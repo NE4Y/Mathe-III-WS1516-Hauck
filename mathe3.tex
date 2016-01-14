@@ -1,0 +1,4510 @@
+\documentclass[a4paper, openany]{book}
+\usepackage{titlesec}
+\usepackage[utf8x]{inputenc}
+\usepackage[document]{ragged2e}
+\usepackage{enumitem}
+\usepackage{polynom}
+\usepackage{amsmath, amssymb, amstext, amsfonts, mathrsfs}
+\usepackage{wasysym}
+\renewcommand{\chaptername}{}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\titleformat{\chapter}
+  {\Large\bfseries} % format
+  {}                % label
+  {0pt}             % sep
+  {\huge}           % before-code
+
+\author{Steffen Lindner}
+\title{\vspace{-2cm}Mathe III Skript WS 15/16}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\chapter{Algebraische Strukturen}
+\section{Definition Verknüpfung}
+
+Sei X $\neq \emptyset$ Menge. Eine \underline{Verknüpfung} auf X ist Abb. 
+$\begin{cases}
+    X \times X \rightarrow x \\
+    (a,b) \mapsto a \ast b
+\end{cases}$
+
+$\ast$ ist Platzhalter für andere Verknüpfungssymbole, die in speziellen Beispielen auftreten können.
+
+\section{Beispiel}
+\begin{enumerate}[label=(\alph*)]
+  \item Addition + und Multiplikation $\cdot$ sind Verknüpfungen auf $\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{C}$.
+  
+  Multiplikation ist \underline{keine} Verknüpfung auf der Menge der \underline{negativen} ganzen Zahlen.
+  
+  \item Division ist \underline{keine} Verknüpfung auf $\mathbb{N}$, $\mathbb{Z}$.
+  
+  Division ist Verknüpfung auf $\mathbb{Q} \setminus \lbrace 0 \rbrace$, $\mathbb{R} \setminus \lbrace 0 \rbrace$.
+  
+  \item $\mathbb{Z}_n$ := $\lbrace$ 0,1,...,n-1 $\rbrace$ (n $\in \mathbb{N})$
+  
+  a $\oplus$ b := (a+b) mod n $\in \mathbb{Z}_n$
+  
+  a $\odot$ b := (a $\cdot$ b) mod n $\in \mathbb{Z}_n$
+  
+  Verknüpfungen auf $\mathbb{Z}_n$
+  
+  \item M Menge, X = Menge aller Abb. $M \rightarrow M$
+  
+  Verknüpfung auf X: Hintereinanderausführung von Abb. $\circ$
+  
+  f, g : $M \rightarrow M$, so f $\circ$ g : $M \rightarrow M$
+
+  (f $\circ$ g) (m) = f(g(m)) $\in$ M
+  
+  Im Allgemeinen ist $g \circ f \neq f \circ g$
+  
+  \item X = $\lbrace 0, 1 \rbrace$
+  
+  2-stellige aussagenlogische Junktoren wie $\vee, \wedge, XOR, \Rightarrow, ...$ liefern Verknüpfungen auf X.
+  
+  0 $\vee$ 0 = 0, 1 $\vee$ 0 = 1 
+  
+  0 $\wedge$ 0 = 0, 1 $\wedge$ 0 = 0, 1 $\wedge$ 1 = 1 (= Multiplikation)
+  
+  0 XOR 0 = 0, 1 XOR 0 = 1, 1 XOR 1 = 0 (= Addition mod 2)
+  
+  \item X = $M_n$ ($\mathbb{R}$) = Menge der n $\times$ n - Matrizen über $\mathbb{R}$
+  
+  Matrizenaddition ist Verknüpfung auf X. Matrizenmultiplikation ist Verknüpfung auf X.
+  
+  \item M Menge, X = Menge aller endlichen Folgen von Elementen aus M ("Wörter" über M).
+  
+  Verknüpfung: Hintereinanderausführung zweier Folgen, \underline{Konkatenation}.
+  
+  M = $\lbrace 0, 1 \rbrace$
+  
+  $w_1 = 1101$, $w_2 = 001$, $w_1w_2=1101001$, $w_2w_1 = 0011101$
+\end{enumerate}
+
+\section{Definition Halbgruppe, Gruppe, Monoid}
+
+Sei X $\neq \emptyset$ eine Menge mit Verknüpfung $\ast$.
+
+\begin{enumerate}[label=(\alph*)]
+  \item X, genauer (X, $\ast$) ist \underline{Halbgruppe}, falls (a $\ast$ b) $\ast$ c = a $\ast$ (b $\ast$ c) für alle a,b,c $\in X$ (\underline{Assoziativgesetz})
+  
+  \item (X, $\ast$) heißt \underline{Monoid}, falls (X, $\ast$) Halbgruppe ist und ein e $\in X$ existiert mit e $\ast$ a, a $\ast$ e = a f.a a $\in X$.
+  
+  e heißt \underline{neutrales Element}. (Später: es ist eindeutig bestimmt)
+  
+  \item Sei (X, $\ast$) ein Monoid.
+  
+  Ein Element a $\in X$ heißt \underline{invertierbar}, falls b $\in X$ existiert (abhängig von a) mit a $\ast$ b = b $\ast$ a = e.
+  
+  b heißt \underline{inverses Element} (das \underline{Inverse}) zu a. (Später: Wenn b existiert, so ist es eindeutig).
+  
+  \item Monoid (X, $\ast$) heißt \underline{Gruppe}, falls jedes Element in x bezüglich $\ast$ invertierbar ist.
+  
+  \item Halbgruppe, Monoid, Gruppe (X, $\ast$) heißt \underline{kommutativ} (oder abelsch), falls a $\ast$ b = b $\ast$ a, für alle a,b $\in X$ (Kommutativgesetz)
+\end{enumerate}
+
+\section{Bemerkung}
+In Halbgruppe liefert jede sinvolle Klammerung eines `Produktes' mit endlich vielen Faktoren das gleiche Element.
+
+\par \medskip
+n = 4 
+
+(a $\ast$ (b $\ast$ c)) $\ast$ d = ((a $\ast$ b) $\ast$ c) $\ast$ d = (a $\ast$ b) $\ast$ (c $\ast$ d) = a $\ast$ (b $\ast$ (c $\ast$ d)) = a $\ast$ ((b $\ast$ c) $\ast d$) (Assoziativgesetz)
+
+\par \medskip
+
+Klammern werden meist weggelassen:
+
+$a^n$ = a $\ast$ ... $\ast$ a  ``Potenzen'' eindeutig definiert. ($n \in \mathbb{N}$)
+
+\section{Proposition}
+\begin{enumerate}[label=(\alph*)]
+  \item In einem Monoid (X, $\ast$) ist das neutrale Element eindeutig bestimmt.
+  \item Ist (X, $\ast$) Monoid und ist $a \in X$ invertierbar, so ist das Inverse zu a eindeutig bestimmt.
+
+  Beziehung.: $a^{-1}$
+  \item Ist (X, $\ast$) Monoid und wenn $a,b \in X$ invertierbar sind, so auch a $\ast$ b und (a $\ast$ b)$^{-1}$ = $b^{-1} \ast a^{-1}$
+
+  \item Die Menge der invertierbaren Elemente in einem Monoid (X, $\ast$) bilden bezüglich $\ast$ eine Gruppe.
+\end{enumerate}
+
+\subsection{Beweis}
+
+\begin{enumerate}[label=(\alph*)]
+  \item Angenommen $e_1, e_2$ sind neutrale Elemente. Dann:
+
+  \begin{equation}
+    e_1 = e_1 \ast e_2 = e_2 = e_1 \ast e_2
+  \end{equation}
+
+  \item Angenommen a hat 2 inverse Elemente $b_1, b_2$; also 
+
+  \begin{equation}
+    \begin{split}
+      a \ast b_1 = e, b_2 \ast a = e \\
+      b_1 = e \ast b_1 = (b_2 \ast a) \ast b_1 \\
+      = b_2 \ast (a \ast b_1) = b_2 \ast e = b_2
+    \end{split}
+  \end{equation}
+
+  \item (a $\ast$ b) $\ast$ ($b^{-1} \ast a^{-1}$) 
+
+  = $a \ast e \ast a^{-1} = a \ast a^{-1} = e$
+
+  Analog: $(b^{-1} \ast a^{-1}) \ast (a \ast b) = e$
+
+  Also: $(a \ast b)^{-1} = b^{-1} \ast a^{-1}$
+
+  \item I = Menge der invertierten Elemente in (X, $\ast$)
+
+  $e \in I$, dann $e \ast e = e$, d.h. $e^{-1} = e$.
+
+  $\ast$ ist Verknüpfung auf I. Z.z. $a,b \in I \Rightarrow a \ast b \in J$
+
+  Folgt aus c). 
+
+  Assoziativgesetz gilt in I
+
+  $a \in I \Rightarrow a^{-1} \in I$, denn $(a^{-1})^{-1} = a$
+  \end{enumerate}
+
+  \subsection{Bemerkung}
+
+  Multiplikation mit $a^{-1}$ macht Multiplikation mit a (Verkn.) rückgängig: 
+
+  \begin{equation}
+    \begin{split}
+      (b \ast a) \ast a^{-1} = b \ast (a \ast a^{1}) = b \ast e = b \\
+      a^{-1} \ast (a \ast b) = b
+    \end{split}
+  \end{equation}
+
+  \section{Beispiel}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item $\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}$ sind Halbgruppen bezüglich +
+
+    $\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}$ sind bezüglich + Monoide, neutrales Element 0.
+
+    $\mathbb{N} = \lbrace 1,2,... \rbrace$ ist kein Monoid bezügich +, aber $\mathbb{N}_0$
+
+    $\mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}$ sind Gruppen bezüglich +, inverses Element zu a : -a
+
+    $\mathbb{N}_0$ ist keine Gruppe bezüglich. + 
+
+    Invertierte Elemente in $\mathbb{N}_0: \lbrace 0 \rbrace$.
+
+    \item $\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}, \mathbb{C}$ sind Monoide bezüglich $\cdot$ (Multiplikation) (neutrales Element: 1)
+
+    Keine Gruppen (da 0 nicht invertierbar ist).
+
+    $\mathbb{Q} \setminus \lbrace 0 \rbrace, \mathbb{R} \setminus \lbrace 0 \rbrace, \mathbb{C} \setminus \lbrace 0 \rbrace$ Gruppen.
+
+    Intervierbare Elemente in $\mathbb{Z}: \lbrace 1, -1 \rbrace$ (Gruppe bezüglich Multiplikation)
+
+    \item M Menge. 
+
+    X = Menge aller Abbildungen M $\rightarrow$ M mit Hintereinanderausführung $\circ$ als Verknüpfung.
+
+    Monoid, neutrales Element $id_M$
+
+    \begin{equation}
+      f \circ id_M = f = id_M \circ f
+    \end{equation}
+
+    Invertierbar sind genau die bijektiven Abbildungen M $\rightarrow$ M
+
+    Inverse = Umkehrabbildung
+
+    $f: M \rightarrow M$ bijektiv:
+
+    \begin{equation}
+      f \circ f^{-1} = f^{-1} \circ f = id_M
+    \end{equation}
+
+    1.5.d): Die bijektiven Abbildungen M $\rightarrow$ M bilden bezüglich $\circ$ eine Gruppe.
+
+    \item M Menge, z.B. $\lbrace 0, 1 \rbrace$
+
+    X  = Menge aller endlichen Folgen über M.
+
+    Verknüpfung: Konkatenation (Hintereinanderausführung).
+
+    $\rightarrow$ Halbgruppe
+
+    Nimmt man die leere Folge hinzu, so ist sie das neutrale Element (einziges invertierbares Element).
+
+    Dann: Monoid.
+
+    \item $M_n$($\mathbb{R}$) = Menge der $n \times n$ - Matrizen über $\mathbb{R}$
+
+    Addition: neutrales Element Nullmatrix 
+
+    Inverses zu A ist -A.
+
+    $\rightarrow$ Gruppe
+
+    Multiplikation: $(A \cdot B) \cdot C = A \cdot (B \cdot C)$ 
+
+    $\rightarrow$ Halbgruppe
+
+    Neutrales Element: Einheitsmatrix
+
+    \item $n \in \mathbb{N}$
+
+    $\mathbb{Z}_n =  \{0,1,...,n-1\}$, Verknüpfung $\oplus$
+
+    a $\oplus$ b := a + b mod n
+
+    ($\mathbb{Z}_n$, $\oplus$) ist gruppe, Assoziativgesetz: a,b,c $\in \mathbb{Z}_n$.
+
+    \begin{equation}
+      \begin{split}
+        (a \oplus b) \oplus c = ((a+b mod n) + c) \ mod \ n \\
+        = ((a+b)+c) \ mod \ n \\
+        = (a+(b+c))\  mod \ n \\
+        = (a+(b+c) \ mod \ n) \ mod \ n \\
+        = (a+(b \oplus c)) \ mod \ n \\
+        = a \oplus (b \oplus c)
+      \end{split}
+    \end{equation}
+
+    0 ist neutrales Element bezüglich $\oplus$.
+
+    0 ist sein eigenes Inverses.
+
+    $1 \leq i \le n-1: n-i \in \mathbb{Z}_n$ Inverses zu i.
+
+    \begin{equation}
+      \begin{split}
+        i \oplus (n-i) \\
+        = (i+(n-i)) \ mod \ n \\
+        = n \ mod\  n \\
+        = 0
+      \end{split}
+    \end{equation}
+
+    \item $n \in \mathbb{N}, \mathbb{Z}_n$
+
+    Verknüpfung $\odot$ = a $\cdot$ b mod n, $n > 1$
+
+    ($\mathbb{Z}_n$, $\odot$) ist Monoid, Assozisativgesetz wie bei $\oplus$.
+
+    1 ist neutrales Element bezüglich $\odot$. 
+
+    Keine Gruppe bezüglich $\odot$, denn z.B. hat 0 kein Inverses.
+
+  \end{enumerate}
+
+  \section{Satz}
+
+  Sei $n \in \mathbb{N}, n > 1$
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Die Elemente in ($\mathbb{Z}_n$, $\odot$), die invertierbar bezüglich $\odot$ sind, sind genau diejenigen $a \in \mathbb{Z}_n$ mit ggT(a, n) = 1.
+
+    Für solche a bestimmt man das Inverse folgendermaßen:
+
+    Bestimme $s, t \in \mathbb{Z}$ mit:
+
+    \begin{equation}
+      s \cdot a + t \cdot n = 1
+    \end{equation}
+
+    (Erweiterter Euklidischer Algorithmus, Mathe I)
+
+    Dann ist $a^{-1} = s \ mod \ n$
+
+    \item $\mathbb{Z}_{n}^{\ast} := \{a \in \mathbb{Z}_n : ggT(a,n) = 1\}$ ist Gruppe bezüglich $\odot$.
+
+    $|\mathbb{Z}_{n}^{\ast}| =: \varphi(n)$ \underline{Eulersche $\varphi$-Funktion} (L. Euler, 1707-1783).
+
+    \item Ist p eine primzahl, so ist ($\mathbb{Z}_p \setminus \{0\}, \odot$) eine Gruppe. Beweis folgt aus b).
+  \end{enumerate}
+
+  \subsection{Beweis}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Angenommen $a \in \mathbb{Z_n}$ invertierbar bezüglich $\odot$.
+
+    Das heißt es existiert $b \in \mathbb{Z}_n$ mit $a \odot$ b = 1. 
+
+    a $\cdot$ b mod n = 1, das heißt es existiert $k \in \mathbb{Z}$ mit:
+
+    \begin{equation}
+      a \cdot b = 1 + k \cdot n, 1 = a \cdot b - k \cdot n
+    \end{equation}
+
+    Sei d = ggT(a, n).
+
+    \begin{equation}
+      \begin{split}
+        d|a \rightarrow d | a \cdot b \\
+        d|n \rightarrow d | k \cdot n \\
+        \Rightarrow d|a \cdot b - k \dot n = 1 \\
+        \Rightarrow d = 1.  ggT(a, n) = 1.
+      \end{split}
+    \end{equation}
+
+    Umgekehrt sei $a \in \mathbb{Z}_n$ mit ggT(a,n) = 1.
+
+    EEA (Erweiterter Euklidischer Algorithmus) liefert $s, t \in \mathbb{Z}$ mit $s \cdot a + t \cdot n = 1$.
+
+    \begin{equation}
+      \begin{split}
+        (s \ mod \ n) \odot a \\
+        = ((s \ mod \ n) \cdot a) \ mod \ n \\
+        = (s \cdot a) \ mod \ n \\
+        = (1-t \cdot n) \ mod \ n \\
+        = (1-(t \cdot n) \ mod \ n) \ mod \ n \\
+        = 1 \ mod \ n  \\
+        = 1.
+      \end{split}
+    \end{equation}
+
+    \item 1.5.d) und Teil a)
+
+  \end{enumerate}
+
+  \section{Beispiel}
+
+  n = 24, a = 7 ist invertierbar in ($\mathbb{Z}_{24}, \odot$). 
+
+  EEA:
+
+  1 = (-2) $\cdot$ 24 + 7 $\cdot$ 7.
+
+  $a^{-1}$ = 7 mod 24 = 7 = a.
+
+  \section{Beispiel symmetrische Gruppe}
+
+  Sei M = $\{1,...,n\}$.
+
+  Die Menge der bijektiven Abbildungen auf M (\underline{Permutation}) bilden nach 1.6.c) eine Gruppe bezüglich der Hintereinanderausführung $\circ$.
+
+  \par \medskip
+
+  Bezeichnung: $S_n$, \underline{symmetrische Gruppe vom Grad n}.
+
+  Es ist $|S_n|$ = $n!$.
+
+  Zum Beispiel $\pi$ = $\begin{pmatrix}
+                          1 & 2 & 3  \\
+                          3 & 2 & 1 
+                        \end{pmatrix} \in S_3$,  $\pi^{-1}$ = $\begin{pmatrix}
+                                                               1 & 2 & 3 \\
+                                                               3 & 2 & 1 
+                                                            \end{pmatrix}$ = $\pi$
+
+  
+  $\rho$ = $\begin{pmatrix} 1 & 2 & 3 \\ 3 & 1 & 2 \end{pmatrix}$ $\in S_3$, $\rho^{-1}$ = $\begin{pmatrix} 1 & 2 & 3 \\ 2 & 3 & 1 \end{pmatrix}$
+
+  $\Rightarrow$ $\rho \circ \rho^{-1} = id$
+
+  \par \medskip
+
+  $\pi \circ \rho = \begin{pmatrix}1 & 2 & 3 \\ 1 & 3 & 2 \end{pmatrix}$ $\neq$ $\rho \circ \pi = \begin{pmatrix}1 & 2 & 3 \\ 2 & 1 & 3 \end{pmatrix}$
+
+  $S_n$ ist für $n \ge 3$ nicht abelsch (nicht kommutativ).
+
+  \section{Satz (Gleichungslösen in Gruppen)}
+
+  Sei (G, $\cdot$) eine Gruppe, $a,b \in G$. (In allgemeinen Gruppen schreibt man Verknüpfung oft als $\cdot$ statt $\ast$, oft auch $ab$ statt $a \cdot b$).
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Es gibt genau ein $x \in G$ mit $ax = b$ (nämlich $x = a^{-1} \cdot b$).
+
+    [''Teilen'' durch a von links = Multiplikation von links mit $a^{-1}$]
+
+    \item Es gibt genau ein $y \in G$ mit $ya = b$ (nämlich $y = ba^{-1}$).
+
+    \item Ist $ax = bx$ für ein $x \in G$ so ist $a = b$.
+
+    Ist $ya = yb$ für ein $y \in G$ so ist $a=b$.
+  \end{enumerate}
+
+  \subsection{Beweis}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Setze $x = a^{-1} \cdot b \in G$.
+
+    \begin{equation}
+      a \cdot (a^{-1} \cdot b) = (a \cdot a^{-1}) \cdot b = e \cdot b = b.
+    \end{equation}
+
+    \textbf{Eindeutigkeit:} Sei $x \in G$ mit $ax = b$.
+
+    Multipliziere beide Seiten mit $a^{-1}$.
+
+    \begin{equation}
+      x = (a^{-1}a)x = a^{-1}(ax) = a^{-1}b
+    \end{equation}
+
+    \item analog
+
+    \item $ax = bx$, multiplikation mit $x^{-1}$ von rechts.
+
+    Dann $a=b$.
+  \end{enumerate}
+
+  \section{Beispiel}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Suche Permutation $\xi \in S_3$ mit $\rho \circ \xi = \pi$ (vgl. 1.9)
+
+    1.10.a):
+
+    $\xi = \rho^{-1} \circ \pi$ = $\begin{pmatrix}1 & 2 & 3 \\ 2 & 3 & 1 \end{pmatrix}$ $\circ$ $\begin{pmatrix} 1 & 2 & 3 \\ 3 & 2 & 1 \end{pmatrix}$ = $\begin{pmatrix}1 & 2 & 3 \\ 1 & 3 & 2 \end{pmatrix}$
+
+    \item 1.10.c) gilt in Monoiden, die keine Gruppen sind, im Allgemienen nicht:
+
+    \textbf{Beispiel:} ($\mathbb{Z}_6, \odot$)
+
+    $2 \odot 3 = 0 = 4 \odot 3$, aber $2 \neq 4$.
+  \end{enumerate}
+
+   \section{Definition Ring}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item  R $\neq \emptyset$ Menge mit 2 Verknüpfungen + und $\cdot$ heißt \underline{Ring}, falls gilt:
+   
+      \begin{enumerate}
+        \item (R, +) ist kommutative Gruppe (neutrales Element: 0, \underline{Nullelement}, Inverses zu a: -a, b+(-a) =: b-a)
+        \item (R, $\cdot$) ist Halbgruppe
+        \item (a+b) $\cdot$ c = a $\cdot$ c + b $\cdot$ c und a $\cdot$ (b+c) = a $\cdot$ b + a $\cdot$ c ($\cdot$ vor +), für alle $a,b,c \in R$.
+
+        \underline{Distributivgesetz}
+      \end{enumerate}
+
+    \item Ring heißt \underline{kommutativer Ring} falls (R, $\cdot$) kommutative Halbgruppe ist.
+    \item Ring R heißt \underline{Ring mit Eins}, falls (R, $\cdot$) Monoid mit neutralem Element 1 $\neq$ 0 (Einselement, \underline{Eins})
+  \end{enumerate}
+
+  \section{Beispiele zu Ringen}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item ($\mathbb{Z},+, \cdot$) ist kommutativer Ring mit 1, invertierbare Elemente bezüglich $\cdot$ sind 1 und -1.
+    \item ($\mathbb{Q},+, \cdot$), ($\mathbb{R}, +, \cdot$), ($\mathbb{C}, +, \cdot$) sind kommutative Ringe mit Eins. Alle Elemente $\neq$ 0 sind invetierbar bezüglich $\cdot$.
+    \item $n \in \mathbb{N}, n > 1$. $\mathbb{Z}_n = \{0, ..., n-1\}$
+
+    ($\mathbb{Z}, \oplus, \odot$) ist kommutativer Ring mit Eins: 
+
+    \textbf{Beweis:} Wegen 1.6.f),g) sind nur die Distributivgesetze zu zeigen:
+
+    \begin{equation}
+      \begin{split}
+        (a \oplus b) \odot c = ((a \oplus b) \cdot c) \mod n \\
+        = (((a+b) \mod n) \cdot c) \mod n \\
+        \underbrace{=}_{Mathe \ I} ((a+b) \cdot c) \mod n \\
+        = (a \cdot c + b \cdot c) \mod n \\
+        \underbrace{=}_{Mathe \ I} ((a \cdot c) \mod n + (b \cdot c) \mod n) \mod n \\
+        = a \odot c \oplus b \odot c
+      \end{split}
+    \end{equation}
+
+    \item $M_n(\mathbb{R})$, $n \times n$ - Matrizen über $\mathbb{R}$, mit Matrizenaddition + und Multiplikaiton $\cdot$, ist Ring mit Eins. (Folgt aus Rechenregeln für Matrizen, Mathe II)
+
+    Eins: $E_n$, $n \times n$ - Einheitsmatrix
+
+    Für $n \geq 2$ ist $M_n(\mathbb{R})$ kein kommutativer Ring.
+  \end{enumerate}
+
+  \section{Proposition}
+
+  Sei (R, +, $\cdot$) ein Ring. Dann gilt für alle $a,b \in R$:
+
+  \begin{enumerate}[label=(\alph*)]
+    \item $0 \cdot a = a \cdot 0 = 0$
+    \item $(-a) \cdot b) = a \cdot (-b) = - (a \cdot b)$
+    \item $(-a) \cdot (-b) = a \cdot b$
+  \end{enumerate}
+
+  \subsection{Beweis}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item $0 \cdot a = (0+0) \cdot a \underbrace{=}_{Distr.} 0 \cdot a + 0 \cdot a$
+
+    Addiere auf beiden Seiten $-(0 \cdot a)$
+
+    $0 = 0 \cdot a +0 = 0 \cdot a$
+
+    $a \cdot 0 = 0$ analog.
+
+    \item $(-a) \cdot b + a \cdot b = ((-a) + a) \cdot b = 0 \cdot b \underbrace{=}_{(a)} 0$
+
+    $\Rightarrow (-a) \cdot b = - (a \cdot b)$. Analog $a \cdot (-b) = - (a \cdot b)$.
+
+    \item $(-a) \cdot (-b) \underbrace{=}_{(b)} - (a \cdot (-b)) \underbrace{=}_{(b)} - (- (a \cdot b)) = a \cdot b$
+  \end{enumerate}
+
+  \section{Bemerkung Ringe}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item In einem Ring mit Eins sind 1 und -1 bezüglich $\cdot$ invertierbar:
+
+    $1 \cdot 1 = 1$  ($1^{-1} = 1$) 
+
+    $(-1) \cdot (-1) = 1$  (1.14.c)), d.h. $(-1)^{-1} = -1$.
+
+    0 ist \textbf{nie} bezüglich Multiplikation invertierbar, denn $0 \cdot a \underbrace{=}_{1.14.a)} 0 \neq 1$.
+
+    \item Es kann sein, dass 1 = -1 gilt.
+
+    \textbf{Beispiel:} ($\mathbb{Z}_2, \oplus, \odot$).
+
+    $1 \oplus 1 = 0$ $\rightarrow 1 = -1$
+  \end{enumerate}
+
+  \section{Definition Körper}
+
+  Ein kommutativer Ring (R, +, $\cdot$) mit Eins heißt \underline{Körper}, wenn jedes Element $\neq$ 0 bezüglich der Multiplikation invertierbar ist.
+
+  \section{Beispiel Körper}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item $\mathbb{Q}, \mathbb{R}, \mathbb{C}$ sind Körper, $\mathbb{Z}$ nicht.
+    \item ($\mathbb{Z}_n, \oplus, \odot)$ ist genau dann ein Körper, wenn n eine Primzahl ist.
+
+    \textbf{Begründung:} 
+
+    $\mathbb{Z}_n$ ist kommutativer Ring mit 1.
+
+    1.13.c): 
+
+    Die invertierbaren Elemente in $\mathbb{Z}_n$ sind alle $a \in \mathbb{Z}_n$ mit $ggT(a,n) = 1$.
+  \end{enumerate}
+
+  \section{Proposition (Nullteilerfreiheit) in Körpern}
+
+  Ist K ein Körper, $a,b \in K$ mit $a \cdot b = 0$, so ist a = 0 oder b = 0.
+
+  \subsection{Beweis}
+
+  Sei $a \cdot b = 0$. Angenommen $a \neq 0$.
+
+  Dann existiert $a^{-1} \in K$.
+
+  \begin{equation}
+    \begin{split}
+      0 \underbrace{=}_{1.14.a)} a^{-1} \cdot 0 = a^{-1} (a \cdot b) \\
+      = (a^{-1} \cdot a) \cdot b) = 1 \cdot b = b
+    \end{split}
+  \end{equation}
+
+  \textbf{Beispiel:} R = ($\mathbb{Z}_6, \oplus, \odot$)
+
+  $2 \odot 3 = 0$, aber $2 \neq 0, 3 \neq 0$
+  
+  \section{Definition Polynom}
+
+  Sei K ein Körper. 
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Ein (formales) \underline{Polynom} über K ist ein Ausdruck.
+
+    \begin{equation}
+      f = a_0 + a_1x+ a_2x² + ... + a_nx^n, n \in \mathbb{N}_0, a_i \in K
+    \end{equation}
+
+    (Manchmal f(x) statt f, +-Zeichen hat zunächst nichts mit Addition zu tun).
+
+    $a_i:$ \underline{Koeffizienten} von f
+
+    Ist $a_i$ = 0, so kann man in der Schreibweise von f 0 $\cdot x^i$ auch weglassen.
+
+    \par \medskip
+
+    Statt $a_0x^0$ schreibt man $a_0$, statt $a_1x^1$ schreibt man $a_1x$.
+
+    Sind alle $a_i = 0$, so $f = 0$, \underline{Nullpolynom}.
+
+    Ist $a_i = 1$, so schreibt man $x^i$ statt $1 \cdot x^i$.
+
+    \item Zwei Polynome f und g sind \underline{gleich}, wenn \underline{entweder} f = 0 und g = 0 \underline{oder} f = $\sum_{i=0}^{n} a_ix^i, a_n \neq 0$, g = $\sum_{i=0}^{m} b_ix^i, b_,m \neq 0$, und n = m und $a_i = b_i$ für i=0,...,n
+
+    \item Menge aller Polynome über K: $K[x]$
+
+    Wir wollen $K[X]$ zu einem Ring machen. Wie?
+
+    \textbf{Beispiel:} $f = 3x^2 + 2x + 1, g = 5x³ + x² + x \in \mathbb{Q}[x]$
+
+    $f+g = 5x³ + 4x² + 3x + 1$
+
+    $f \cdot g = (3x² + 2x +1) \cdot (5x³ + x² + x) = 15x^5 + 13x^4 + 10x^3 + 3x^2 + x$
+ \end{enumerate}
+
+ \section{Satz und Definition}
+
+ K Körper. $K[x]$ wird zu einem kommutativen Ring mit Eins durch folgende Verknüpfungen:
+
+  \begin{equation}
+   f = \sum_{i=0}^{n} a_ix_i, g = \sum_{i=0}^{n} b_ix^i
+  \end{equation}
+  
+  so:
+
+  \begin{equation}
+    f+g := \sum_{i=0}^{max(n,m)} (a_i+b_i)x^i
+  \end{equation}
+
+  \begin{equation}
+    f \cdot g = \sum_{i=0}^{n+m} c_ix^i, 
+  \end{equation}
+
+  wobei:
+
+  \begin{equation}c_i = \sum_{j=0}^{i} a_jb_{i-j} = a_0b_i + a_1b_{i-1} + ... +a_ib_0 \textnormal{ (Faltungsprodukt)}
+  \end{equation}
+
+  In beiden Fällen sind Koeffizienten $a_i$ mit $i > n$ beziehungsweise $b_i$ mit $i > m$ gleich 0 zu setzen.
+
+  Das Einselement ist 1 (= $1x^0$).
+
+  Das Nullelement ist das Nullpolynom.
+
+  \begin{itemize}
+    \item f = $\sum_{i=0}^{n} (-a_i)x^i$
+  \end{itemize}
+
+  ($K[x]$, +, $\cdot$) heißt \underline{Polynomring} in einer Variablen.
+
+  \par \medskip
+
+  \textbf{Beweis:} Nachrechnen
+
+  \section{Bemerkung}
+
+  \begin{enumerate}[label=(\alph*)]
+    \item $f = \sum_{i=0}^{n} a_ix^i \in K[x], a \in K \subseteq K[x]$
+
+    $a \cdot f = \sum_{i=0}^{n} (a \cdot a_i)x^i$
+
+    $x \cdot f = \sum_{i=0}^{n} a_ix^{i+1} = a_nx^{n+1} + ... + a_0x$
+
+    \item Das +-Zeichen in der Definition der Polynome entspricht genau der Addition der ``\underline{Monome}'' $a_ix^i$.
+
+    $((a_0x^0) + (a^1x^1)) = a_0x^0 + a_1x^1$
+  \end{enumerate}
+
+  \section{Definition}
+
+  Sei $0 \neq f \in K[x]$, $f = \sum_{i=0}^{n} a_ix^i, a_n \neq 0$.
+
+  Dann heißt n der \underline{Grad} von f, Grad(f) = n
+
+  \par \medskip
+
+  Grad(0) := -$\infty$
+
+  Grad(f) = 0: \underline{Konstante Polynome} $\neq$ 0.
+
+  \section{Satz}
+
+  Sei K ein Körper, $f,g \in K[x]$. Dann ist Grad($f \cdot g$) = Grad(f) + Grad(g)
+
+  (Konvention : -$\infty +n = n+ (- \infty) = (-\infty) +(- \infty) = - \infty$)
+
+  \par \medskip
+
+  \textbf{Beweis:} Richtig, falls f = 0 oder g = 0. Sei $f \neq 0, g \neq 0$.
+
+  \begin{equation}
+    f = \sum_{i=0}^{n} a_ix^i, a_n \neq 0, \textnormal{ n = Grad(f)}
+  \end{equation}
+
+  \begin{equation}
+   g = \sum_{i=0}^{m} b_ix^i, b_m \neq 0, \textnormal{ m = Grad(g)}
+  \end{equation}
+
+  Koeffizient von $x^{n+m}$ in $f \cdot g: a_n \cdot b_m \underbrace{\neq}_{1.18} 0$
+
+  Höhere Potenzen mit Koeffizient $\neq 0$ treten in $f \cdot g$ nicht auf. Also: Grad($f \cdot g$) = n+m = Grad(f) + Grad(g)
+
+  \section{Korollar}
+
+  Sei K ein Körper.
+
+  \begin{enumerate}[label=(\alph*)]
+    \item Genau die konstanten Polynome $\neq$ 0 sind in $K[x]$ bezüglich $\cdot$ invertierbar. Insbesondere ist $K[x]$ \underline{kein} Körper.
+
+    \item Sind $f,g \in K[x]$ mit $f \cdot g$ = 0, so ist f = 0 oder g = 0 (Nullteilerfreihit in $K[x]$).
+
+    \item Sind $f,g_1,g_2 \in K[x]$ mit $f \cdot g_1 = f \cdot g_2$ und ist $f \neq 0$, so ist $g_1 = g_2$.
+  \end{enumerate}
+
+  \subsection{Beweis}
+    \begin{enumerate}[label=(\alph*)]
+      \item Sei $f \in K[x]$ invertierbar bezüglich $\cdot$.
+
+      Dann ist $f \neq 0$ und es existiert $g \in K[x]$ mit $f \cdot g = 1$.
+
+      Mit 1.23:
+
+      0 = Grad(1) = Grad($f \cdot g$) = Grad(f) + Grad(g).
+
+      Also: Grad(f) = 0 (= Grad(g))
+
+      D.h. f ist konstantes Polynom.
+
+      Ist umgekehrt $f = a \in K, a \neq 0$, so $f^{-1} = a^{-1} \in K$.
+
+      \item Folgt aus 1.23:
+
+      - $\infty$ = Grad(0) = Grad($f \cdot g$) = Grad(f) + Grad(g)
+
+      $\Rightarrow$ Grad(f) = - $\infty$ oder Grad(g) = - $\infty$, d.h. f = 0 oder g = 0.
+
+      \item $fg_1 = fg_2$ 
+
+      $\Rightarrow 0 = fg_1 - fg_2 = f (g_1 - g_2)$
+
+      Da $f \neq 0$, folgt mit b) $g_1-g_2 = 0$, d.h. $g_1 = g_2$.
+    \end{enumerate}
+
+    \section{Bemerkung}
+
+    \begin{enumerate}[label=(\alph*)] 
+      \item Jedem Polynom $f =  \sum_{i=0}^{n} a_ix^i \in K[x]$ kann man eine Funktion $K \rightarrow K$ zuordnen: $a \in K \mapsto f(a) = \sum_{i=0}^{n} a_ia^i \in K$ (Polynomfunktion aus Analysis für $K = \mathbb{R}$)
+
+      Auf Grund der Definition von Addition / Multiplikation von Polynomen gilt:
+
+      \begin{equation}
+        \begin{split}
+          \underbrace{(f+g)}_{K[x]} (a) = f(a) \underbrace{+}_{K} g(a) \\
+          \underbrace{(f \cdot g)}_{K[x]} (a) = f(a) \underbrace{\cdot}_{K} g(a)
+        \end{split}
+      \end{equation}
+
+      Es kann passieren, dass zwei verschiedene Polynome die gleiche Funktion beschreiben:
+
+      \textbf{Zum Beispiel:} K = $\mathbb{Z}_2$ = \{0,1\}
+
+      $f = x², g = x, f \neq g$
+
+      f(1) = 1 = g(1)
+
+      f(0) = 0 = g(0)
+
+      Über unendlichen Körpern passiert das nicht (später).
+
+      \item Schnelel Berechnung von f(a):
+
+      $f = a_0+a_1x+...+a_nx^n$
+
+      f(a) = $a_0 + a(a_1+a(a_2+...+a(a_{n-1}+aa---.n) ...))$
+
+      n Multiplikation
+
+      n Addition
+
+      \textbf{\underline{Horner-Schema}}
+    \end{enumerate}
+
+    \section{Definition} 
+
+    K Körper, $f,g \in K[x]$.
+
+    f \underline{teilt} g ($f|g$), falls $q \in K[x]$ existiert mit
+
+    \begin{equation}
+      g = q \cdot f
+    \end{equation}
+
+    (Falls $g \neq 0$ und $f|g$, so ist der Grad(f) $\le$ Grad(g) nach 1.23)
+
+    \section{Satz}
+
+    K Körper, $0 \neq f \in K[x], g \in K[x]$. Dann existieren eindeutig bestimmte Polynome $q,r \in K[x]$ mit 
+
+    \begin{enumerate}
+      \item $g = q \cdot f +r$
+      \item Grad(r) $<$ Grad(f)
+    \end{enumerate}
+
+    \underline{Division mit Rest}
+
+     $q =: g \textnormal{ div} f$
+
+     $r =: g \mod f$
+
+     (Beweis: WHK, Satz 4.69)
+
+     \section{Beispiel}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $g = x^4 + 2x^3 - x + 2$, $f = 3x² - 1$, f,g $\in \mathbb{Q}[x]$
+
+      \underline{$x^4$}$ + 2x^3 - x + 2 : \  $\underline{$3x²$} $-1 = \underbrace{\frac{1}{3}x² + \frac{2}{3}x + \frac{1}{9}}_{q}$
+
+      %\polyset{style=C, div=:,vars=x}
+      %\polylongdiv{x⁴ + 2x³ - x + 2}{3x² -1}
+
+      -($x^4 - \frac{1}{3}x²$)
+
+      ------------------------
+
+      $\ \ \ \ \ \ $\underline{$2x³$}$ + \frac{1}{3}x² - x + 2$
+
+      $\ \ \ \ \ - (2x³ - \frac{2}{3}x)$
+
+      $\ \ \ \ \ $ ------------------------
+
+      $\ \ \ \ \ \ \ \ \ \ $\underline{$\frac{1}{3}x²$} $ - \frac{1}{3}x +2$
+
+      $\ \ \ \ \ \ \ \ \ - (\frac{1}{3}x² - \frac{1}{9})$
+
+      $\ \ \ \ \ \ \ \ \ $ -----------------------------
+
+      $\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \underbrace{- \frac{1}{3}x + \frac{19}{9}}_{r}$
+
+      \item $g = x⁴ - x² + 1, f = x² + x, f,g \in \mathbb{Z}_3[x]$ (-1 = 2 in $\mathbb{Z}_3$)
+
+      $x⁴ + 2x² + 1$ : $x² + x$ = $x²+2x$
+
+      -$(x⁴ + x³)$
+
+      ---------------
+
+      $\ \ \ 2x³ + 2x² + 1$
+
+      $\ \ - (2x³ + 2x²)$
+
+      $\ \ $---------------
+
+      $\ \ \ \ \ \ \ \ \ \ \ \ $ 1
+
+      g div f = $x² + 2x$
+
+      g mod f = 1
+
+      \par \medskip
+
+      $x^4 + 2x² + 1 = (x² + 2x) (x² + x) + 1$
+
+      \section{Korollar}
+
+      K Körper, $a \in K$.
+
+      $f \in K[x]$ ist genau dann durch (x-a) tielbar, wenn $f(a) = 0$ (d.h. a ist \underline{Nullstelle} von f).
+
+      [f = q $\cdot$ (x-a), q $\in K[x]$]
+
+      \subsection{Beweis}
+
+      Falls $(x-a)|f$, so existiert q $\in K[x]$ mit f = q $\cdot (x-a)$. Dann:
+
+      \begin{equation} 
+        f(a) = q(a) \cdot (a-a) = 0
+      \end{equation}
+
+      umgekerht: Angenommen f(a) = 0. Division mit Rest von f durch x-a:
+
+      \begin{equation}
+        f = q \cdot (x-a) +r, \ \ q,r \in K[x]
+      \end{equation}
+
+      Grad(r) $<$ Grad(x-a) = 1, $r \in K$
+
+      Zeige: r = 0.
+
+      r = f - q $\cdot$ (x-a)
+
+      Setze $a \in K$ ein.
+
+      r $\underbrace{=}_{1.25a)} = f(a) - q(a) \cdot \underbrace{(a-a)}_{=0} = 0 -0 = 0$
+
+      f = q(x-a)
+    \end{enumerate}
+
+
+    \section{Definition}
+
+    K Körper. $a \in K$ heißt \underline{m-fache Nullstelle} von $f \in K[x]$, falls:
+
+    \begin{equation}
+      (x-a)^m|f \textnormal{ und } (x-a)^{m+1} \not{|} f
+    \end{equation}
+
+    D.h. $f = q \cdot (x-a)^m$ und $q(a) \neq 0$ 
+
+    \section{Beispiel}
+
+    $f = x⁵ + x⁴ + 1 \in \mathbb{Z}_3[x]$
+
+    In $\mathbb{Z}_{3}$ hat f Nullstelle 1.
+
+    1.29: x-1 (= x+2) teilt ft.
+
+    Dividiere f durch x-1: 
+
+    \begin{equation}
+      f = (x⁴ + 2x³ +2x² + 2x +2) : (x-1)
+    \end{equation}
+
+    1 Nullstelle von $x⁴ + 2x^3 + 2x^2 + 2x + 2$.
+
+    \begin{equation}
+      (x-1)|x^4 + 2x^3 + 2x^2 + 2x +2
+    \end{equation}
+
+    \begin{equation}
+      x⁴ + 2x³ + 2x² + 2x + 2 : x-1 = x³ + 2x+1
+    \end{equation}
+
+    $f = \underbrace{(x³ + 2x + 1)}_{q}  \cdot (x-1)²$
+
+    q(1) = 1 $\neq 0$
+
+    1 ist 2-fache Nullstelle von f
+
+    \section{Satz}
+
+    K Körper, $f \in K[x]$, Grad(f) = $n \geq 0 $ (d.h. f $\neq 0$). Dann hat f höchstns n Nullstellen in K (einschließlich Ivelfachheit).
+
+    Genauer: Sind $a_1,..,a_k$ die verschiedenen Nullstellen von f, so ist $f = g \cdot (x-a_1)^{m_1} ... (x-a_k)^{m_k}$, $m_i$ Vielfachheiten der Nullstellen $a_i$, g hat keine Nullstellen in K.
+
+    g hat keine Nullstellen in K.
+
+    \subsection{Beweis}
+
+    Durch Induktion nach n.
+
+    \par \medskip
+
+    n = 0: f = $a_0 \neq 0$, ohne Nullstellen.
+
+    \par \medskip
+
+    Sei n $>$ 0. Behauptung sei richtig für alle Polynome von Grad $<$ n.
+
+    Hat f keine Nullstellen, g = f
+
+    Hat f Nullstellen $a_1,...,a_k$, $k \geq 1$, so $f = q \cdot (x-a_1)^{m_1}$ (nach Definition).
+
+    q($a_1$) $\neq$ 0.
+
+    Grad(q) = n - $m_1$ $\underbrace{<}_{m_1 > 0}$ n
+
+    Wir zeigen: 
+
+    \par \medskip
+
+    q hat genau die Nullstellen $a_2,...,a_k$ mit Vielfachheiten $m_2,...,m_k$. Klar: Jede Nullstelel von q ist auch Nullstelle von f.
+
+    D.h. q hat höchstens Nullstelle $a_2, ..., a_k$. Diese Nullstellen hat q mit vielfachheit $0 \leq n_i \leq m_i$, denn $(x-a_i)^{n_i}|q$ $\rightarrow$ $(x-a_i)^{n_i}|f$
+
+    Sei $i \in \{2,...,k\}$. Es ist: 
+
+    \begin{equation}
+     f = s \cdot (x-a_i)^{m_i}, s \in K[x], s(a_i) \neq 0
+    \end{equation}
+
+    \begin{equation}
+      q = q_1 \cdot (x-a_i)^{n_i}, q_1 \in K[x], q_1(a_i) \neq0, ((x-a_i)^0 = 1)
+    \end{equation}
+
+    \begin{equation}
+      f = q \cdot (x-a_i)^{m_i}
+    \end{equation}
+
+    $s \cdot (x-a_i)^{m_i - n_i} \cdot (x-a_i)^{n_i} = s \cdot (x-a_i)^{m_i} = f = q_1 (x - a_i)^{n_i} \cdot (x-a_1)^{m_1}$
+
+    \par \medskip
+
+    \textbf{1.24.c):}
+
+    $s (x-a_i)^{m_i - n_i} = q_1 \cdot (x-a_1)^{m_1}$.
+
+    Ist $m_i > n_i$, so ist $m_i - n_i > 0$.
+
+    $0 = s(a_i)(a_i-a_i)^{m_i - n_i} = q_1(a_i)(a_i-a_1)^{m_1} \neq 0$
+
+    D.h. $n_i = m_i$, $i=2,...,k$.
+
+    $q = g \cdot (x-a_2)^{m_2}...(x-a_k)^{m_k}$, g ohne Nullstelle in K (nach Induktionsvoraussetzung).
+
+    $f = g \cdot (x-a_1)^{m_1}...(x-a_k)^{m_k}$.
+
+    \section{Korollar}
+
+    K Körper, $f,g \in K[x]$, m = max(Grad(f), Grad(g))
+
+    Gibt es m+1 Elemente $a_1, ..., a_{m+1} in K$, paarweise verschieden, mit $f(a_i) = g(a_i), i=1,...,m+1$, so f=g
+
+    \par \medskip
+
+    \textbf{Insbesondere:} Ist K unendlich, $f,g, \in K[x]$ mit f(a) = g(a) für alle $a \in K$, so ist f = g.
+
+    \subsection{Beweis}
+
+    $f-g \in K[x]$, Grad($f-g$) $\leq$ m.
+
+    $f-g$ hat m+1 Nullstellen $a_1, ..., a_{m+1}$
+
+    1.32. $f-g = 0$, $f = g$
+
+    \section{Bemerkung}
+
+    Über $\mathbb{Q, R}, \mathbb{Z}_p$ (p Primzahl) gibt es Polynome beliebig hohen Grades ohne Nullstellen.
+
+    Über $\mathbb{Q, R}$: $(x² + 1)^m$ hat Grad 2m, keine Nullstelle in $\mathbb{Q, R}$
+
+    In $\mathbb{C}$ $x² + 1 = (x+i)(x-i)$
+
+    Über $\mathbb{Z}_p$ z.B. $(x^p - x + 1)^m$ hat Grad pm, ohne Nullstellen. (ohne Beweis) 
+
+    \section{Fundamentalsatz der Algebra (C.F. Gauß)}
+
+    Ist $f \in \mathbb{C}[x]$, $f \neq 0$, so ist:
+
+    \begin{equation}
+      \begin{split}
+      f = a_n(x-c_1)^{m_1}...(x-c_k)^{m_k}, a_n \in \mathbb{C}, c_i,...,c_k \in \mathbb{C} \textnormal{ (Nullstellen mit Vielfachheit $m_1,...,m_k$)} \\
+      m_1 +...+m_k = \textnormal{ Grad(f)}
+      \end{split}
+    \end{equation}
+
+    Grad(f) = n: f hat n Nullstellen (einschließlich Vielfachheit)
+
+    \chapter{Vektorräume}
+
+    Verallgemeinerung von Mathe II, Kap. 10
+
+    \section{Definition}
+
+    Sei K ein Körper. 
+
+    Ein \underline{K-Vektorraum} V besitzt Verknüpfung $+$, bezüglich derer er eine kommutative Gruppe ist. (Neutrales Element $\sigma$, \underline{Nullvektor}; Inverses zu $v \in V$: $-v$)
+
+    Außerdem existiert Abbildung :
+
+    \begin{center}
+      $K \times V \rightarrow V$ 
+
+      $(a,v) \mapsto av, a \in K, v \in V$
+    \end{center}
+
+    (``Multiplikation'' von Elementen aus $V$ (``Vektoren'') mit Körperelementen (``Skalare'')), so dass gilt:
+
+    \par \medskip
+
+    $(a \underbrace{+}_{in \ K} b) v = av \underbrace{+}_{in \ V} bv$ für alle $a,b \in K, v \in V$
+
+    \par \medskip
+
+    $a (v \underbrace{+}_{in \ V} w) = av \underbrace{+}_{in \ V} aw$ für alle $a \in K, v,w \in V$
+
+    \par \medskip
+
+    $(a \underbrace{\cdot}_{in \ K} b) v = a \cdot (\underbrace{bv}_{\in V})$
+
+    \par \medskip
+
+    $1 v = v$ für alle $v \in V$ (mit 1 neutrales Element in K bezüglich $\cdot$)
+
+    \section{Beispiel Vektorraum}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item K Körper, $n \in \mathbb{N}$
+
+      $K^n = \{\begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix} : a_i \in K\}$ ist K-Vektorraum begzüglich:
+
+      \begin{equation}
+        \begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix} + \begin{pmatrix}b_1 \\ ... \\ b_n \end{pmatrix} := \begin{pmatrix}a_1 + b_1 \\ ... \\ a_n + b_n \end{pmatrix}
+      \end{equation}
+
+      \begin{equation}
+        a \begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix} := \begin{pmatrix} a \cdot a_1 \\ ... \\ a \cdot a_n \end{pmatrix}
+      \end{equation}
+
+      für alle $a \in K, \begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix}, \begin{pmatrix}b_1 \\ ... \\ b_n \end{pmatrix} \in K^n$
+
+      Raum der \underline{Spaltenvektoren} der Länge n über K.
+
+      \par \medskip
+
+      Entsprechend Raum der Zeilenvektoren.
+
+      \begin{equation}
+        \begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix}  = \begin{pmatrix}a_1,...,a_n\end{pmatrix}^t
+      \end{equation}
+
+      Für $K =  \mathbb{R} : \mathbb{R}^n$
+
+      n = 2,3 Elemente aus $\mathbb{R}^2, \mathbb{R}^3$ identifizierbar mit Ortsvektor der Ebene oder des 3-dimensionalen Raums.
+
+      \item Sei K ein Körper.
+
+      Polynomring $K[x]$ ist ein K-Vektorraum bezüglich:
+
+      \begin{itemize}
+        \item Addition von Polynomen
+        \item Multiplikation von Körperelementen mit Polynomen
+
+        \begin{center}
+          $a \cdot (\sum_{i=0}^{n} a_ix^i) := \sum_{i=0}^{n} (aa_i)x^i \in K[x]$, $a \in K, a_i \in K$
+        \end{center}
+
+        (Multiplikation von Polynomen mit Polynom vom Grad $\le$ 0 (konstant))
+
+        2.1 folgt aus den Ringeigenschaften von $K[x]$.
+      \end{itemize}
+
+      \item K Körper. V = Abb(K,K) = \{$\alpha : K \rightarrow K : \alpha$ Abb.\}
+
+      Addition auf V: 
+
+      $\alpha, \beta \in V$
+
+      $(\alpha + \beta)(x) := \alpha(x) + \beta(x)$, für alle $x \in K$.
+
+      Skalare Mutliplikation:
+
+      $a \in K, \alpha \in V$.
+
+      $(a \cdot \alpha)(x) = a \cdot \alpha(x)$, für alle $x \in K$
+
+      Nachrechnen: Damit wird V ein K-Vektorraum.
+    \end{enumerate}
+
+    \section{Prop}
+    $K$ Körper, $V$ K-VR.
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $a \cdot \sigma$ = $\sigma$, für alle $a \in K$
+      \item $0 \cdot v$ = $\sigma$, für alle $v \in V$.
+      \item (-1) $\cdot v$ = $-v$ 
+    \end{enumerate}
+
+    \subsection{Beweis}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $a \cdot \sigma = a \cdot (\sigma + \sigma) \underbrace{=}_{2.1} a \cdot \sigma + a \cdot \sigma$
+
+      $\Rightarrow a \cdot \sigma = \sigma$
+
+      \item $0 \cdot v = (0+0) \cdot v = 0 \cdot v + 0 \cdot v$
+
+      $\Rightarrow 0 \cdot v = \sigma$
+
+      \item $(-1) \cdot v + v \underbrace{=}_{2.1} (-1) \cdot v + 1 \cdot v \underbrace{=}_{2.1} ((-1)+1) \cdot v \underbrace{=}_{b)} 0 \cdot v = \sigma$
+
+      $\Rightarrow (-1) \cdot v = -v$
+    \end{enumerate}
+
+    \section{Definition Unterraum}
+
+    K Körper, V K-VR.
+
+    $\emptyset \neq U \subseteq V$ heißt \underline{Unterraum} (Untervektorraum oder Teilraum) von $V$, falls U begzülich Addition auf V und der skalaren Multiplikation mit Elementen aus K selbst K-Vektorraum ist.
+
+    \section{Prop}
+
+    U ist Unterraum von V $\Leftrightarrow$ 
+
+    \begin{enumerate}
+      \item[(1)] $u_1 + u_2 \in U$ für alle $u_1,u_2 \in U$
+      \item[(2)] $au \in U$ für allle $u \in U, a \in K$.
+    \end{enumerate}
+
+    (Nullvektor in $U$ = Nullvektor in $V$)
+
+    \subsection{Beweis}               
+    $\Rightarrow$ klar
+
+    $\Leftarrow$: Da $U \neq \emptyset$, existiert $u \in U$:
+
+    \begin{center}
+      $\sigma \underbrace{=}_{2.3.b)} 0 \cdot u \in U$
+    \end{center}
+
+    $u \in U \Rightarrow -u = (-1) \cdot u \in U$
+
+    Mit (1): $(U,+)$ ist kommutative Gruppe.
+
+    Restliche Axiome gelten auch für $U,K$.
+
+    \section{Beispiel}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item V K-VR, so ist V Unterraum von V und $\{\sigma\}$ ist Unterraum von V (\underline{Nullraum}).
+
+      \item Betrachte $K[x]$ als K-VR (2.2.b)).
+
+      Sei $n \in \mathbb{N}_0$.
+
+      U = $\{f \in K[x] : \textnormal{ Grad(f) $\le$ n}\}$
+
+      Unterraum von $K[x]$.
+    \end{enumerate}
+
+    \section{Prop}
+
+    Seien $U_1, U_2$ Unterräume von K-VR V.
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $U_1 \cap U_2$ ist Unterraum
+      \item $U_1 + U_2 := \{u_1 +u _2: u_1 \in U_1, u_2 \in U_2\}$ ist Unterraum von V (\underline{Summe} von Unterräumen)
+      \item $U_1 + U_2$ ist der kleinste Unterraum von $V$, der $U_1 \cup U_2$ enthält
+      \item $U_1 \cup U_2$ ist im Allgemeinen kein Unterraum
+    \end{enumerate}
+
+    \textbf{Beweis:} Wie 10.4, Mathe II
+
+    \section{Definition}
+
+    V K-VR
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $v_1,...,v_m \in V, a_1,...,a_m \in K$
+
+      Dann heißt $a_1v_1 + ...a_mv_m = \sum_{i=1}^{m} a_iv_i \in V$ \underline{Linearkombination} von $v_1,...,v_m$ (mit Koeffizienten $a_1,...,a_m$).
+
+      [Beachte: Zwei formal verschiedene Linearkombinationen derselben Vektoren können den gleichen Vektor darstellen]
+
+      \item Ist $M \subseteq V$, so ist der von M \underline{erzeugte} oder \underline{aufgespannte Unterraum} $<M>_k$ (oder kurz $<M>$) die Menge aller (endlichen) Linearkombinationen, die man mit Vektoren aus M bilden kann:
+
+      $<M>_k = \{\sum_{i=0}^{n} a_iv_i : n \in \mathbb{N}, a_i \in K, v_i \in M\}$
+
+      $< \emptyset >_k := \{ \sigma\}$
+
+      $M =  \{v_1,...v_m\}: \ <M> =: <v_1,...,v_m>$
+
+      \item Ist $<M>_k = V$, so heißt M \underline{Erzeugendensystem} in V.
+    \end{enumerate}
+
+    \section{Satz}
+
+    V K-VR, $M \subseteq V$.
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $<M>_k$ ist Unterraum von V
+      \item $<M>_k$ ist der kleinste Unterraum von V, der M enthält.
+
+      Insbesondere: Sind $U_1, U_2$ Unterräume von V, so ist  $<U_1 \cup U_2>_k = U_1 + U_2$
+
+      \textbf{Beweis:} Wie 10.7, Mathe II
+    \end{enumerate}
+
+
+    \textbf{Wiederholung}
+
+    \par \medskip
+
+    V K-VR
+
+    $M \subseteq V$, $<M>_k = \{\sum_{i=1}^{n} a_iv_i : n \in \mathbb{N}, a_i \in K, v_i \in M\}$
+
+    Falls $V = <M>_k$, so heißt M Erzeugendensystem von V.
+
+    \section{Definition}
+
+    V K-VR. V heißt \underline{endlich erzeugt}, falls es eine \underline{endliche} Teilmenge $M \subseteq V$ gibt mit V = $<M>_K$
+
+    \section{Beispiel}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $K^n =  \{ \begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix}: a_i \in K \}$
+
+      $K^n$ ist endlich erzeugt:
+
+      $e_1, ..., e_n$ \underline{Einheitsvektoren}
+
+      $e_i = \begin{pmatrix}0 \\ .. \\ 1 \\.. \\ 0 \end{pmatrix}$ (1 an i-ter Stelle)
+
+      $K^n = <e_1,...,e_n>_k$, denn $\begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix} = a_1e_1+...a_ne_n$
+
+      \item $K[x]$ als K-VR ist nicht endlich erzeugt:
+
+      Angenommen es existieren $f_1,...,f_n \in K[x]$ mit $K[x] = <f_1,...,f_n>_k$.
+
+      Sei t = max Grad($f_i$) $\in \mathbb{N}_0 \cup \{- \infty\}$
+
+      Dann haben alle Polynome in $<f_1, .., f_n>_k$ höchstens Grad t. Also $x^{t+1} \in K[x] \setminus <f_1,...,f_n>_k$. Widerspruch !
+
+      M = $\{1,x,x²,x³,...\} = \{ x^i : i \in \mathbb{N}_0 \}$
+
+      $K[x] = <M>_k$
+
+      $f = \sum_{i=0}^{t} a_ix_i$
+
+      \item $n \in \mathbb{N}$. U = $\{ f \in K[x]: \textnormal{ Grad(f) $\le$ n}\}$
+
+      Unterraum von $K[x]$ endlich erzeugt:
+
+      $U = <x^0, x¹, ..., x^n>_K$
+    \end{enumerate}
+
+    \section{Definition}
+
+    Sei V K-VR. $v_1, ..., v_m \in V$ heißen \underline{linear abhängig}, wenn es $a_1, ..., a_n \in K$, \underline{nicht alle = 0}, gibt mit
+
+    $a_1v_1+...+a_mv_m = \sigma$
+
+    (Beachte: Immer ist $0 \cdot v_1 +...+0 \cdot v_m = \sigma$, aber bei lin. Abhängigkeit solles noch eine andere Möglichkeit geben)
+
+    Andernfalls nennt man $v_1, ..., v_m$ \underline{linear unabhängig}
+
+    (D.h. aus $a_1v_1 + ... + a_mv_m = \sigma$, folgt $a_1 = ... = a_m = 0$)
+
+    \par \medskip
+
+    Entspr.: $\{v_1,...,v_m\}$ linear abhängig / linear unabhängig
+
+    $\emptyset$ per Definition linear unabhängig.
+
+    Klar. Teilmenge von linear unabhängigen Vektoren ist wieder linear unabhängig.
+
+    \section{Beispiel}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $\sigma$ ist linear abhängig.
+
+      $1 \cdot \sigma = \sigma$
+
+      \item $v,w \in V, v \neq \sigma \neq w$.
+
+      Wann sind v und w linear abhängig?
+
+      v,w linear abhängig $\Rightarrow$ $\exists a,b \in K$, nicht beide = 0 mit $a \cdot + b \cdot w = \sigma$
+
+      Angenommen: $a \neq 0$: $a \cdot v = -b \cdot w \ | a^{-1}$ (K körper)
+
+      $v = 1v = (a^{-1}a)v = a^{-1}(av) = a^{-1}(-bw) = (-a^{-1}b) w \in <w>_K = \{cw : c \in K\}$
+
+      $d \in K$
+
+      $d v = (-d \cdot a^{-1} \cdot b) w \in <w>_k$.
+
+      $<v>_k \subseteq <w>_k$
+
+      Dann auch $b \neq 0$.
+
+      Angenommen b = 0: $a \cdot v = -0 \cdot w = \sigma$.
+
+      $v = a^{-1} \cdot \sigma = \sigma$ Widerspruch. 
+
+      Vertausche Rollen von $v,w$: $<w>_k \subseteq <v>_k$
+
+      v,w linear abhängig $\Leftrightarrow$ $<v>_k = <w>_k$
+
+      $\Rightarrow$ klar
+
+      $\Leftarrow$ $v \in <v>_k = <w>_k$ $\rightarrow v = c \cdot w$ für ein $c \in K$.                                                    
+
+      $\rightarrow \sigma = -v + c \cdot w = (-1) v + c \cdot w$
+
+      $\rightarrow v,w$ linear abhängig.
+
+      \item $e_1,...,e_n \in K^n$ sind linear unabhängig.
+
+      $\begin{pmatrix} 0 \\ .. \\ 0 \end{pmatrix} = a_1e_1 + ... + a_ne_n  = \begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix} \rightarrow a_1 = ... = a_n = 0$
+
+      \item $\begin{pmatrix}1 \\ 2 \\ 3 \end{pmatrix}, \begin{pmatrix}3 \\ 2 \\ 1 \end{pmatrix}, \begin{pmatrix}2 \\ 3 \\ 4 \end{pmatrix} \in \mathbb{R}^3$ lin. abhängig / lin. unabhängig?
+
+      Für welche a,b,c, $\in \mathbb{R}$ gilt:
+
+      $a \begin{pmatrix}1 \\ 2 \\ 3 \end{pmatrix} + b \begin{pmatrix}3 \\ 2 \\ 1 \end{pmatrix} + c \begin{pmatrix} 2 \\ 3 \\4 \end{pmatrix} = \begin{pmatrix}0 \\ 0 \\ 0 \end{pmatrix}$ ?
+
+      Führt auf LGS für die Unbekannten: a,b,c:
+
+      $1 \cdot a + 3 \cdot b + 2 \cdot c = 0$ 
+
+      $2 \cdot a + 2 \cdot b + 3 \cdot c = 0$ 
+
+      $3 \cdot a + 1 \cdot b + 4 \cdot c = 0$
+
+      Gauß:
+
+      $\begin{pmatrix}1 & 3 & 2 & | & 0 \\ 2 & 2 & 3 & | & 0 \\ 3 & 1 & 4 & | & 0 \end{pmatrix} \rightarrow \begin{pmatrix} 1 & 3 & 2 & | & 0 \\ 0 & -4 & -1 & | & 0 \\ 0 & -8 & -2 & | & 0 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 3 & 2 & | & 0 \\ 0 & 1 & \frac{1}{4} & | & 0 \\ 0 & 0 & 0 & | & 0 \end{pmatrix} $
+
+      c frei wählbar, $b = - \frac{1}{4} c, a = -3b - 2c = \frac{3}{4} c - 2c = - \frac{5}{4} c$
+
+      Z.b. c = 4, b = -1, a = -5
+
+      $(-5) \cdot \begin{pmatrix}1 \\ 2 \\ 3 \end{pmatrix} + (-1) \cdot \begin{pmatrix}3 \\ 2 \\ 1 \end{pmatrix} +  4 \cdot \begin{pmatrix}2 \\ 3 \\ 4 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$
+
+      Vektoren sind linear abhängig.
+    \end{enumerate}
+
+    \section{Bemerkung}
+
+    Mann kann auch für unendliche Mengen $M \subseteq V$ lineare Unabhängiekt definieren:
+
+    Jede endliche Teilmenge von M ist linear unabhängig.
+
+    Z.B. $\{x^i : i \in \mathbb{N}_0\}$ linear  unabhängig in $K[x]$
+
+    \section{Satz}
+
+    V K-VR, $v_1,...,v_m \in V$.
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $v_1, ..., v_m$ sind linear abhängig $\Leftrightarrow$ $\exists i : v_i = \sum_{j=1}^{n} b_jv_j$ für geeigente $b_j \in K, j \neq i$
+
+      $\Leftrightarrow \exists i : <v_1,...,v_m>_k = <v_1,...,v_{i-1}, v_{i+1}, ..., v_m>_k$
+
+      \item $v_1, ..., v_m$ linear unabhängig $\Leftrightarrow$ jedes $v \in <v_1,...,v_m>_k$ lässt sich auf \underline{eindeutige} Weise als Linearkombination von $v_1,...,v_m$ schreiben.
+
+      \item Sind $v_1,...,v_m$ linear unabhängig und ist 
+
+      \begin{center}
+        $v \not \in <v_1,...,v_m>_k$
+      \end{center}
+
+      so sind $v_1,...,v_m,v$ linear unabhängig.
+
+      \subsection{Beweis}
+
+      Wie 10.11, Mathe II
+
+      z.B b) $\Rightarrow$: 
+
+      Angenommen $V \in <v_1,...,v_m>_k$
+
+      $V = \sum_{i=1}^{m} a_iv_i = \sum_{i=1}^{m} b_i v_i, a_i,b_i \in K$
+
+      $\sum_{i=1}^{m} (a_i - b_i) v_i = \sum_{i=1}^{m}a_iv_i - \sum_{i=1}^{m} b_i v_i = \sigma$
+
+      $v_1,...,v_m$ linear unabhängig $\Rightarrow$ $a_i - b_i = 0$ für $i = 1,...,n \rightarrow a_i = b_i$
+    \end{enumerate}
+
+    \section{Definition}
+
+    Sei V endlich erzeugter K-VR. Eine endliche Teilmenge $B \subseteq V$ heißt \underline{Basis} von V, falls
+
+    \begin{enumerate}
+      \item[(1)] V = $<B>_k$
+      \item[(2)] B linear unabhängig
+    \end{enumerate}
+
+    (V = $\{\sigma\}$ : $\emptyset$ ist Basis von V)
+
+    \section{Beispiel}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $e_1, ..., e_n$ Basis von $K^n$ (\underline{kanonische} Basis)
+
+      $\begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix}$ = $a_1e_1+...+a_ne_n$
+
+      \item $\begin{pmatrix}1 \\ 2 \end{pmatrix}, \begin{pmatrix}3 \\ 1 \end{pmatrix}, K = \mathbb{Z}_5$
+
+      In $\mathbb{Z}_5^2$ sind $\begin{pmatrix}1 \\ 2 \end{pmatrix}, \begin{pmatrix}3 \\ 1 \end{pmatrix}$ keine Basis, denn sie sind nicht linear unabhängig über $\mathbb{Z}_5$.
+
+      $3 \cdot \begin{pmatrix}1 \\ 2 \end{pmatrix} = \begin{pmatrix}3 \\ 1 \end{pmatrix}$
+
+      $\begin{pmatrix}0 \\ 0 \end{pmatrix} = 3 \cdot \begin{pmatrix}1 \\ 2 \end{pmatrix} + 4 \cdot \begin{pmatrix}3 \\ 1 \end{pmatrix}$
+
+      \par \medskip
+
+      $K = \mathbb{Z}_7$
+
+      $\begin{pmatrix}1 \\ 2 \end{pmatrix}, \begin{pmatrix}3 \\ 1 \end{pmatrix}$ bilden Basis von $\mathbb{Z}_7^2$:
+
+      Lineare Unabhängigkeit:
+
+      $a \cdot \begin{pmatrix}1 \\ 2 \end{pmatrix} + b \cdot \begin{pmatrix}3 \\ 1 \end{pmatrix} = \begin{pmatrix}0 \\ 0 \end{pmatrix}$, $a,b \in \mathbb{Z}_7$.
+
+      Führt auf LGS für a,b: 
+
+      $1 \cdot a + 3 \cdot b = 0$ 
+
+      $2 \cdot a + 1 \cdot b = 0$
+
+      Gauß-Algorithmus (funktioniert über jedem Körper K):
+
+      $\begin{pmatrix} 1 & 3 & 0 \\ 2 & 1 & 0 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 3 & 0 \\ 0 & 2 & 0 \end{pmatrix} \underbrace{\rightarrow}_{\textnormal{multp. mit Inversem}} \begin{pmatrix}1 & 3 & 0 \\ 0 & 1 & 0 \end{pmatrix}$
+
+      $b = 0, a +3b = 0 \rightarrow a = 0$
+
+      $\left \langle \begin{pmatrix}1 \\ 2 \end{pmatrix}, \begin{pmatrix}3 \\ 1 \end{pmatrix} \right \rangle_{\mathbb{Z}_7} = \mathbb{Z}_7^2$
+
+      Sei $\begin{pmatrix}c \\ d \end{pmatrix} \in \mathbb{Z}_7^2$. Gesucht sind $a,b \in \mathbb{Z}_7^2$
+
+      $a \cdot \begin{pmatrix}1 \\ 2 \end{pmatrix} + b \cdot \begin{pmatrix}3 \\ 1 \end{pmatrix} = \begin{pmatrix}c \\ d \end{pmatrix}$
+
+      $1 \cdot a + 3 \cdot b = c$ 
+
+      $2 \cdot a + 1 \cdot b = d$
+
+      Gauß:
+
+      $\begin{pmatrix}1 & 3 & c \\ 2 & 1 & d \end{pmatrix} \rightarrow \begin{pmatrix}1 & 3 & c \\ 0 & 2 & d-2c \end{pmatrix} \underbrace{\rightarrow}_{\textnormal{2. Zeile mit $2^{-1}$ = 4}} \begin{pmatrix}1 & 3 & c \\ 0 & 1 & 4d-c \end{pmatrix}$
+
+      $b = 4d-c = 4d + 6c$
+
+      $a = c-3b = c-5d-4c = 4c+2d$
+
+      $\begin{pmatrix}c \\ d\end{pmatrix} = (4c+2d) \cdot \begin{pmatrix}1 \\ 2 \end{pmatrix} + (4d +6c) \begin{pmatrix}3 \\ 1 \end{pmatrix}$
+    \end{enumerate}
+
+    \section{Satz (Existenz von Basen)}
+
+    Sei V endlich erzeugter K-VR. Dann enhält jedes endliche Erzeugendensystem von V eine Basis v von V.
+
+    \subsection{Beweis}
+
+    Sei $M \subseteq V$ endlich mit $V = <M>_K$. Ist M linear unabhängig so ist M basis. 
+
+    Ist M lin. abhängig, so existiert nach 2.15.a) $v \in M$ mit $V = <M>_k = <M \setminus{\{ v \}}>_k$.
+
+    Da M endlich ist endet dieses Verfahren mit Basis.
+
+    \section{Lemma}
+
+    V endlich erzeugter K-VR V.
+
+    $B = \{v_1,...,v_n\}$ Basis von V.
+
+    Sei $\sigma \neq w \in V$. Dann:
+
+    \begin{equation}
+      w = \sum_{j=1}^n a_kv_j, a_j \in K
+    \end{equation}
+
+    Ist $a_i \neq 0$, so ist 
+
+    \begin{center}
+      $(B \setminus \{v_i\}) \cup \{w\}$
+    \end{center}
+
+    wieder eine Basis von V.
+
+    \subsection{Beweis}
+
+    $w = \sum_{j=1}^n a_jv_j \Rightarrow a_iv_i = w - \sum_{j=1, j \neq i}^{n} a_jv_j$
+
+    $\Rightarrow v_i = a_i^{-1}(a_iv_i) = a_i^{-1}w + \sum_{j=1, j \neq i}^n (a_i^{-1} a_j) v_j$
+
+    $v_i \in \left \langle (B \setminus \{v_i\}) \cup \{w\} \right \rangle$
+
+    V = $\left \langle B \right \rangle_K = \left \langle B \cup \{w\} \right \rangle_K = \left \langle (B \setminus \{v_i\} \cup \{w\} \right \rangle_K$
+
+    Zeige: $(B \setminus \{v_i\}) \cup \{w\}$ ist linear unabhängig:
+
+    \par \medskip
+
+    \newpage
+    Angenommen:
+
+    \begin{center}
+       $\sigma = \sum_{j=1, j \neq i}^n c_jv_j + cw$ mit $c_j,c \in K$
+    \end{center}
+
+    Es folgt:
+
+    \begin{center}
+      $\sum_{j=1, j \neq i}^n c_jv_j + \sum_{j=1}^n ca_jv_j$
+
+      $= \sum_{j=1, j \neq i}^n (c_j +ca_j)v_j + ca_iv_i$
+    \end{center}
+
+    $v_1, ..., v_n$ linear unabhängig:
+
+    $\rightarrow$ $ca_i = 0$ und $c_j+c_aj = 0 $ für alle $j \neq i$.
+
+    \begin{enumerate}
+      \item[(1)]$ca_i = 0, \ a_i \neq 0$ $\rightarrow c = 0$
+      \item[(2)]$c_j = 0$ für alle $j \neq i$
+    \end{enumerate}
+
+    \section{Satz (Austauschsatz von Steinitz)}
+
+    V endlich erzeugter K- VR, B Basis von V, M endliche linear unabhängige Teilmenge von V. Dann existiert $C \subseteq B$ mit $|C| = |M|$, so dass                                                             
+
+    \begin{center}
+      $(B \setminus C) \cup M$
+    \end{center}
+
+    Basis von V ist.
+
+    Insbesondere $|M| \le |B|$.
+
+    \subsection{Beweis}
+
+    Sei $|M| = k$. Induktion nach k.
+
+    $k = 0$: klar
+
+    $k > 0$: Sei $M = \tilde{M} \cup \{w\}$, $|\tilde{M}| = k-1$.
+
+    Induktionsvorraussetzung: Existiert $\tilde{C} \subseteq B$ mit 
+
+    \begin{center}
+      $|\tilde{C}| =|\tilde{M}|$
+    \end{center}
+
+    und
+
+    \begin{center}
+      $(B \setminus \tilde{C}) \cup \tilde{M}$ 
+    \end{center}
+
+    ist Basis von V.
+
+    w = $\sum_{u \in B \setminus \tilde{C}} a_uu+ \sum_{v \in \tilde{M}}a_v v$
+
+    Mindestens eines der $a_k$ ist $\neq 0$, denn sonst:
+
+    \begin{center}
+      $w = \sum_{v \in \tilde{M}}a_vv$, also
+    \end{center}
+
+    $M = \tilde{M} \cup \{w\}$ linear abhängig (Widerspruch!)
+
+    Also sei $a_n \neq 0$ für ein $u \in B \setminus \tilde{C}$
+
+    Nach 2.19 ist 
+
+    \begin{center}
+      $(B \setminus C) \cup M$
+    \end{center}
+
+    Basis von V, wobei $C = \tilde{C} \cup \{u\}$. Fertig.
+
+    \section{Korollar}
+
+    V endlich erzeugter K-VR. 
+
+    \begin{enumerate}[label=(\alph*)]
+      \item Je zwei Basen von V enthalten gleich viele Vektoren
+      \item Jede linear unabhängige Teilmenge von V ist endlich
+      \item (Basisergänzungssatz)
+
+      Jede linear unabhängige Menge von Vektoren lässt sich zu einer Basis ergänzen.
+    \end{enumerate}
+
+    \subsection{Beweis}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $B, \tilde{B}$ Basen von V.
+
+      2.20 : $|B| \le |\tilde{B}|$, $|\tilde{B}| \le |B|$, also $|B| = |\tilde{B}|$.
+
+      \item Angenommen V enthält unendlich linear unabhängige Teilmengen.
+
+      Sei B Basis von V. Wähle $M_0 \subset M$ mit $M_0$ endlich, $|M_0| > |B|$.
+
+      Nach Voraussetzung ist $M_0$ linear unabhängig. Widerspruch zu 2.20.
+
+      \item Sei M linear unabhängige Teilmenge von V. Nach b) ist M endlich.
+
+      Sei B eine Basis von V.
+
+      2.20: $\exists C \subseteq B, |C| = |M|$, so dass $(B \setminus C) \cup M$ Basis.
+    \end{enumerate}
+
+    \section{Satz}
+
+    V endlich erzeugter K-VR, $B \subseteq V$. Dann sind äquivalent: 
+
+    \begin{enumerate}
+      \item[(1)] B ist Basis von V
+      \item[(2)] B ist maximal linear unabhängige Teilmenge von V (d.h. $B \cup \{v\}$ ist linear abhängig f.a $v \in V \setminus B$)
+      \item[(3)] B ist minimales Erzeugendensystem von V (d.h. $\left \langle B \setminus \{w\} \right \rangle_K \neq V$ für alle $w \in B$)
+    \end{enumerate}
+
+    \subsection{Beweis}
+
+    \subsubsection*{(2) $\Rightarrow$ (1)}
+
+    Angenommen $\left \langle B \right \rangle_K \neq V$. Sei $v \in V \setminus \left \langle B \right \rangle_K$.
+
+    2.15.c): $B \cup \{v\}$ linear unabhängig. Widerspruch !
+
+    $\left \langle B \right \rangle_K = V.$ B ist Basis
+
+    \subsubsection*{(1) $\Rightarrow$ (2)}
+
+    Angenommen: $B \subseteq C$, C linear unabhängig.
+
+    2.21: C endlich
+
+    2.20: $|C| \le |B|$. Daher: B = C
+
+    \subsubsection*{(3) $\Rightarrow$ (1)} 
+
+    Angenommen B ist linear abhängig.
+
+    2.15.a): $\exists w \in B$:
+
+    V = $\left \langle B \right \rangle_K = \left \langle B \setminus \{w\} \right \rangle$ Widerspruch!
+
+    B ist linear unabhängig, also Basis.
+
+    \subsubsection*{(1) $\Rightarrow$ (3)}
+
+    Angenommen: $\exists w \in B$ mit $\left \langle B \setminus \{w\} \right \rangle_K = V$ = $\left \langle B \right \rangle_K$
+
+    2.15.a): B ist linear abhängig. Widerspruch!
+
+    \section{Definition}
+
+    V K-VR.
+
+    \begin{enumerate}[label=(\alph*)]
+      \item Ist V endlich erzeugt, B ist Basis von V, $|B| = n$, so hat V \underline{Dimension n}, $dim_K(V) = n$ (oder einfach $dim(V) = n$)
+
+      (V heißt endlich-dimensional)
+
+      \item Ist V nicht endlich erzeugt, so heißt V \underline{unendlich-dimensional}.
+    \end{enumerate}
+
+    (Also: endlich erzeugt = endlich-dimensional)
+
+
+    \section{Korollar}
+
+    V K-VR, $dim_K(V) = n$, $B \subseteq V$, $|B| = n$.
+
+    \begin{enumerate}[label=(\alph*)]
+      \item Ist B linear unabhängig, dann ist B Basis.
+
+      \item Ist $\left \langle B \right \rangle_K = V$, dann ist B Basis.
+    \end{enumerate}
+
+    \subsection{Beweis}
+
+    Folgt aus 2.22
+
+    \section{Beispiel}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $dim_K(K^n) = n$, da $e_1,...,e_n$ Basis.
+
+      \item $V = \mathbb{R}^4$
+
+      U = $\left \langle \begin{pmatrix}1 \\ 2 \\ 0 \\1 \end{pmatrix}, \begin{pmatrix}0 \\ 2 \\ 1 \\ 0 \end{pmatrix} \right \rangle_{\mathbb{R}}$
+
+      $u_1, u_2$ sind linear unabhängig.
+
+      $a \cdot \begin{pmatrix}1 \\ 2 \\ 0 \\ 1 \end{pmatrix} + b \cdot \begin{pmatrix}0 \\ 2 \\ 1 \\ 0 \end{pmatrix} = \begin{pmatrix}0 \\ 0 \\ 0 \\ 0 \end{pmatrix}$
+
+      $\{u_1, u_2\} $ Basis von U, $dim_{\mathbb{R}}(U) = 2$
+
+      Ergänze $u_1, u_2$ zu Basis von $V = \mathbb{R}^4$:
+
+      \subsubsection{1. Möglichkeit}
+
+      $e_1, e_2, e_3, e_4$ kanonische Basis des $\mathbb{R}^4$
+
+      $u_1 = 1 \cdot e_1 + 2 \cdot e_2 + 0 \cdot e_3 + 1 \cdot e_4$
+
+      \par \medskip
+
+      2.19: $u_1, e_2, e_3, e_4$ Basis von $\mathbb{R}^4$.
+
+      \par \medskip
+
+      $u_2 = au_1+be_2+ce_3+de_4$
+
+      $\rightarrow \begin{pmatrix}0 \\ 2 \\1 \\ 0 \end{pmatrix} = a \cdot \begin{pmatrix}1 \\ 2 \\ 0 \\ 1 \end{pmatrix} + \begin{pmatrix} 0 \\ b \\ 0 \\ 0 \end{pmatrix} + \begin{pmatrix}0 \\ 0 \\ 0 \\ 0 \end{pmatrix} + \begin{pmatrix}0 \\ 0 \\ 0 \\ d \end{pmatrix}$ $\rightarrow c = 1$
+
+      \par \medskip
+
+      2.19: $u_1,u_2,e_3, e_4$ Basis von $\mathbb{R}^4$
+    \end{enumerate}
+
+    \subsection{2. Möglichkeit}
+
+    2.15.c): 
+
+    $v_1, ..., v_m$ linear unabhängig.
+
+    $v \not \in \left \langle v_1, ..., v_m \right \rangle \rightarrow v_1, ..., v_m, v $ linear unabhängig.
+
+    \par \medskip
+
+    U = $\left \lbrace \begin{pmatrix}a \\ 2a + 2b \\ b \\ a\end{pmatrix} : a,b \in \mathbb{R} \right \rbrace$
+
+    \par \medskip
+
+    $e_1 \not \in U$ (1. Koord $\neq$ 4. Koordinate)
+
+    2.15.c) $u_1, u_2, e_1 $ linear unabhängig.
+
+
+    $\left \langle u_1, u_2, e_1 \right \rangle = ?$
+
+    \par \medskip
+
+    $u_1 := \left \lbrace \begin{pmatrix}a+c \\ 2a+2b \\ b \\ a \end{pmatrix} : a,b,c \in \mathbb{R} \right \rbrace$
+
+    \par \medskip
+
+    $e_2 \not \in U$
+
+    2.15.c) $u_1, u_2, e_1, e_2$ linear unabhängig.
+
+    2.24: $\{u_1, u_2,e_1, e_2\}$ Basis von $\mathbb{R}^4$
+
+    \section{Satz}
+
+    V K-VR, $dim_K(V) = n$.
+
+    \begin{enumerate}[label=(\alph*)]
+      \item Ist U Unterraum von V, so ist $dim_K(U) \le n$.
+
+      Ist $dim_K(U) = n$, so ist U = V.
+
+      \item (Dimensionsformel)
+
+      U, W Unterräume von V, so gilt:
+
+      $dim(U+W) = dim(U) + dim(W) - dim(U \cap W)$
+
+      A, B endl. Mengen:
+
+      $| A \cup B| = |A| + |B| - |A \cup B|$
+    \end{enumerate}
+
+    \subsection{Beweis}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item ergänze Basis von U zu Basis von V. (2.21.c))
+
+      \item Basis von $U \cap W \rightarrow$ (ergänze zu) Basis von U
+
+      (WHK 9.23)
+    \end{enumerate}
+
+    \section{Definition}
+
+    V K-VR, $dim_K(V) = n$.
+
+    B = $(v_1, ..., v_n)$ \underline{geordnete} Basis von V.
+
+    \par \medskip
+
+    Jedes $v \in V$ hat \underline{eindeutige} darstellung $v = \sum_{i=1}^{n} a_iv_i$
+
+    $a_i \in K$. (2.15.b))
+
+    ($a_1, ..., a_n$) (in dieser Anordnung) heißen \underline{Koordinaten} von V bezüglich B.
+
+    \par \medskip
+
+    Insbesondere $v_i$ hat Koordinaten $(0,..,0,1,0,...,0)$ (1 an i-ter Stelle)
+
+    \section{Beispiel}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item V = $K^n$, ($e_1, ..., e_n$) = B kanonische Basisv 
+
+      Koordinaten von $v = \begin{pmatrix}a_1 \\ ... \\ a_n \end{pmatrix}$ bezüglich B: $(a_1, ..., a_n)$ \underline{Kartesische Koordinaten}
+
+      \item $V = \mathbb{Q}^3$, B = ($\begin{pmatrix}1 \\ 2 \\ 0 \end{pmatrix}, \begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix}, \begin{pmatrix}0 \\ 1 \\ 2 \end{pmatrix}$)
+
+      B ist geordnete Basis von V (nachprüfen).
+
+      \par \medskip
+
+      Koordinaten von $\begin{pmatrix}1 \\ 0 \\ 0 \end{pmatrix}$ bezüglich B: 
+
+      $\begin{pmatrix}1 \\ 0 \\ 0 \end{pmatrix} = a_1 \cdot \begin{pmatrix}1 \\ 2 \\ 0 \end{pmatrix} + a_2 \begin{pmatrix}1 \\ 0 \\ 1 \end{pmatrix} + a_3 \cdot \begin{pmatrix}0 \\ 1 \\ 2 \end{pmatrix}$
+
+      Gauß-Algorithmus:
+
+      $\begin{pmatrix} 1 & 1 & 0 & 1 \\ 2 & 0 & 1 & 0 \\ 0 & 1 & 2 & 0 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 1 & 0 & 1 \\ 0 & -2 & 1 & -2 \\ 0 & 1 & 2 & 0 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 1 & 0 & 1 \\ 0 & 1 & - \frac{1}{2} & 1 \\ 0 & 1 & 2 & 0 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 1 & 0 & 1 \\ 0 & 1 & -\frac{1}{2} & 1 \\ 0 & 0 & 1 & - \frac{2}{5} \end{pmatrix}$
+
+      Damit folgt:
+
+      $a_3 = - \frac{2}{5}$
+
+      $a_2 = 1 + \frac{1}{2} a_3 = 1 - \frac{1}{5} = \frac{4}{5}$
+
+      $a_1 = 1 - a_2 = \frac{1}{5}$
+
+      Koordinaten von $\begin{pmatrix}1 \\ 0 \\ 0 \end{pmatrix}$ bezüglich B: ($\frac{1}{5}, \frac{4}{5} , - \frac{2}{5}$)
+    \end{enumerate}
+
+    $\mathbb{R}^2:$ 1-dim. Unterräume (Geraden durch $\sigma$), 0-dim: $\{\sigma\}$
+
+    0-dim. affiner Unterräume $\{v\}, v \in V$
+
+    \section{Definition}
+
+    V K-VR, U Unterraum von V, $w \in V$
+
+    Dann heißst $w + U := \{w +u: u\in U\}$ \underline{affiner Unterraum} von V.
+
+    (w + U ist im Allgemienen kein Untervektorraum)
+
+    \par \medskip
+
+    $dim(w+U) := dim(U)$
+
+    \section{Satz}
+
+    V K-VR, U,W Unterräume von V, $w \in V, v_1, v_2 \in V$
+
+    \begin{enumerate}[label=(\alph*)]
+      \item w+U ist Unterraum (1) $\Leftrightarrow$ $w \in U  (2) \Leftrightarrow$ w + U = U (3)
+
+      \item Ist $v \in w+U$, so ist $v + U = w + U$
+
+      \item Sind $v_1 + U, v_2 + W$ affine Unterräume, so ist entweder ($v_1 + U) \cap (v_2 + W) = \emptyset$ oder es existiert $v \in V$ mit $(v_1+U) \cap (v_2 + W) = v + (U \cap W)$ (affiner Unterraum)
+    \end{enumerate}
+
+    \subsection{Beweis}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item  \textbf{(1) $\rightarrow$ (2)}
+
+      w+U Unterraum $\Rightarrow \sigma \in w + U$
+
+      $\Rightarrow \exists u \in U$ mit $w+u = \sigma$ 
+
+      $\Rightarrow w = -u \in U$
+
+      \textbf{(2) $\rightarrow$ (3)}
+
+      $w \in U, w+U \subseteq U$ (da U Unterraum)
+
+      Sei $u \in U$. Dann $u-w \in U$, $u = w + (u-w) \in w + U$
+
+      w + u = U
+
+      \textbf{(3) $\rightarrow$ (1)}
+
+      $\checkmark$
+
+      \item $v \in w+U, v = w+u$ für ein $u \in U$.
+
+      v + U = w + $\underbrace{u + U}_{=U}$ = w+U
+
+      \item Angenommen: $(v_1 + U) \cap (v_2 + W) \neq \emptyset$
+
+      Sei $v \in (v_1+U) \cap (v_2+U)$
+
+      \par \medskip
+
+      Nach b): 
+
+      \begin{itemize}
+        \item $v + U = v_1 + U$         
+        \item $v + W = v_2 + W$
+      \end{itemize}
+
+      $(v_1 + U) \cap (v_2 + W) = (v+ U) \cap (v + W) = v+ (U \cap W)$ 
+    \end{enumerate}
+
+    \section{Bemerkung}
+    affine Unterräume: 
+
+    Spezielle Rolle von $\sigma$ ist aufgehoben.
+
+    \par \medskip
+
+    Zur Beschreibung eines $x \in K^n$ kann man jeden Punkt p als ``Nullpunkt'' wählen und dann die Koordinaten von x bezüglich einer nach p ``verschobenen'' Basis berechnen.
+
+    \par \medskip
+
+    p hat Koordinaten ($p_1, ..., p_n$) bezüglich Basis $v_1,...,v_n$.
+
+    (1) Ursprüngliches Koordinatensystem: $\sigma$, $v_1,...,v_n$.
+
+    (2) Neues Koordinatensystem: p, $v_1+p,...,v_n+p$.
+
+    \par \medskip
+
+    x hat Koordinaten ($a_1, ..., a_n$) bezüglich (1) $\rightarrow$ Koordinaten von x bezüglich (2) = ($a_1+p, ..., a_n+p$)
+
+    \par \medskip
+    x hat Koordinaten ($a'_1,...,a'_n$) bezüglich (2) $\rightarrow$ x hat Koordinaten ($a'_1+p,...,a'_n+p$) bezüglich (1)
+
+    (Robotik)
+
+    \section{Bemerkung}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item In Mathe II:
+
+      $n \times m$-Matrizen über $\mathbb{Q,R,C}$
+
+      Das geht auch über beliebigen Körpern K.
+
+      Addition, Multiplikation mit Skalaren, Matrizenmultiplikation werden analog definiert. Es gelten die gleichen Rechenregeln wie in Mathe II, 9.5
+
+      \item In Mathe II wurden Matrizen verwendet zur Beschreibung von LGS.
+
+      Analog: LGS über beliebigen Körpern K. Gauß-Algorithmus funktioniert analog.
+
+      $(a_1,...,a_m), a_1 \neq 0$
+
+      $\rightarrow$ ($1, a_2 \cdot a_1^{-1}, ...$) (Mutliplikation der Zeile mit $a_1^{-1}$) (K Körper!)
+    \end{enumerate}
+
+    \section{Satz}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item Die Menge der Lösungen eines \underline{homogenen} LGS
+
+      \begin{center}
+        $A \cdot x = 0$
+      \end{center}
+
+      $(A \in M_{n,m}(K)$, $x \in K^m$, 0 ist Nullvektor in $K^n$)
+
+      bildet Untervektorraum  von $K^m$.
+
+      \item Ist das \underline{inhomogene} LGS
+
+      \begin{center}
+        $A \cdot x = b$
+      \end{center}
+
+      ($A,x$ wie oben, $b \in K^n$)
+
+      lösbar und ist $x_0 \in K^m$ eine spezielle Lösung(d.h. $A \cdot x_0 = b$), so erhält man alle Lösungen von $A \cdot x = b$ durch
+
+      \begin{center}
+        $\{x_0 + y : Ay = 0 \}$
+      \end{center}
+
+      Ist U der Lösungsraum von $A \cdot x = 0$, so ist die Lösungsmenge von $A \cdot x = b$ gerade der affine Unterraum $x_0 + U$ von $K^m$
+    \end{enumerate}
+
+    \subsection{Beweis}
+
+    \begin{enumerate}[label=(\alph*)] 
+      \item Folgt aus Rechenregeln für Matrizen
+
+      $x_1, x_2 \in K^m$ Lösungen von 
+
+      \begin{center}
+        $A \cdot x = 0$
+      \end{center}
+
+      $A \cdot (x_1+x_2) = Ax_1 + Ax_2 = 0 + 0 = 0$ 
+
+      $\rightarrow x_1 + x_2$ auch Lösung.
+
+      $a \in K$.
+
+      $A \cdot (a \cdot x_1) = a \cdot (Ax_1) = a \cdot 0 = 0 $
+
+      $\rightarrow a \cdot x_1$ Lösung.
+
+      Null-Lösung existiert immer.
+
+      \item $A \cdot x_0 = b$. Sei $y \in K^m$ mit $Ay = 0$.
+
+      $A \cdot (x_0 + y) = Ax_0 + Ay = b + 0 = b$
+
+      $\rightarrow x_0 + y$ ist Lösung von $Ax = b$.
+
+      \par \medskip
+
+      Zeige: Jede Lösung von Ax = b ist von der Form $x_0 + y$ für ein $y$ mit $Ay = 0$.
+
+      Sei x Lösung von $Ax = b$.
+
+      $x = x_0 + (x-x_0)$
+
+      $A \cdot (x - x_0) = Ax - Ax_0 = b - b = 0 \ \checkmark$
+    \end{enumerate}
+
+    \section{Beispiel}
+
+    Gegeben LGS:
+
+    \begin{center}
+
+      $x_1 + x_2 + x_3 - x_4 = 0$
+
+      $x_1 - 2x_2 + 0 x_3 - x_4 = 1$ 
+
+    \end{center}
+
+    über $\mathbb{Q}$.
+
+    $\begin{pmatrix}1 & 1 & 1 & -1 \\ 1 & -2 & 0 & 1 \end{pmatrix} \cdot \begin{pmatrix}x_1 \\ ... \\ x_4 \end{pmatrix} = \begin{pmatrix}0 \\ 1 \end{pmatrix}$
+
+    Gauß:
+
+
+    \par \medskip
+
+    $\begin{pmatrix}1 & 1 & 1 & -1 & 0 \\ 1 & -2 & 0 & 1 & 1 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 1 & 1 & -1 & 0 \\ 0 & -3 & -1 & 2 & 1 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 1 & 1 & -1 & 0 \\ 0 & 1 & \frac{1}{3} & - \frac{2}{3} & - \frac{1}{3} \end{pmatrix}$
+
+    \par \medskip
+
+    $x_3, x_4$ frei wählbar.
+
+    $x_2 = - \frac{1}{3} - \frac{1}{3} x_3 + \frac{2}{3} x_4$, $x_1 = ...$
+
+    \par \medskip
+
+    \textbf{Zugehöriges homogenes System:}
+
+    \par \medskip
+
+    $\begin{pmatrix}1 & 1 & 1 & -1 & 0 \\ 1 & -2 & 0 & 1 & 0 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 1 & 1 & -1 & 0 \\ 0 & 1 & \frac{1}{3} & - \frac{2}{3} & 0 \end{pmatrix}$
+
+    \par \medskip
+
+    Lösungsmenge = Unterraum.
+
+    Basis des Lösungsraums:
+
+    Setze die frei wählbaren $x_4, x_3:$
+
+    \begin{itemize}
+      \item $x_4 = 1, x_3 = 0$ $\rightarrow$ Lösung $\begin{pmatrix}\frac{1}{3} \\ \frac{2}{3} \\ 0 \\ 1 \end{pmatrix}$
+      \item $x_4 = 0, x_3 = 1$ $\rightarrow$ Lösung $\begin{pmatrix}- \frac{2}{3} \\ - \frac{1}{3} \\ 1 \\ 0 \end{pmatrix}$
+    \end{itemize}
+
+    Jede Lösung $d \cdot \begin{pmatrix} \frac{1}{3} \\ \frac{2}{3} \\ 0 \\ 1 \end{pmatrix} + c \cdot \begin{pmatrix}- \frac{2}{3} \\ - \frac{1}{3} \\ 1 \\ 0 \end{pmatrix} = \begin{pmatrix}* \\ * \\ c \\ d \end{pmatrix}$
+
+    \par \medskip
+
+    Lösungsraum von zugehörigen homogenen LGS: 
+
+    $\left \langle \begin{pmatrix} \frac{1}{3} \\ \frac{2}{3} \\ 0 \\ 1 \end{pmatrix}, \begin{pmatrix}- \frac{2}{3} \\ - \frac{1}{3} \\ 1 \\ 0 \end{pmatrix} \right \rangle = \left \langle \begin{pmatrix}1 \\ 2 \\ 0 \\ 3 \end{pmatrix}, \begin{pmatrix}2 \\ 1 \\ -3 \\ 0 \end{pmatrix} \right \rangle$
+
+    \par \medskip
+
+    affiner Lösungsraum des inhomogenen LGS:
+
+    Spezielle Lösung $x_4 = x_4 = 0$, $x_2 = - \frac{1}{3}$, $x_1 = \frac{1}{3}$.
+
+    $\begin{pmatrix}\frac{1}{3} \\ - \frac{1}{3} \\ 0 \\ 0 \end{pmatrix} +  \left \langle \begin{pmatrix}1 \\ 2 \\ 0 \\ 3 \end{pmatrix}, \begin{pmatrix}2 \\ 1 \\ -3 \\ 0 \end{pmatrix} \right \rangle$
+
+
+    \chapter{Lineare Abbildungen}
+
+    \section{Definition}
+
+    V, W K-VR
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $\alpha: V \rightarrow W$ heißt \underline{(K-)lineare Abbildung} (oder \underline{Vektorraum-Homomorphismus}), falls:
+
+        \begin{enumerate}
+          \item[(1)]$\alpha$(u+v) = $\alpha(u)$ + $\alpha(v)$, für alle $u,v \in V$. (Additivität)
+          \item[(2)]$\alpha(kv)$ = $k \cdot \alpha(v)$, für alle $k \in K, v \in V$. (Homogenität)
+        \end{enumerate}
+    \end{enumerate}
+
+    \section{Bemerkung}
+
+    $\alpha: V \rightarrow W$ lineare Abbildung.
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $\alpha(\sigma) = \sigma$
+      \item $\alpha(\sum_{i=1}^n k_i v_i)$ = $\sum_{i=1}^n k_i \alpha(v_i)$
+    \end{enumerate}
+
+    \subsection{Beweis}
+
+    \begin{enumerate}[label=(\alph*)]
+      \item $\alpha(\sigma) = \alpha(\sigma + \sigma) = \alpha(\sigma) + \alpha(\sigma) \rightarrow \alpha(\sigma) = 0$
+      \item Definition + Induktion nach n.
+    \end{enumerate}
+
+    \section{Beispiel}
+    \begin{enumerate}[label=(\alph*)]
+      \item Nullabbildung $\alpha: V \rightarrow W$
+
+      $\alpha(v) = \sigma$ für alle $v \in V$
+
+      \item $c \in K$.
+
+      $\alpha: V \rightarrow V, \alpha(v) = c \cdot v$
+
+      lineare Abbildung.
+
+      $c = 1:  \alpha = id_v$
+
+      \item $\varphi : \begin{cases}\mathbb{R}^3 \rightarrow \mathbb{R}^3 \\ \begin{pmatrix}x_1 \\ x_2 \\ x_3 \end{pmatrix} \mapsto \begin{pmatrix}x_1 \\ x_2 \\ - x_3 \end{pmatrix} \end{cases}$ linear.
+
+      Spiegelung an der $\{x_1, x_2\}$-Ebene in $\mathbb{R}^3$
+
+      \item $\alpha: \begin{cases}\mathbb{R}^2 \rightarrow \mathbb{R}^1 \\ \begin{pmatrix}x_1 \\ x_2 \end{pmatrix} \mapsto x_1^2 \end{cases}$ nicht linear.
+
+      $\alpha(\begin{pmatrix}x_1 \\ x_2 \end{pmatrix} + \begin{pmatrix}y_1 + y_2 \end{pmatrix}) = \alpha(\begin{pmatrix}x_1 + y_1 \\ x_2 + y_2 \end{pmatrix}) = (x_1+y_1)^2 = x_1² + 2x_1y_1 + y_1² \neq x_1² + y_1^2$
+      \end{enumerate}
+
+      \section{Satz}
+
+      Sei $A \in M_{m,n}(k)$
+
+      Definiere $\alpha: K^n \rightarrow K^m$ (Spaltenvektoren) durch $\alpha(x) = \underbrace{A}_{m \times n} \cdot \underbrace{x}_{n \times 1} \in K^m$. Dann ist $\alpha$ lineare Abbildung.
+
+      \subsection{Beweis}
+
+      Folgt aus Rechenregeln für Matrizenmultiplikation: 
+
+      \begin{itemize}
+        \item $\alpha(x+y) = A \cdot (x+y) = Ax + Ay = \alpha(x) + \alpha(y)$ $\checkmark$
+        \item $\alpha(k \cdot x) = A (k \cdot x) = k \cdot (Ax) = k \alpha(x)$ $\checkmark$
+      \end{itemize}
+
+      \underline{Beispiel aus 3.3 a) - c)}
+
+      \begin{itemize} 
+        \item $V = K^n$, Nullabbildung $K^n \rightarrow K^m$
+
+        Von der Form in 3.4 mit $A = \begin{pmatrix}0 & ... & 0 \\ ... & ... &... \\ 0 & ... & 0 \end{pmatrix}$ Nullmatrix
+
+        \item $\alpha: \begin{cases}K^n \rightarrow K^n \\ x \mapsto c \cdot x \end{cases}, (c \in K)$
+
+        3.4 mit $A = \begin{pmatrix}c & .. & 0 \\ ... & ... & .. \\ 0 & ... & c \end{pmatrix}$
+
+        \item Spiegelung aus 3.3.c)
+
+        3.4 mit $A = \begin{pmatrix}1 & & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -1 \end{pmatrix}$
+      \end{itemize}
+
+      \underline{Später:} Alle linearen Abbildungen $K^n \rightarrow K^m$ sind von der Form 3.4
+
+      \section{Satz}
+
+      U, V, W K-VR:
+
+      \begin{enumerate}[label=(\alph*)]
+        \item $\alpha, \beta: V \rightarrow W$ linear, so \underline{auch $\alpha + \beta$} (definiert durch $(\alpha + \beta) (v) := \alpha(v) + \beta(v)$ f.a. $v \in V$), und \underline{$k \cdot \alpha$} (definiert durch ($k \cdot \alpha) (v) := k \cdot \alpha(v)$ f.a. $v \in V$) linear von V nach W.
+
+        \item $\alpha: V \rightarrow W, \gamma : W \rightarrow U$ linear, so auch $\gamma \circ \alpha : V \rightarrow U$ lineare Abbildung.
+      \end{enumerate}
+
+      \subsection{Beweis}
+
+      Blatt 5.
+
+      \section{Satz}
+
+      $\alpha: V \rightarrow W$ lineare Abbildung.
+
+      \begin{enumerate}[label=(\alph*)]
+        \item Ist U Unterraum von V, so ist $\alpha(U) := \{ \alpha(u) : u \in U\}$ Unterraum von W.
+
+        Insbesondere ist $\alpha(V)$, \underline{Bild} von $\alpha$, Unterraum von W.
+
+        \item Ist U endlich-dimensional, so auch $\alpha(U)$ und es gilt $dim(\alpha(U)) \le dim(U)$ 
+      \end{enumerate}
+
+      \subsection{Beweis}
+
+      \begin{enumerate}[label=(\alph*)]
+        \item $\alpha(u_1), \alpha(u_2) \in \alpha(U)$, d.h. $u_1, u_2 \in U$, so $\alpha(u_1) + \alpha(u_2) = \alpha(\underbrace{u_1+u_2}_{\in U}) \in \alpha(U)$
+
+        $k \in K$
+
+        $k \cdot \alpha(u_1) = \alpha(k \cdot u_1) \in \alpha(U)$
+
+        \item Sei $u_1, ..., u_k$ Basis von U.
+
+        $u \in U, u = \sum_{i=1}^{k} c_i u_i, c_i \in K$
+
+        $\alpha(u) = \sum_{i=1}^{k} c_i \alpha(u_i)$
+
+        Also $\alpha(u) = \left \langle \alpha(u_1), ..., \alpha(u_k) \right \rangle_K$
+
+        Nach 2.13: 
+
+        $\{\alpha(u_1), ..., \alpha(u_k)\}$ enthält Basis von $\alpha(U)$.
+
+        $dim(\alpha(U)) \le k = dim(U)$
+      \end{enumerate}
+
+      \section{Definition}
+
+      V,W K-VR, V endlich dimensional, $\alpha : V \rightarrow W$ lineare Abbildung. 
+
+      \par \medskip
+
+      Dann $dim(\alpha(V)) =: rg(\alpha)$ (Rang von $\alpha$)
+
+      \section{Satz}
+
+      V, W K-VR, $\alpha: V \rightarrow W$ lineare Abbildung.
+
+      \begin{enumerate}[label=(\alph*)]
+        \item $ker(\alpha) := \{v \in V : \alpha(v) = \sigma\}$, \underline{Kern von $\alpha$}, ist Unterraum von V.
+
+        \item $\alpha$ injektiv $\Leftrightarrow$ $ker(\alpha) = \{\sigma\}$
+
+        \item Ist $\alpha$ bijektiv, so ist die Umkehrabbildung $\alpha^{-1} : W \rightarrow V$ bijektiv \underline{und linear}.
+      \end{enumerate}
+
+      \subsection{Beweis}
+
+      \begin{enumerate}[label=(\alph*)]
+        \item $v_1, v_2 \in ker(\alpha)$
+
+        $\alpha(v_1 + v_2) = \alpha(v_1) + \alpha(v_2) = \sigma + \sigma = \sigma$
+
+        \par \medskip
+
+        Also: $v_1 + v_2 \in ker(\alpha)$
+
+        \par \medskip
+
+        $\alpha(k \cdot v_1) = k \cdot \alpha(v_1) = k \cdot \sigma = \sigma$
+
+        \par \medskip
+
+        Also: $k \cdot v_1 \in ker(\alpha)$
+
+        \item $\Rightarrow : \checkmark$, denn falls $\sigma \neq v \in ker(\alpha)$, so $\alpha(v) = \sigma = \alpha(\sigma)$ $\rightarrow \alpha$ nicht injektiv. Widerspruch !
+
+        $\Leftarrow$: Angenommen $v_1, v_2 \in V$ mit $\alpha(v_1) = \alpha(v_2)$.
+
+        Zu zeigen $v_1 = v_2$.
+
+        $\sigma = \alpha(v_1) = \alpha(v_2) = \alpha(v_1 - v_2))$
+
+        $\rightarrow v_1 - v_2 = \sigma, v_1 = v_2$
+
+        \item Zu zeigen: $\alpha^{-1}$ ist linear
+
+        Seien $w_1, w_2 \in W$.
+
+        Zeige: $\alpha^{-1}(w_1+w_2) = \alpha^{-1}(w_1) + \alpha^{-1}(w_2)$
+
+        $\alpha$ bijektiv $\rightarrow$ ex. $v_1. v_2 \in V$ mit $\alpha(v_1) = w_1, \alpha(v_2) = w_2$.
+
+        $v_1 = \alpha^{-1}(w_1) , v_2 = \alpha^{-1}(w_2)$
+
+        \par \medskip
+
+        $\alpha^{-1} (w_1+ w_2) = \alpha^{-1}(\alpha(v_1) + \alpha(v_2)) = \alpha^{-1}(\alpha(v_1 + v_2)) = v_1 + v_2 = \alpha^{-1}(w_1) + \alpha^{-1}(w_2) \checkmark$
+
+        \par \medskip
+
+        Homogenität analog.
+      \end{enumerate}
+
+      \section{Beispiel}
+
+      $\alpha : \begin{cases}\mathbb{R}^3 \rightarrow \mathbb{R}^3 \\ \begin{pmatrix}x_1 \\ x_2 \\ x_3 \end{pmatrix} \mapsto \begin{pmatrix}x_1 \\ 2x_1 \\ x_1+x_2+2x_3 \end{pmatrix} \end{cases}$ 
+
+      \par \medskip
+
+      ist lineare Abbildung, da:
+
+      \par \medskip
+
+      $\alpha(\begin{pmatrix}x_1 \\ x_2 \\ x_3\end{pmatrix}) = \begin{pmatrix}1 & 0 & 0 \\ 2 & 0 & 0 \\ 1 & 1 & 2 \end{pmatrix} \cdot \begin{pmatrix}x_1 \\ x_2 \\ x_3 \end{pmatrix}$ (3.4)
+
+      $\alpha(e_1) = \begin{pmatrix}1 \\ 2 \\ 1 \end{pmatrix}, \alpha(e_2) = \begin{pmatrix}0 \\ 0 \\ 1 \end{pmatrix}, \alpha(e_3) \begin{pmatrix}0 \\0 \\ 2 \end{pmatrix}$
+
+      Bild von $\alpha$ wird erzeugt $\alpha(e_1), \alpha(e_2), \alpha(e_3)$ lineare abhängig.
+
+      \par \medskip
+
+      $\alpha(\mathbb{R}^3) = \left \langle \underbrace{\alpha(e_1), \alpha(e_2)}_{\textnormal{lin. unabhäng}} \right \rangle$
+
+      $rg(\alpha) = 2$
+
+      U = $\left \langle e_2, e_3 \right \rangle$ 2-dim. Unterraum von $\mathbb{R}^3$ 2-dim. Unterraum von $\mathbb{R}^3$.
+
+      $\alpha(U) = \left \langle \alpha(e_2) \right \rangle = \left \langle e_3 \right \rangle$ 1-dim. 
+
+      $ker(\alpha) = ?$
+
+      Suche alle $\begin{pmatrix}x_1 \\ x_2 \\ x_3 \end{pmatrix}$ mit $\begin{pmatrix}x_1 \\ 2x_1 \\ x_1 + x_2 +2x_3 \end{pmatrix} = \begin{pmatrix}0 \\ 0 \\ 0 \end{pmatrix}$
+
+      \par \medskip
+
+      \par \medskip
+
+      LGS: $x_1 = 0 , 2x_1 = 0, x_1 + x_2 + 2x_3 = 0$
+
+      \par \medskip
+
+      $ker(\alpha) =  \left \lbrace \begin{pmatrix}0 \\ -2c \\ c \end{pmatrix} : c \in \mathbb{R} \right \rbrace$ = $\left \langle \begin{pmatrix}0 \\ -2 \\ 1 \end{pmatrix} \right \rangle$ 1-dim.
+
+      \section{Satz}
+
+      V, W, K-VR, $dim(V) = n$.
+
+      $\{v_1, ..., v_n \}$ sei Basis von V, $w_1, ..., w_n \in W$ beliebig (nicht notwendigerweise verschieden).
+
+      Dann existiert genau eine lineare Abbildung $\alpha : V \rightarrow W$ mit $\alpha(v_i) = w_i$, $i=1,...,n$, nämlich:
+
+      \begin{center}
+        $\alpha(\sum_{i=1}^n c_i v_i) := \sum_{i=1}^n c_i w_i \ \ (*)$
+      \end{center}
+
+      Also: Kennt man die Bilder einer Basis, so kennt man die lineare Abbildung vollständig.
+
+      \subsection{Beweis}
+      Die in $(*)$ definierte Abbildung $\alpha$ ist linear und es gilt $\alpha(v_i) = w_i$ für $i=1, ..., n$ (Nachrechnen)
+
+      $\alpha$ eindeutig.
+
+      Angenommen : $\beta : V \rightarrow W$ linear mit $\beta(v_i) = w_i$, so gilt:
+
+      \begin{center}
+        $\beta(\sum_{i=1}^n c_i v_i) = \sum_{i=1}^n c_i \beta(v_i) = \sum_{i=1}^n c_i w_i = \alpha(\sum_{i=1}^n c_i v_i)$
+
+        $\rightarrow \alpha = \beta$
+      \end{center}
+
+      \textbf{Beispiel}
+
+      V = W = $\mathbb{R}^3$
+
+      $\alpha(e_1) = \begin{pmatrix} \\ -12 \\ 3 \end{pmatrix}, \alpha(e_2) = \begin{pmatrix}1 \\ 1 \\ 1 \end{pmatrix}, \alpha(e_3) = \begin{pmatrix}0 \\ -5 \\ 0 \end{pmatrix}$
+
+      \par \medskip
+
+      $\alpha(\begin{pmatrix}2 \\ 3 \\4 \end{pmatrix}) = ?$
+
+      $\alpha(\begin{pmatrix}2 \\3 \\¼ \end{pmatrix}) = 2 \cdot \begin{pmatrix}-2 \\ -12\\ 3 \end{pmatrix} + 3 \cdot \begin{pmatrix}1 \\ 1 \\ 1 \end{pmatrix} + 4 \cdot \begin{pmatrix}0 \\ -5 \\ 0 \end{pmatrix} = \begin{pmatrix}7 \\ -51 \\9 \end{pmatrix} \checkmark$
+
+      \section{Beispiel}
+
+      V = $\mathbb{R}^2$, $\alpha: V \rightarrow V$. Drehung um Winkel $\varphi$, $0 \le \varphi < 2 \pi$, um Nullpunkt (entgegen Uhrzeigersinn). $\alpha$ ist lineare Abbildung. 
+
+      \par \medskip
+
+      $\alpha(e_1) = \alpha(\begin{pmatrix}1 \\ 0 \end{pmatrix}) = \begin{pmatrix}cos(\varphi) \\ sin(\varphi) \end{pmatrix}$
+
+      \par \medskip
+
+      $\alpha(e_2) = \alpha(\begin{pmatrix}0 \\ 1 \end{pmatrix} = \begin{pmatrix}-sin(\varphi) \\ cos(\varphi)\end{pmatrix}$
+
+      3.10
+
+      $x = \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}$
+
+      $\alpha(x) = x_1 \cdot \alpha(e_1) + x_2 \cdot \alpha(e_2) = \begin{pmatrix}x_1 \cdot cos(\varphi) - x_2 \cdot sin(\varphi) \\ x_1 \cdot sin(\varphi) - x_2 \cdot cos(\varphi) \end{pmatrix} = \underbrace{\begin{pmatrix}cos(\varphi) & - sin(\varphi) \\ sin(\varphi) & cos(\varphi) \end{pmatrix}}_{\textnormal{Drehmatrix}} \cdot \begin{pmatrix}x_1 \\ x_2 \end{pmatrix}$
+
+      \section{Satz}
+
+      $\alpha: V \rightarrow W$ lin. Abbildung
+
+      $dim(V) = n, \{v_1, ..., v_n$\} Basis von V.
+
+      \begin{enumerate}[label=(\alph*)]
+        \item $\alpha$ injektiv $\Leftrightarrow$ \{$\alpha(v_1), ..., \alpha(v_n)$\} ist linear unabhängig. 
+        \item $\alpha$ surjektiv $\Leftrightarrow$ $\alpha$ bijektiv $\Leftrightarrow$ $\{\alpha(v_1), ..., \alpha(v_n)\}$ Basis von W.
+      \end{enumerate}
+
+      \subsection*{Beweis}
+
+      \begin{enumerate}[label=(\alph*)]
+        \item $\Rightarrow$:
+
+        Zeige: $\sum_{i=1}^n c_i \alpha(v_i) = \sigma$ $\rightarrow c_1 = ... = c_n = 0$.
+
+        $\sigma = \sum_{i=1}^n c_i \alpha(v_i) = \alpha(\sum_{i=1}^n c_i v_i)$
+
+        \par \medskip
+
+        $\sum_{i=1}^n c_i v_i \in ker(\alpha) \underbrace{=}_{\textnormal{ $\alpha$ injektiv}} \{\sigma\}$
+
+        $\rightarrow \sum_{i=1}^n c_i v_i = \sigma \Rightarrow c_1 = ... = c_n = 0$ ($v_1, ..., v_n$ linear unabhängig)
+
+        $\Leftrightarrow$:
+
+        Zeige: $ker(\alpha) = \{\sigma\}$
+
+        Angenommen : $\sigma_{i=1}^n c_i v_i \in ker(\alpha)$
+
+        $\sigma = \alpha(\sum_{i=1}^n c_i v_i) \underbrace{=}_{\textnormal{$\alpha$ lin.}} = \sum_{i=1}^n c_i \alpha(v_i) \Rightarrow$ ($\alpha(v_1), ..., \alpha(v_n)$ linear unabhängig.)
+
+        $\Rightarrow c_1 = ... = c_n = 0$
+
+        $\Rightarrow \sum_{i=1}^n c_i v_i = \sigma$ $\checkmark$
+
+        \item $\alpha(V) = \left \langle \alpha(v_1), ..., \alpha(v_n) \right \rangle$
+
+        Behauptung folgt.
+
+        \item Folgt aus (a) und (b)
+
+      \end{enumerate}
+
+        \section{Korollar}
+
+        Seien V,W K-VR, $dim(V) = dim(W)$. Dann sind V und W isomorph.
+
+        \subsection{Beweis}
+
+        Sei $v_1, ..., v_n$ Basis von V, $w_1, ..., w_n$ Basis von W.
+
+        Nach 3.10 existiert genau eine lin. Abbildung $\alpha : V \rightarrow W$ mit $\alpha(v_i) = w_i$.
+
+        Nach 3.12c) ist $\alpha$ bijektiv,
+
+        \begin{center}
+          $V \cong W$
+        \end{center}
+
+
+
+        \section{Korollar}
+
+        V n-dim. VR über K, $\mathcal{B} = (v_1, ..., v_n)$ geordnete basis von V. Dann ist die Abb. 
+
+        \begin{equation}
+          K_{\mathcal{B}} : \begin{cases}V \rightarrow K^n \textnormal{ (Zeilenvektoren)}\\ \sum_{i=1}^n c_i v_i \mapsto (c_1, ..., c_n) \end{cases}
+        \end{equation}
+
+        (Koordinatenabbildung bezüglich $\mathcal{B}$) ein Isomorphismus. Das heißt $V \cong K^n$.
+
+        \subsection{Beweis}
+
+        $K_{\mathcal{B}}(v_i) = (0,..,0,1,0,...,0)$
+
+        $v_i$ werden auf die kanonische Basis des $K^n$ abgebildet.
+
+        $K_{\mathcal{B}}$ ist Isomorph.
+
+        \section{Satz (Dimensionsformel)}
+
+        V endlich dim. K-VR, $\alpha: V \rightarrow W$ lin. Abbildung.
+
+        Dann:
+
+        $dim(V) = rg(\alpha) + dim(ker(\alpha)) = dim(\alpha(v)) + dim(ker(\alpha))$
+
+        \subsection{Beweis}
+
+        Sei $u_1, ..., u_k$ Basis von $ker(\alpha)$.
+
+        Basisergänzungssatz (2.21.c). Ergänze zu Basis $u_1, ..., u_k, u_{k+1}, ..., u_n$ von V.
+
+        Sei U = $\left \langle u_{k+1}, ..., u_n \right\rangle_K$ Unterraum von V, $ker(\alpha) \cap U = \{\sigma\}$:
+
+        Angenommen: $v \in ker(\alpha) \cap U$
+
+        v = $\sum_{i=1}^k c_i u_i = \sum_{i=k+1}^n c_i u_i$
+
+        $\Rightarrow \sum_{i=1}^k c_i u_i + \sum_{i=k+1}^n (-c_i)u_i = \sigma$
+
+        $\Rightarrow$ $c_1 = ... = c_n = 0$, $v = \sigma$
+
+        $ker(\alpha) \cap U = \{\sigma\}$, also $\alpha|_{U}$ ist injektiv, d.h. $dim(U) = dim(\alpha(U))$
+
+        $\alpha(V) = \alpha(U)$
+
+        $v \in V, v = \sum_{i=1}^k c_i u_i + \sum_{i=k+1}^n c_i u_i$
+
+        $\alpha(v) = \underbrace{\sum_{i=1}^k c_i \alpha(u_i)}_{0} + \sum_{i=k+1}^n c_i \alpha(u_i) \in \alpha(U)$
+
+        $V = ker(\alpha) + U$
+
+        $dim(V) = dim(ker(\alpha)) + dim(U) - \underbrace{dim(ker(\alpha) \cap U)}_{=0}$
+
+        $= dim(ker(\alpha)) + dim(\alpha(U))$
+
+        $= dim(ker(\alpha)) + dim(\alpha(v))$
+
+        $= dim(ker(\alpha)) + rg(\alpha)$
+
+        \section{Korollar}
+
+        V, W endlich-dimensional K-VR mit \underline{$dim(V) = dim(W)$}, $\alpha: V \rightarrow W$ linear. 
+
+        Dann gilt:
+
+        $\alpha$ ist injektiv $\Leftrightarrow$ $\alpha$ ist surjektiv $\Leftrightarrow$ $\alpha$ ist bijektiv
+
+        \subsection{Beweis}
+
+        $\alpha$ ist surjektiv $\Leftrightarrow$ $\alpha(v) = w$ $\Leftrightarrow$ dim($\alpha(V)) = dim(W) = dim(V) \Leftrightarrow$ dim(ker($\alpha$)) = 0 $\Leftrightarrow$ ker($\alpha$) = $\{\sigma\} \Leftrightarrow$ $\alpha$ ist injektiv.
+
+        \chapter{Der Rang einer Matrix und lineare Gleichungssysteme}
+
+        \section{Definition}
+
+        Der \underline{Zeilenrang} einer Matrix A über Körper K ist die Maximalzahl linear unabhängiger Zeilen in A. Das heißt sind $z_1, ..., z_m$ die Zeilen von A, so ist Zeilenrang von A = dim($\left \langle z_1, ..., z_m \right \rangle$)
+
+        \par \medskip
+
+        Analog: Spaltenrang
+
+        \par \medskip
+
+        $A = \begin{pmatrix}1 & -2 & 2 \\ 1 & -2 & 1 \\ 1 & -2 & 0 \end{pmatrix}$ Spaltenrang von A = 2, Zeilenrang $z_1 + 2z_3 - 2z_2 = 0$, Zeilenrang von A = 2.
+
+        \section{Satz}
+
+        Bei elementaren Zeilenumformungen ändert sich der Zeilenrang einer Matrix nicht. (Analog: Spaltenumf. / Spaltenrang)
+
+        \subsection{Beweis}
+
+        $\left \langle z_1, ..., z_m \right \rangle$
+
+        = $\left \langle z_1, ..., az_2, ..., z_m \right \rangle$, $a \neq 0$
+
+        \par \medskip
+
+        $\left \langle z_1, ..., z_m \right \rangle$ = $\left \langle z_1, ..., z_i + az_j, ..., z_m \right \rangle$, $i \neq j$
+
+        \section{Bemerkung}
+
+        Zeilenrangbest. von A: 
+
+        Bringe A mit Gauß auf Zeilenstufenform (ändert Zeilenrang nicht)
+
+        Zeilenrang = Anzahl der von Nullzeile verschiedenen Zeilen.
+
+        \section{Korollar}
+
+        Sei $A \cdot x = b$ ein LGS über K, $A \in \mathcal{M}_{m,n}(k), x \in K^n, b \in K^m$ (m Gleichungen, n Unbekannte)
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $A \cdot x = b$ ist genau dann lösbar, wenn Zeilenrang von A = Zeilenrang von ($A|b$)
+
+          \item $A \cdot x = b$ ist genau dann eindeutig lösbar, wenn:
+
+          Zeilenrang A = Zeilenrang von ($A|b$) = n (= Anzahl der Unbekannten)
+
+          \item Dimension des Lösungsraums von $A \cdot x = \sigma$ = n - Zeilenrang von A
+        \end{enumerate}
+
+        \section{Satz}
+
+        Sei $A \in \mathcal{M}_{m,n} (K)$, $\alpha: \begin{cases}K^n \rightarrow K^m \\ x \mapsto Ax \end{cases}$
+
+        $\alpha$ ist lineare Abbildung und es gibt:
+
+        \begin{center} 
+          $rg(\alpha) = $ Spaltenrang von A
+        \end{center}
+
+        \subsection{Beweis}
+
+        $\alpha(K^n) = \left \langle \alpha(e_1), ..., \alpha(e_n) \right \rangle$, $e_1, ..., e_n$ kan. Basis von $K^n$
+
+        \begin{center}
+          $\alpha(e_i) = A \cdot \begin{pmatrix}0 \\ ... \\ 1 \\ 0 \\ 0 \end{pmatrix} = \begin{pmatrix}a_{1i} \\ a_{2i} \\ ... \\ a_{mi}\end{pmatrix}$ = i-te Spalte von A =: $s_i$.
+        \end{center}
+
+        $rg(\alpha) = dim(\alpha(K^n)) = dim(\left \langle \alpha(e_1), ..., \alpha(e_n) \right \rangle) = dim(\left \langle s_1, ..., s_n \right \rangle) = $ Spaltenrang von A.
+
+        \section{Satz und Definition}
+
+        Sei $A \in \mathcal{M}_{m,n} (K)$. Dann ist Zeilenrang von A = Spaltenrang von A. Diese gemeinsame Zahl heißt \underline{Rang von A}, $rg(A)$.
+
+        (Also: $\alpha : \begin{cases}K^n \rightarrow K^m \\ x \mapsto Ax \end{cases}$, so $rg(\alpha) = rg(A)$)
+
+        \subsection{Beweis}
+
+        Betrachte homogenes LGS
+
+        \begin{center}
+          $Ax = 0$, $(*)$
+        \end{center}
+
+        Dimension des Lösungsraums von $(*)$ = Dimension von $ker(\alpha)$, $\alpha$ in 4.5.
+
+        3.15: $dim(ker(\alpha)) = n - rg(\alpha)$ $\underset{4.5}{=}$ $n$ - Spaltenrang von A.
+
+        4.4: $dim$ Lösungsraum von $Ax = 0$ = $n$ - Zeilenrenrang von A
+
+        \par \medskip
+
+        Damit folgt die Behauptung.
+
+        \section{Korollar}
+
+        $A \in \mathcal{M}_{m,n} (K)$. $rg(A) = rg(A^t)$
+
+        \par \medskip
+
+        \underline{Beweis:} $rg(A)$ = Zeilenrang von A = Spaltenrang von $A^t$ = $rg(A^t$)
+
+        \section{Satz}
+
+        Sei $V$ endlich dimensionaler K-VR, $\mathcal{B}$ geordnete Basis von V, $u_1, ..., u_m \in V$ beliebig.
+
+        Seien $K_{\mathcal{B}}(u_i)$ die Koordinatenvektoren von $u_i$ bezüglich $\mathcal{B}$ (Zeilenvektoren).
+
+        \par \medskip
+
+        Dann gilt: $dim(\left \langle u_1, ..., u_m \right \rangle) = rg\begin{pmatrix}K_{\mathcal{B}}(u_1) \\ ... \\ K_{\mathcal{B}}(u_m) \end{pmatrix}$ ($m \times n$ - Matrix, $n = dim(V))$
+
+        \par \medskip
+        
+        Lässt sich durch Gauß-Algorithmus bestimmen.
+
+        \subsection{Beweis}
+
+        Sei $U = \left \langle u_1, ..., u_m \right \rangle$. $K_{\mathcal{B}} : V \rightarrow K^n$ wie in 3.14. $K_{\mathcal{B}}$ Isomorphismus.
+
+        \par \medskip
+
+        $dim(U) = dim(K_{\mathcal{B}}(U)) = dim(\left \langle K_{\mathcal{B}}(u_1), ..., K_{\mathcal{B}}(u_m) \right \rangle)$ = Zeilenrang von $\begin{pmatrix}K_{\mathcal{B}}(u_1) \\ ... \\ K_{\mathcal{B}}(u_m) \end{pmatrix}$
+
+        \section{Beispiel}
+
+        V R-VR aller Polynome vom Grad $\le$ 3. $dim(V) = 4$, Basis $\mathcal{B} = (1,x,x^2, x^3)$ 
+
+        \begin{center}
+          U = $\left \langle 1 + 6x^2 + x^3, 2x-2x^2 + 3x^3, 3x+x², 2x+15x^2-x^3 \right \rangle_{\mathbb{R}}$
+        \end{center}
+
+        $dim(U) =$ ?
+
+        \par \medskip
+
+        \par \medskip
+
+        Bilde gemäß 4.8 die Matrix der Koordinatenvektoren der $u_i$ bezüglich $\mathcal{B}$.
+
+        \par \medskip
+
+        $\begin{pmatrix}1 & 0 & 6 & 1 \\ 0 & 2 & -2 & 3 \\ 0 & 3 & 1 & 0 \\ 2 & 1 & 15 & -1 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 0 & 6 & 1 \\ 0 & 2 & -2 & 3 \\ 0 &  & 1 & 0 \\ 0 & 1 & 3 & -3 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 0 & 6 & 1 \\ 0 & 1 & -1 & \frac{3}{2} \\ 0 & 0 & 4 & - \frac{9}{2} \\ 0 & 0 & 4 & - \frac{9}{2} \end{pmatrix} \rightarrow \begin{pmatrix}1 & 0 & 1 & 1 \\ 0 & 1 & -1 & \frac{3}{2} \\ 0 & 0 & 4 & - \frac{9}{2} \\ 0 & 0 & 0 & 0 \end{pmatrix}$
+
+        \par \medskip
+        
+        Rang der Matrix = 3
+
+        $dim(U) = 3$
+
+        \chapter{Matrizen und lineare Abbildungen}
+
+        \section{Definition}
+
+        Seien V, W K-VR, $\mathcal{B} = (v_1, ..., v_n)$ und $\mathcal{C} = (w_1, ..., w_m)$ geordnete Basen von V bezw. W. Sei $\alpha : V \rightarrow W$ lineare Abbildung.
+
+        \par \medskip
+
+        Nach 3.10 ist $\alpha$ eindeutig bestimmt durch $\alpha(v_1), ..., \alpha(v_n)$. $(v = \sum_{i=1}^n b_i v_i \rightarrow \alpha(v) = \sum_{i=1}^n b_i \alpha(vi))$
+
+        \par \medskip
+
+        \par \medskip
+
+        Stelle $\alpha(v_1), ..., \alpha(v_n)$ jeweils als Linearkombination von $w_1, ..., w_n$ dar:
+
+        \begin{center}
+          $\alpha(v_1) = a_{11}w_{1} + ... + a_{m1}w_m$
+
+          $\alpha(v_2) = a_{21}w_{1} + ... + a_{m2} w_m$
+
+          ...
+
+          $\alpha(v_n) = a_{1m}w_{1} + ... + a_{mm} w_m$
+        \end{center}
+
+        (Ordnung der Indizes beachten!)
+
+        \par \medskip
+
+        Dann heißt die $m \times n$ - Matrix:
+
+        \begin{equation}
+          A_{\alpha}^{\mathcal{B, C}} := \begin{pmatrix}a_{11} & a_{12} & ... & a_{1m} \\ ... & ... & ... \\ a_{m1} & a_{m2} & ... & a_{mn} \end{pmatrix}
+        \end{equation}
+
+        die \underline{Darstellungsmatrix} von $\alpha$ bezüglich $\mathcal{B}$ und $\mathcal{C}$. (In den Spalten stehen die Koordinaten von $\alpha(v_i)$ bezüglich $\mathcal{C}$)
+
+        (Abkürzende Schreibweise: $A_{\alpha}$, falls $\mathcal{B}$ und $\mathcal{C}$ aus Kontext klar)
+
+        \par \medskip
+
+        \par \medskip
+
+        Falls V = W und $\mathcal{B} = \mathcal{C}$, so
+
+        \begin{center}
+          $A_{\alpha}^{\mathcal{B}} := A_{\alpha}^{\mathcal{B}, \mathcal{B}}$
+        \end{center}
+
+        \section{Bemerkung}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Bei Kenntnis von $\mathcal{B}$ und $\mathcal{C}$ ist $\alpha$ durch $A_{\alpha}^{\mathcal{B,C}}$ eindeutig bestimmt:
+
+          Sei $v \in V$. $v = \sum_{i=1}^n b_i v_i$.
+
+          \begin{align*}
+            \alpha(v) & = \sum_{i=1}^n b_i \alpha(v_i) \\
+                      & = \sum_{i=1}^n b_i (a_{1i} w_1 + ... + a_{mi} w_m) \\
+                      & = \sum_{i=1}^n b_i (\sum_{j=1}^m a_{ji} w_j) \\
+                      & = \sum_{j=1}^m \cdot \underbrace{(\sum_{i=1}^n a_{ji} b_i)}_{\textnormal{Koord. von $\alpha(v)$ bezgl. $\mathcal{C}$}} \cdot  w_j
+          \end{align*}
+
+          Und jede $m \times n$ - Matrix A bestimmt lin. Abbildung $\alpha : V \rightarrow W$ mit $A = A_{\alpha}^{\mathcal{B, C}}$
+
+          \item Beachte: Dieselbe lin. Abb. hat im Allgemeinen bezüglich anderer Wahl der Basen eine andere Darstellungsmatrix
+        \end{enumerate}
+
+        \section{Beispiel}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item V = W = $\mathbb{R}^2$, $\alpha$ Drehung um 0 mit Winkel $\varphi$ (entgegen Uhrzeigersinn).
+
+          Nach 3.11:
+
+          $\mathcal{B} = \mathcal{C} = (e_1, e_2)$
+
+          $\alpha(e_1) = cos(\varphi)e_1 + sin(\varphi) e_2$
+
+          $\alpha(e_2) = -sin(\varphi)e_1 + cos(\varphi)e_2$
+
+          \par \medskip
+
+          \begin{equation}
+            A_{\alpha}^{\mathcal{B}} = \begin{pmatrix} cos(\varphi) & -sin(\varphi) \\ sin(\varphi) & cos(\varphi) \end{pmatrix}
+          \end{equation}
+
+          \item Nullabbildung
+
+          $\beta : \begin{cases}V \rightarrow W \\ v \mapsto \sigma \textnormal{ (Nullvektor)} \end{cases}$
+
+          hat bezüglich allen Basen $\mathcal{B}$ und $\mathcal{C}$ Nullmatrix als Darstellungsmatrix
+
+          \item V, $\mathcal{B}$, $id_v$
+
+          $A_{id_v}^{\mathcal{B}} = E_n = \begin{pmatrix}1 & ... & 0 \\ 0 & ... & 1 \end{pmatrix}$
+
+          \item $V = \mathbb{R}^2, \mathcal{B} = (e_1, e_2), \mathcal{C} = (e_2, e_1)$
+
+          $A_{id_v}^{\mathcal{B, C}} = \begin{pmatrix}0 & 1 \\  1 & 0 \end{pmatrix}$
+
+          \item $V = \mathbb{R}^2, \mathcal{B} = (e_1, e_2)$, $\sigma$ Spiegelung an $\left \langle e_1 \right \rangle$, d.h. $\sigma(\begin{pmatrix}x_1 \\ x_2 \end{pmatrix}) = \begin{pmatrix}x_1 \\ - x_2 \end{pmatrix}$
+
+          $A_{\sigma}^{\mathcal{B}} = \begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix}$
+
+          \par \medskip
+
+          \par \medskip
+
+          $\mathcal{B'} = (e_1 + e_2, e_1 - e_2)$ Basis.
+
+          $\sigma(e_1 + e_2) = e_1-e_2$
+
+          $\sigma(e_1 - e_2) = e_1 + e_2$
+
+          $A_{\sigma}^{\mathcal{B'}} = \begin{pmatrix}0 & 1 \\ 1 & 0 \end{pmatrix}$
+
+          \par \medskip
+
+          \par \medskip
+
+
+          $\sigma(e_1) = e_1 = a(e_1 + e_2) + b(e_1 - e_2) = \frac{1}{2} (e_1 + e_2) + \frac{1}{2}(e_1 - e_2)$
+
+          $- e_2 = \sigma(e_2) = c (e_1 + e_2) + d (e_1 - e_2) = - \frac{1}{2}(e_1 + e_2) + \frac{1}{2} (e_1 - e_2)$
+
+          $A_{\sigma}^{\mathcal{B, B'}} = \begin{pmatrix}\frac{1}{2} & - \frac{1}{2} \\ \frac{1}{2} & \frac{1}{2} \end{pmatrix}$
+        \end{enumerate}
+
+        \section{Satz}
+
+        V, W, $\mathcal{B}, \mathcal{C}, \alpha : V \rightarrow W$ linear.
+
+        \begin{equation}
+          k_{\mathcal{C}}(\alpha(V))^t = A_{\mathcal{\alpha}}^{\mathcal{B,C}} \cdot k_{\mathcal{B}}(V)^t
+        \end{equation}
+
+        \subsection{Beweis}
+
+        Folgt aus 5.2.a)
+
+        \begin{align*}
+          \textnormal{Basis } \mathcal{B} & & \textnormal{Basis } \mathcal{C} \\
+          V & \overset{\alpha}{\longrightarrow} & W \\
+          \downarrow & & \downarrow \\
+          K^n & \longrightarrow & K^m
+        \end{align*}
+
+        \section{Beispiel}
+
+        V, W $\mathbb{R}$ - VR, $dim(V) = 4$, $dim(W) = 3$, $\mathcal{B} = (v_1, ..., v_4)$, $\mathcal{C} = (w_1, w_2, w_3), \alpha : V \rightarrow W$.
+
+        \begin{center}
+          $A_{\alpha}^{\mathcal{B, C}} = \begin{pmatrix}1 & 1 & 2 & 3 \\ 2 & 0 & -1 & 1 \\ 3 & 2 & 0 & 2 \end{pmatrix}$
+        \end{center}
+
+        $V = 5_1 - 6v_2 + 7v_3 - 2v_4$
+
+        $\alpha(V) =$ ?
+
+        \par \medskip
+
+        $\begin{pmatrix}1 & 1 & 2 & 3 \\ 2 & 0 & -1 & 1 \\ 3& 2 & 0 & 2 \end{pmatrix} \cdot \begin{pmatrix}5 \\ -6 \\ 7 \\ -2 \end{pmatrix} = \begin{pmatrix}7 \\ 1 \\ -1 \end{pmatrix}$
+
+        \par \medskip
+
+        5.4: $\alpha(V) = 7w_1 + w_2 - w_3$
+
+        \section{Korollar}
+
+        Jede lineare Abbildung $K^n \rightarrow K^m$ ist von der Form $\alpha(x) = A \cdot x$ für ein $A \in \mathcal{M}_{m,n} (K)$.
+
+        Es ist $A = A_{\alpha}^{\mathcal{B, C}}$, wobei $\mathcal{B, C}$ die kanonischen Basen von $K^n$ bzw. $K^m$ sind.
+
+        \subsection{Beweis}
+
+        $x \in K^m$, $k_{\mathcal{B}}(x)^t = x$, $k_{\mathcal{C}}(\alpha(x))^t = \alpha(x)$
+
+        Behauptung folgt aus 5.4
+
+        \section{Satz}
+
+        $\alpha, \beta$ lineare Abbildung $U \rightarrow V$, $\gamma$ lin. Abbildung $V \rightarrow W$. $\mathcal{B,C,D}$ geordnete Basen von $U,V,W$.
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $A_{\alpha + \beta}^{\mathcal{B,C}} = A_{\alpha}^{\mathcal{B, C}} + A_{\beta}^{\mathcal{B,C}}$
+
+          $A_{k \cdot \alpha}^{\mathcal{B,C}} = k \cdot A_{\alpha}^{\mathcal{B,C}}$ ($k \in K$)
+
+          \item $A_{\gamma \circ \alpha}^{\mathcal{B,D}} = A_{\gamma}^{\mathcal{C,D}} \cdot A_{\alpha}^{\mathcal{B,C}}$ (Matrixmultiplikation) (Reihenfolge beachten!)
+        \end{enumerate}
+
+        \subsection{Beweis}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Nachrechnen
+          \item $\mathcal{B} = (u_1, ..., u_l)$
+
+          $\mathcal{C} = (v_1, ..., v_m)$
+
+          $\mathcal{D} = (w_1, ..., w_n)$
+
+          \par \medskip
+
+          \begin{center}
+            $A_{\alpha}^{\mathcal{B,C}} = (a_{ij})$ $m \times l$ - Matrix 
+
+            $A_{\gamma}^{\mathcal{C,D}} = (b_{ij})$ $n \times m$ - Matrix
+          \end{center}
+
+          \begin{align*}
+            (\gamma \circ \alpha) (u_i) & = \gamma(\alpha(u_i)) \\
+                                        & = \gamma(\sum_{j=1}^m a_{ji} \cdot v_j) \\
+                                        & = \sum_{j=1}^m a_{ji} \cdot \gamma(v_j) \\
+                                        & = \sum_{j=1}^m a_{ji} (\sum_{k=1}^m b_{k_j} w_k) \\
+                                        & = \sum_{k=1}^m (\underbrace{\sum_{j=1}^m b_{k_j} \cdot a_{ji}}_{\textnormal{Koeff. (k,i)}}) w_k
+          \end{align*}
+        \end{enumerate}
+
+        \section{Beispiel}
+
+        $U = V = W = \mathbb{R}^2$
+
+        $\mathcal{B = C = D} = (e_1, e_2)$
+
+        \par \medskip
+
+        $\alpha$ Drehung um $\varphi$, $\beta$ Drehung um $\psi$ (jeweils um 0)
+
+        \begin{equation}
+          A_{\alpha}^{\mathcal{B}} = \begin{pmatrix}cos(\varphi) & - sin(\varphi) \\ sin(\varphi) & cos(\varphi)\end{pmatrix}
+        \end{equation}
+
+        \begin{equation}
+          A_{\beta}^{\mathcal{B}} = \begin{pmatrix}cos(\psi) & - sin(\psi) \\ sin(\psi) & cos(\psi)\end{pmatrix}
+        \end{equation}
+
+        $\beta \circ \alpha$ Drehumg um $\varphi$ + $\psi$
+
+        \begin{equation}
+          A_{\beta \circ \alpha}^{\mathcal{B}} = \begin{pmatrix}cos(\varphi + \psi) & - sin(\varphi + \psi) \\ sin(\varphi + \psi) & cos(\varphi + \psi) \end{pmatrix}
+        \end{equation}
+
+        Nach 5.7
+
+        \par \medskip
+
+        $A_{\beta \circ \alpha}^{\mathcal{B}} = A_{\beta}^{\mathcal{B}} \cdot A_{\alpha}^{\mathcal{B}} = \begin{pmatrix}cos(\varphi) cos(\psi) - sin(\varphi) sin(\psi) & -sin(\varphi)cos(\psi) - cos(\varphi) sin(\psi) \\ cos(\varphi) sin(\psi) + sin(\varphi) cos(\psi) & -sin(\varphi) sin(\psi) + cos(\varphi) cos(\psi) \end{pmatrix}$ 
+
+        \par \medskip
+
+        $\Rightarrow$ $cos(\varphi + \psi) = cos(\varphi)cos(\psi) - sin(\varphi) sin(\psi)$, usw.
+
+        (Additionstheoreme der Tirgonometrie)
+
+        \section{Definition}
+
+        Sei $A \in \mathcal{M}_{n} (K)$ ($n \times n$ - Matrix).
+
+        A heißt \underline{invertierbar}, falls $A^{-1} \in \mathcal{M}_{n} (K)$ existiert (\underline{Inverse}, \underline{inverse Matrix} zu A) mit 
+
+        \begin{center}
+          $A \cdot A^{-1} = A^{-1} \cdot A = E_n =$ Einheitsmatrix $(*)$
+        \end{center}
+
+        (($\mathcal{M}_n (K), \cdot$) ist Monoid, neutrales Element $E_n$)
+
+        \subsection{Bemerkung}
+
+        Gilt $A \cdot A^{-1} = E_n$ so auch $A^{-1} \cdot A = E_n$ (und umgekehrt). (Folgt aus 5.10 und 3.16)
+
+        \section{Korollar}
+
+        $dim_K(V) = n$, $\mathcal{B}$ geord. Basis von V, $\alpha : V \rightarrow V$ linear. Dann gilt:
+
+        \begin{center}
+          $\alpha$ invertierbar (d.h. bijektiv) $\Leftrightarrow$ $A_{\alpha}^{\mathcal{B}}$ invertierbar
+        \end{center}
+
+        Dann: $A_{\alpha^{-1}}^{\mathcal{B}} = (A_{\alpha}^{\mathcal{B}})^{-1}$
+
+        \subsection{Beweis}
+
+        \subsubsection*{$\Rightarrow$}
+
+        $A_{\alpha}^{\mathcal{B}} \cdot A_{\alpha^{-1}}^{\mathcal{B}}$ $\underbrace{=}_{5.7} A_{\alpha \circ \alpha^{-1}}^{\mathcal{B}} = A_{id_y}^{\mathcal{B}} = E_n$
+
+        Gegenrichtung analog.
+
+        \subsubsection*{$\Leftarrow$}
+
+        Es existiert inverse Matrix $B$ zu $A_{\alpha}^{\mathcal{B}}$, d.h. $A_{\alpha}^{\mathcal{B}} \cdot B = B \cdot A_{\alpha}^{\mathcal{B}} = E_n$
+
+        Dann B = $A_{\beta}^{\mathcal{B}}$ für eine eindeutig bestimmte lineare Abbildung $\beta : V \rightarrow V$ (5.2)
+
+        \par \medskip
+
+        $A_{\alpha}^{\mathcal{B}} \cdot A_{\beta}^{\mathcal{B}} = A_{\beta}^{\mathcal{B}} \cdot A_{\alpha}^{\mathcal{B}} = E_n$
+
+
+        Damit folgt $\alpha \circ \beta = id_v$ Analog: $\beta \circ \alpha = id_v$ $\beta = \alpha^{-1}$
+
+        \section{Satz}
+
+        $A \in \mathcal{M}_n (K)$. A invertierbar $\Leftrightarrow$ rg(A) = n (D.h. Zeilen $|$ Spalten von A sind lin. unabhängig)
+
+        \subsection{Beweis}
+
+        Def. $\alpha : K^n \rightarrow K^n$ durch $\alpha(x) = A \cdot x$.
+
+        $A = A_{\alpha}^{\mathcal{B}}$ bezüglich der kanonischen Basis B von $K^n$
+
+        A invertierbar $\underbrace{\Leftrightarrow}_{5.10} \alpha$ invertierbar $\underbrace{\Leftrightarrow}_{3.16}$ $\alpha$ surjektiv / injektiv $\Leftrightarrow$ $rg(\alpha) = n \Leftrightarrow rg(A) = n$
+
+        \section{Lemma}
+
+        $A \in \mathcal{B}_{m,n} (K), X \in \mathcal{M}_{n,l} (K)$, $C = AX \in \mathcal{M}_{m,l} (K)$
+
+        Wendet man dieselben elementaren Zeilenumformungen auf A und C an (beachte: A und C haben beide m Zeilen) so gilt für die entstehenden Matrizen A', C'
+
+        \begin{center}
+          C' = A' X
+        \end{center}
+
+        \section{Bestimmung der Inversen einer invertierbaren Matrix (Gauß-Jordan-Verfahren)}
+
+        A invertierbare $n \times n$ - Matrix. Gesucht $A^{-1}$ mit:
+        
+        \begin{center}
+          $A  \cdot A^{-1} = E_n$
+        \end{center}
+
+        Mann kann A durch elementare Zeilenumformungen auf die Form $E_n$ bringen. Analog zu Gauß-Algorithmus:
+
+        \begin{center}
+          $A \longrightarrow \begin{pmatrix}1 & * & * & ... \\ 0 & * & * & ... \\ ... & ... & ... & ... \\ 0 & * & * & ... \end{pmatrix}$
+        \end{center}
+
+        $rg(A) = n$: In der zweiten Spalte findet man Eintrag $\neq 0$ unterhalb (einschließlich) der Diagonalen.
+
+        Erzeuge wie bei Gauß 1 in der Diagonale, unterhalb der Diagnoale erzeuge Nullen \underline{und} auch oberhalb.
+
+        So fortfahren (keine Vertauschung von Zeilen oberhalb der Diagonalen !).
+
+        \begin{center}
+          $A \cdot A^{-1} = E_n$
+        \end{center}
+
+        Durch elementare Zeilenumformung entsteht aus A die Einheitsmatrix $E_n$. Dieselben zeilenumformungen angwandt auf $E_n$ liefert Matrix $A'$.
+
+        \par \medskip
+
+        5.12: $E_n \cdot A^{-1} = A'$
+
+        \begin{center}
+          $(A | E_n) \longrightarrow (E_n|A^{-1})$
+        \end{center}
+
+        (Verf. zeigt gleichzeitig, ob A invertierbar ist)
+
+        \section{Beispiel}
+
+        $A = \begin{pmatrix}1 & 0 & 2 \\ 2 & 2 & 1 \\ 0 & 1 & 0 \end{pmatrix} \in \mathcal{M}_3(\mathbb{Q})$
+
+        \par \medskip
+
+        $\begin{pmatrix}1 & 0 & 2 & | & 1 & 0 & 0 \\ 2 & 2 & 1 & | & 0 & 1 & 0 \\ 0 & 1 & 0 & | & 0 & 0 & 1 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 0 & 2 & | & 1 & 0 & 0 \\ 0 & 2 & -3 & | & -2 & 1 &  0 \\ 0 & 1 & 0 & | & 0 & 0 & 1 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 0 & 2 & | & 1 & 0 & 0 \\ 0 & 1 & \frac{-3}{2} & | & -1 & \frac{1}{2} & 0 \\ 0 & 1 & 0  & | & 0 & 0 & 1 \end{pmatrix}$
+
+        \par \medskip
+        \par \medskip
+
+        $\rightarrow \begin{pmatrix}1 & 0 & 2 & | & 1 & 0 & 0 \\ 0 & 1 & - \frac{3}{2} & | & -1 & \frac{1}{2} & 0 \\ 0 & 0 & \frac{3}{2} & | & 1 & - \frac{1}{2} & 1 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 0 & 2 & | & 1 & 0 & 0 \\ 0 & 1 & - \frac{3}{2} & | & -1 & \frac{1}{2} & 0 \\ 0 & 0 & 1 & | & \frac{2}{3} & - \frac{1}{3} & \frac{2}{3} \end{pmatrix}$
+
+        \par \medskip
+        \par \medskip
+
+        $\rightarrow \begin{pmatrix}1 & 0 & 0 & | & - \frac{1}{3} & \frac{2}{3} & - \frac{4}{3} \\ 0 & 1 & 0 & | & 0 & 0 & 1 \\ 0 & 0 & 1 & | & \frac{2}{3} & - \frac{1}{3} & \frac{2}{3} \end{pmatrix}$
+
+        \section{Bemerkung}
+
+        Sei $A x = b$ LGS mit $n$ Gleichungen und $n$ Unbekannten (d.h. A $n \times n$ - Matrix).
+
+        4.4.b: $A x = b$ hat eindeutige Lösung, wenn $rg(A) = n$. Dann ex. $A^{-1}$ und es gilt:
+
+        \begin{center}
+          $x = A^{-1} \cdot b$
+        \end{center}
+
+        \section{Definition}
+
+        V K-VR mit geordneten Basen $\mathcal{B} = (v_1, ..., v_n)$, $\mathcal{B'} = (v'_1, ..., v'_n)$
+
+        \par \medskip
+
+        \begin{equation}
+          v'_j = \sum_{i=1}^n s_{ij}v_i, j = 1, ..., n
+        \end{equation}
+
+        (Reihenfolge der Indizes beachten!)
+
+        $S_{\mathcal{B, B'}} = (s_{ij})_{i,j=1,...,n}$ heißt \underline{Basiswechselmatrix}
+
+        \par \medskip
+
+        Spalten: Koordinaten der Basisvektoren aus $\mathcal{B}'$ bzgl. $\mathcal{B}$.
+
+        Analaog.  $v_k = \sum_{j=1}^n t_{jk} v'_j$
+
+        $S_{\mathcal{B', B}} = (t_{jk})_{j,k=1,...,n}$
+
+        \section{Satz}
+
+        Bezeichnung wie in 5.16
+
+        $S_{\mathcal{B, B'}}$ ist invertierbar und $S_{\mathcal{B, B'}}^{-1} = S_{\mathcal{B', B}}$, d.h. $S_{\mathcal{B, B'}} \cdot S_{\mathcal{B', B}} = S_{\mathcal{B', B}} \cdot S_{\mathcal{B, B'}} = E_n$
+
+        \subsection{Beweis}
+
+        \begin{align*}
+          V_k & = \sum_{j=1}^n t_{jk} v'_j \\
+              & = \sum_{j=1}^n t_{jk} (\sum_{i=1}^n s_{ij} v_i) \\
+              & = \sum_{i=1}^n (\sum_{j=1}^n s_{ij} t_{jk})v_i 
+        \end{align*}
+
+        $\sum_{j=1}^n s_{ij} \cdot t_{jk} = \begin{cases}0 \textnormal{ für $i \neq k$} \\ 1 \textnormal{ für $i = k$} \end{cases}$
+
+        \begin{center}
+          $S_{\mathcal{B, B'}} \cdot S_{\mathcal{B', B}} = E_n$
+        \end{center}
+
+        \section{Satz}
+
+        $V, \mathcal{B, B'}$ wie oben, $v \in V$. 
+
+        $K_{\mathcal{B'}}(v)^t$ = $S_{\mathcal{B', B}} \cdot K_{\mathcal{B}}(v)^t$
+
+        \subsection{Beweis}
+
+        Analog zu 5.4 (5.2.a)
+
+        \section{Beispiel}
+
+        V = $\mathbb{R}^2$, $\mathcal{B} = (e_1, e_2)$, $\mathcal{C} = (e_1 + e_2, e_1-2e_2) = ((1,1)^t, (1,-2)^t)$
+
+        \par \medskip
+        \par \medskip
+
+        $S_{\mathcal{B, B'}} = \begin{pmatrix}1 & 1 \\ 1 & -2 \end{pmatrix}$
+
+        \par \medskip
+        \par \medskip
+
+        $S_{\mathcal{B, B'}} = S_{\mathcal{B, B'}}^{-1}$
+
+        5.14:
+
+        $\begin{pmatrix}1 & 1 & | & 1 & 0 \\ 1 & -2 & | & 0 & 1 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 1 & | & 1 & 0 \\ 0 & -3 & | & -1 & 1 \end{pmatrix} \rightarrow \begin{pmatrix}1 & 1 & | & 1 & 0 \\ 0 & 1 & | & \frac{1}{3} & - \frac{1}{3} \end{pmatrix} \rightarrow \begin{pmatrix}1 & 0 & | & \frac{2}{3} & \frac{1}{3} \\ 0 & 1 & | & \frac{1}{3} & - \frac{1}{3} \end{pmatrix}$
+
+        $S_{\mathcal{B', B}} = \begin{pmatrix}\frac{2}{3} & \frac{1}{3} \\ \frac{1}{3} & - \frac{1}{3} \end{pmatrix}$
+
+        V = $\begin{pmatrix}5 \\ 3 \end{pmatrix} \in K_{\mathcal{B}} (v)^t$
+
+        $K_{\mathcal{B}}(v) = ?$
+
+        $K_{\mathcal{B'}}(v)^t = \begin{pmatrix}\frac{2}{3} & \frac{1}{3} \\ \frac{1}{3} & - \frac{1}{3} \end{pmatrix} \cdot \begin{pmatrix}5 \\ 3 \end{pmatrix} = \begin{pmatrix}\frac{13}{3} \\ \frac{2}{3} \end{pmatrix}$
+
+        \section{Satz}
+
+        $\alpha : V \rightarrow W$ linear, $\mathcal{B, B'}$ geordnete Basen von V $\mathcal{C, C'}$ geordnete Basen W.
+
+        Dann:
+
+        \begin{center}
+          $A_{\alpha}^{\mathcal{B', C'}} = S_{\mathcal{C', C}} \cdot A_{\alpha}^{\mathcal{B,C}} \cdot S_{\mathcal{B, B'}}$
+        \end{center}
+
+        \subsection{Beweis:}
+
+        Sei $v \in V$.
+
+        \begin{align*}
+        A_{\alpha}^{\mathcal{B', C'}} \cdot K_{\mathcal{B'}}(v) & = K_{\mathcal{C}}(\alpha(v))^t  \\
+                                                                & = S_{\mathcal{C', C}} \cdot K_{\mathcal{C}}(\alpha(v))^t \\
+                                                                & = S_{\mathcal{C', C}} \cdot A_{\alpha}^{\mathcal{B, C}} \cdot K_{\mathcal{B}}(v)^t \\
+                                                                & = S_{\mathcal{C', C}} \cdot A_{\alpha}^{\mathcal{B, C}} \cdot S_{\mathcal{B, B'}} \cdot K_{\mathcal{B}}(v)^t
+        \end{align*}
+
+        Wenn v alle Vektoren aus V durchläuft, durchläuft $K_{\mathcal{B}}(v)^t$ alle Vektoren aus $K^n$ (n = dim(V)). Daraus folgt Behauptung.
+
+        \section{Korollar}
+
+        $\alpha : V \rightarrow V, \mathcal{B}, \mathcal{B'}$ geordnete Basis von v.
+
+        $S = S_{\mathcal{B, B'}}$. Dann:
+
+        \begin{center}
+          $A_{\alpha}^{\mathcal{B}}$ = $S^{-1} \cdot A_{\alpha}^{\mathcal{B}} \cdot S$
+        \end{center}
+
+        \subsection{Beweis}
+
+        Folgt aus 5.20 und 5.17
+
+        \par \medskip
+        (Bemerkung: Zwei $n \times n$ - Matrizen A, B heißen ähnlich, wenn es eine invertierbare MatrixS gibt mit B = $S^{-1} A S$)
+
+        \section{Beispiel}
+
+        V = $\mathbb{R}^2$, $\mathcal{B} = (e_1, e_2)$
+
+        $\mathcal{B'} = (e_1 + e_2, e_1 - 2_e2)$
+
+        \par \medskip
+        \par \medskip
+
+        $S_{\mathcal{B, B'}} = \begin{pmatrix}1 & 1 \\ 1 & -2 \end{pmatrix}$,
+
+        $S_{\mathcal{B', B}} = \begin{pmatrix}\frac{2}{3} & \frac{1}{3} \\ \frac{1}{3} & - \frac{1}{3} \end{pmatrix}$ (5.19)
+
+        Sei $A_{\alpha}^{\mathcal{B}} = \begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix}$
+
+        \par \medskip
+
+        $\alpha$ ist Spiegelung an $e_1$ - Achse
+
+
+        \par \medskip
+
+        \par \medskip
+
+        $A_{\alpha}^{\mathcal{B'}} = \begin{pmatrix}\frac{2}{3} & \frac{1}{3} \\ \frac{1}{3} & - \frac{1}{3} \end{pmatrix} \cdot \begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix} \cdot \begin{pmatrix}1 & 1 \\ 1 & -2 \end{pmatrix} = \begin{pmatrix}\frac{1}{3} & \frac{4}{3} \\ \frac{2}{3} & - \frac{1}{3}\end{pmatrix}$
+
+        $\alpha(e_1+e_2) = \frac{1}{3} \cdot (e_1 + e_2) + \frac{2}{3} \cdot (e_1- 2e_2)$
+
+        $\alpha(e_1 - 2e_2) = \frac{4}{3} \cdot (e_1 + e_2) - \frac{1}{3} \cdot (e_1 - 2e_2)$
+
+        \chapter{Determinanten}
+
+        $\mathcal{M}_{n}(K) \longrightarrow K$
+
+        \section{Definition}
+        
+        $A \in \mathcal{M}_n(K), i,j, \in \{1,...,n\}$.
+
+        $A_{ij} \in \mathcal{M}_{n-1}(K)$ ist die Matrix, die aus A entsteht, wenn man in A die i-te Zeile und j-te Spalte streicht.
+
+        \subsection{Beispiel}
+
+        \begin{center}
+          $A = \begin{pmatrix}3 & 4 & 5 \\ 6 & 7 & 8 \\ 9 & 10 & 11 \end{pmatrix} \in \mathcal{M}_3(\mathbb{R}) \longrightarrow A_{11} = \begin{pmatrix}7 & 8 \\ 10 & 11 \end{pmatrix}, A_{23} = \begin{pmatrix}3 & 4 \\ 9 & 10 \end{pmatrix}$
+        \end{center}
+
+        Definiere Determinante einer \underline{quadratischen} Matrix rekursiv.
+
+        \section{Laplacescher Entwicklungssatz}
+
+        det: $\mathcal{M}_n(K) \rightarrow K$ ist eine Abbildung, die \underline{Determinante}, die folgendermaßen berechnet wird:
+
+        \begin{itemize}
+          \item[(1)] $det((a)) := a$
+          \item[(2)] $A \in \mathcal{M}_n(K)$. Wähle irgendein $i \in \{1,...,n\}$.
+
+          $det(A) = \sum_{j=1}^n (-1)^{i+j} \cdot a_{ij} \cdot det(A_{ij})$
+
+          (Entwicklung nach der i-ten Zeile)
+
+          (Schachbrettmuster der Vorzeichen)
+
+          \item[(3)] Alternativ: 
+
+          Wähle $j \in \{1,...,n\}$
+
+          $det(A) = \sum_{i=1}^n (-1)^{i+j} \cdot a_{ij} \cdot det(A_{ij})$
+
+          (Entwicklung nach der j-ten Spalte)
+        \end{itemize}
+
+        \subsection{Bemerkung}
+
+        \textbf{Wichtig:} Egal nach welcher Zeile oder Spalte man entwickelt, es kommt immer dasselbe raus!
+
+        \par \medskip
+
+        (Schwierigster Beweis in der elementaren Determinantentheorie (WHK 10.4))
+
+
+        \section{Beispiel}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $det\begin{pmatrix}a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix} = a_{11} \cdot a_{22} - a_{12} \cdot a_{21}$ (Entwicklung nach 1. Zeile)
+
+          Entwicklung nach 2. Spalte: $-a_{12} \cdot a_{21} + a_{22} \cdot a_{11}$
+
+          \item $A = \begin{pmatrix}2 & 0 & 3 \\ -1 & 0 & 4 \\ 2 & 3 & -1 \end{pmatrix} \in \mathcal{M}_3 (\mathbb{Q})$
+
+          \par \medskip
+
+          Entwicklung nach der 1. Zeile:
+
+          \begin{align*}
+            det(A) & = 2 \cdot det \begin{pmatrix}0 & 4 \\ 3 & -1 \end{pmatrix} - 0 \cdot det \begin{pmatrix}-1 & 4  \\ 2 & -1 \end{pmatrix} + 3 \cdot det \begin{pmatrix}-1 & 0 \\ 2 & 3 \end{pmatrix} \\
+                   & = -24 - 0 -9 \\
+                   & = -33
+          \end{align*}
+
+          Entwicklung nach der 2. Spalte:
+
+          \begin{align*}
+            det(A)& = -3 \cdot det \begin{pmatrix}2 & 3 \\ -1 & 4 \end{pmatrix} \\
+                  & = -33
+          \end{align*} 
+
+          \underline{Allgemeine Strategie:} Verwende zur Determinantenberechnung eine Zeile oder Spalte mit möglichst vielen Nullen!
+
+          \item $det \begin{pmatrix}a_{11} & 0 & 0 \\ a_{21} & a_{22} & 0 \\ ... & ... & 0 \\ a_{n1} & ... & a_{nn} \end{pmatrix} = a_{11} \cdot a_{22} \cdot ... \cdot a_nn$ (untere Dreiecksmatrix)
+
+          Induktion nach n:
+
+          n = 1 $\checkmark$
+
+          n-1 $\rightarrow$ n:
+
+          Entwicklung nach 1. Zeile
+
+          \par \medskip
+
+          \par \medskip
+
+          Insbesondere: $det(E_n) = 1$
+
+          \end{enumerate}
+
+          \section{Korollar}
+
+          $det(A) = det(A^t)$
+
+          \section{Rechenregeln für Determinanten}
+
+          Sei $A \in \mathcal{M}_n(K)$.
+
+          \begin{enumerate}[label=(\alph*)]
+            \item Zeilen bzw. Spaltenvertauschung ändern das Vorzeichen der Determinante.
+
+            \item Addiert man das Vielfache einer Zeile / Spalte zu einer anderen Zeile / Spalte, so ändert sich die Determinante überhaupt nicht.
+
+            \item Multipliziert man eine Zeile / Spalte von A mit $a \in K$ so ändert sich det(A) um Faktor a.
+
+            \underline{Insbesondere:} 
+
+            $A \in \mathcal{M}_n(K)$
+
+            $det(a \cdot A) = a^n \cdot det(A)$
+
+            \item $A, B \in \mathcal{M}_n(K).$
+
+            $det(A \cdot B) = det(A) \cdot det(B).$
+
+            (Determinantenmultiplikationssatz)
+
+            (Aber: Im Allgemeinen $det(A+B) \neq det(A) + det(B)$)
+          \end{enumerate}
+        
+
+        \section{Bemerkung}
+
+        Strategie zur Det.berechnung:
+
+        Wende auf A elementare Zeilen / Spaltenumformungen an, um Dreiecksgestalt zu erhalten. Dann 6.3.c
+
+        \par \medskip
+
+        (Buchführen über Vorzeichen!)
+
+        \section{Beispiel}
+
+        $A = \begin{pmatrix}0 & 1 & 2 & 3 \\ -1 & 0 & 0 & 4 \\  1 & 3 & 4 & 2 \\ 0 & 3 & 0 & 1 \end{pmatrix}, K = \mathbb{Q}$
+
+        \par \medskip
+
+        \begin{align*}
+          det(A)  & = - det \begin{pmatrix}-1 & 0 & 0 & 4 \\ 0 & 1 & 2 & 3 \\ 1 & 3 & 4 & 2 \\ 0 & 3 & 0 & 1 \end{pmatrix}  \\
+                  & = - det \begin{pmatrix}-1 & 0 & 0 & 4 \\ 0 & 1 & 2 & 3 \\ 0 & 3 & 4 & 6 \\ 0 & 3 & 0 & 1 \end{pmatrix}  \\
+                  & = - det \begin{pmatrix}1 & 0 & 0 & 4 \\ 0 & 1 & 2 & 3 \\ 0 & 0 & -2 & -3 \\ 0 & 0 & -6 & -8 \end{pmatrix} \\
+                  & = - det \begin{pmatrix}-1 & 0 & 0 & 4 \\ 0 & 1 & 2 & 3 \\ 0 & 0 &-2 & -3 \\ 0 & 0 & 0 & 1 \end{pmatrix} \\
+                  & \underbrace{=}_{6.3.c)} -2 
+        \end{align*}
+
+        \section{Satz}
+
+        $A \in \mathcal{N}(K)$. Dann gilt:
+
+        \begin{center}
+          A invertierbar $\Leftrightarrow$ $rg(A) = n$ $\Leftrightarrow det(A) \neq 0$
+        \end{center}
+
+        In diesem Fall gilt:
+
+        \begin{center}
+          $det(A^{-1}) = det(A)^{-1}$
+        \end{center}
+
+        [$\Rightarrow: \ A \cdot A^{-1} = E_n, 1 = det(E_n) = det(A \cdot A^{-1}) = det(A) \cdot det(A^{-1})$]
+
+        \par \medskip
+
+        Andere Berechnungsmethode von $A^{-1}$ mit Hilfe der Determinante.
+
+        \section{Definition}
+
+        $A \in \mathcal{M}_n(K)$. Die \underline{Adjunkte} $A^{ad}$ zu A ist $n \times n$ - Matrix über K:
+
+        \begin{center}
+          $A^{ad} := (b_{ij})_{i,j=1,...,n}$
+        \end{center}
+
+        wobei $b_{ij} = (-1)^{i+j} \cdot det(A_{ji})$ (Indizes beachten).
+
+        \section{Satz}
+
+        $A \in \mathcal{M}_n(K)$
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $A^{ad} \cdot A = A \cdot A^{ad} = det(A) \cdot E_n$
+
+          \item Ist $det(A) \neq 0$, so ist
+
+          \begin{center}
+            $A^{-1} = \frac{1}{det(A)} \cdot A^{ad}$
+          \end{center}
+        \end{enumerate}
+
+        \section{Beispiel}
+
+        $A = \begin{pmatrix}a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}$.
+
+        \par \medskip
+
+        Angenommen:
+
+        $det(A) = a_{11} \cdot a_{22} - a_{12} \cdot a_{21} \neq 0$.
+
+        \begin{center}
+          $A^{-1} = \frac{1}{det(A)} \cdot \begin{pmatrix}a_{22} & - a_{12} \\ - a_{21} & a_{11} \end{pmatrix}$
+        \end{center}
+
+        \section{Demerkung}
+
+        $\alpha : V \rightarrow V $ lin. Abbildung. V endl. dimensional. $\mathcal{B, B'}$ Basen von V.
+
+        \par \medskip
+
+        \par \medskip
+
+        \begin{center}
+          $A_{\alpha}^{mathcal{B'}} = S^{-1} \cdot A_{\alpha}^{\mathcal{B}} \cdot S$
+        \end{center}
+
+        wobei $S = S_{\mathcal{B, B'}}$ (5.21)
+
+        \par \medskip
+
+        \par \medskip
+
+        \begin{align*}
+          det(A_{\alpha}^{\mathcal{B'}}) & = det(S^{-1} \cdot A_{\alpha}^{\mathcal{B}} \cdot S)  \\
+                                         & = det(S^{-1}) \cdot det(A_{\alpha}^{\mathcal{B}}) \cdot det(S) \\
+                                         & = det(A_{\alpha}^{\mathcal{B}}) \cdot \underbrace{det(S)^{-1} \cdot det(S)}_{1} \\
+                                         & = det(A_{\alpha}^{\mathcal{B}})
+        \end{align*}
+
+        Daher definiert man:
+
+        \begin{center}
+          $det(\alpha) := det(A_{\alpha}^{\mathcal{B}})$
+        \end{center}
+
+        (unabhängig von der Wahl von $\mathcal{B}$) 
+
+        \par \medskip
+
+        [Im Allgemienen ist $det(A_{\alpha}^{\mathcal{B, C}}) \neq det(A_{\alpha}^{\mathcal{B', C'}})$]
+
+        \chapter{Eigenwerte}
+
+        \textbf{\underline{Problem:}} $\alpha: V \rightarrow V$ linear. Suche Basis $\mathcal{B}$ von V bezüglich der $A_{\alpha}^{\mathcal{B}}$ besonders einfache Gestalt hat. 
+
+        Am besten wäre Dreiecksmatrix (Untere und Obere. Somit nur Diagonale $\neq 0$).
+
+        Dh. $\mathcal{B} = (v_1, ..., v_n)$, so $\alpha(v_i) = a_iv_i$, $i=1, ...,n$ 
+
+        Das geht allerdings im Allgemeinen nicht.
+
+        \section{Beispiel:}
+
+        \begin{enumerate}[label=(\alph*)]
+
+          \item $\sigma : \mathbb{R}^2 \rightarrow \mathbb{R}^2$ Spiegelung an der $e_1-$Achse. $\mathcal{B} = (e_1, e_2)$ - kanonische Basis.
+
+          \begin{center}
+            $A_{\sigma}^{\mathcal{B}} = \begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix}$
+          \end{center}
+
+          (Diagonalmatrix)
+
+          \item Drehung $\rho$ um 0 mit Winkel  $k \cdot \pi$.
+
+          \par \medskip
+
+          Kein Vektor $\neq \sigma$ wird auf ein Vielfaches von sich abgebildet.
+        \end{enumerate}
+
+        Für \underline{keine} Basis $\mathcal{B}$ ist $A_{\rho}^{\mathcal{B}}$ Diagonalmatrix.
+
+        \section{Definition}
+
+        $\alpha : V \rightarrow V$ lineare Abbildung. $c \in K$ heißt \underline{Eigenwert} von $\alpha$, falls $v \in V, v \neq \sigma$, existiert mit 
+
+        \begin{center}
+          $\alpha(v) = c \cdot v$ 
+        \end{center}
+
+        Jeder solcher Vektor $v \neq \sigma$ heißt \underline{Eigenvektor} von $\alpha$ zu dem Eigenwert $c$.
+
+        \par \medskip
+
+        Die Menge aller Eigenvektoren zu $c$, zusammen mit dem Nullvektor, heißt \underline{Eigenraum} von $\alpha$ zum Eigenwert $c$.
+
+        \section{Bemerkung}
+
+        $\alpha: V \rightarrow V$ linear, $c$ sei ein Eigenwert von $\alpha$. 
+
+        \par \medskip
+
+        Eigenraum von $\alpha$ zu $c$ = $ker(c \cdot id_v - \alpha)$, also Unterraum von V.
+
+        \par \medskip
+
+        Insbesondere: 0 ist Eigenwert von $\alpha$ $\Leftrightarrow ker(\alpha) \neq \{\sigma\}$
+
+        \subsection{Beweis}
+
+        $\alpha(v) = c \cdot v \Leftrightarrow c \cdot v - \alpha(v) = \sigma \Leftrightarrow (c \cdot id_v - \alpha) (v) = 0 \Leftrightarrow v \in ker(c \cdot id_v - \alpha)$
+
+        \section{Beispiel}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $id_v$ hat nur Eigenwert 1, Eigenraum zu 1 ist V.
+
+          \item Spiegelung aus 7.1.a):
+
+          1 ist Eigenwert
+
+          -1 ist Eigenwert
+
+          Eigenraum zu 1: $\left \langle e_1 \right \rangle$
+
+          Eigenraum zu -1: $\left \langle e_2 \right \rangle$
+
+          \item Drehung um $\rho \neq k \cdot \pi$ hat keine Eigenwerte.
+        \end{enumerate}
+
+        \section{Definition}
+
+        A $n \times n$ - Matrix über K. 
+
+        \underline{Eigenwerte von A} := Eigenwerte von $\alpha_{A} : \begin{cases}K^n \rightarrow K^n \\ x \mapsto A \cdot x \end{cases}$
+
+        (d.h. $c \in K$ ist Eigenwert von A $\Leftrightarrow \exists x \neq 0 \in K^n : A \cdot x = c \cdot x$)
+
+        \section{Satz}
+
+        $\alpha : V \rightarrow V$ lin. Abbildung. Dann haben $\alpha$ und $A_{\alpha}^{\mathcal{B}}$ die gleichen Eigenwerte für jede Basis $\mathcal{B}$ von V.
+
+        \subsection{Beweis}
+
+        Sei $c$ Eigenwert von $\alpha$, $v \neq \sigma$ mit $\alpha(v) = c \cdot v$.
+
+        \par \medskip
+
+        \par \medskip
+
+        \begin{align*}
+        A_{\alpha}^{\mathcal{B}} \cdot \mathcal{K}_{\mathcal{B}}(v)^t & = \mathcal{K}_{\mathcal{B}}(\alpha(v))^t \\
+                                                                      & = \mathcal{K}_{\mathcal{B}}(c \cdot v⁾^t \\
+                                                                      & = c \cdot \mathcal{K}_{\mathcal{B}}(v)^t
+        \end{align*}
+
+        Da $v \neq \sigma$ ist $\mathcal{K}_{\mathcal{B}}(v) \neq 0$.
+
+        Also ist $c$ Eigenwert von $A_{\alpha}^{\mathcal{B}}$.
+
+        Umgekehrt: Sei $0 \neq x = \begin{pmatrix}x_1 \\ ... \\ x_n \end{pmatrix} \in K^n$ mit $A \cdot x = c \cdot x$. ($c$ ist Eigenwert von A).
+
+        \par \medskip
+
+        \par \medskip
+
+        Sei $v = \sum_{i=1}^n x_i v_i$, $\mathcal{B} = (v_1, ..., v_n)$.
+
+        $\mathcal{K}_{\mathcal{B}}(v)^t = x$.
+
+        Es folgt $\mathcal{K}_{\mathcal{B}}(\alpha(v)) = \mathcal{K}_{\mathcal{B}}(c \cdot v)$. 
+
+        \par \medskip
+
+        Dann $\alpha(v) = c \cdot v$
+
+        $c$ ist Eigenwert von $\alpha$.
+
+        \section{Satz}
+
+        V n-dim. K-VR, $\mathcal{B}$ Basis von V, $\alpha: V \rightarrow V$ linear, $A := A_{\alpha}^{\mathcal{B}}$, $c \in K$.
+
+        Dann sind äquivalent:
+
+        \begin{itemize}
+          \item[(1)] $c$ ist Eigenwert von $\alpha$
+          \item[(2)] $ker(c \cdot id_v - \alpha) \neq \{\sigma\}$
+          \item[(3)] $det(c \cdot E_n -A) = 0$
+        \end{itemize}
+
+        \subsection{Beweis}
+
+        \subsubsection*{$(1) \Leftrightarrow (2)$}
+
+        7.3
+
+        \subsubsection*{$(2) \Leftrightarrow (3)$}
+
+        $A_{c \cdot id_v -\alpha}^{\mathcal{B}} = c \cdot E_n - A$
+
+        $\alpha(v) = c \cdot v$ 
+
+        \par \medskip
+
+        Es gilt:
+
+        \begin{align*}
+          det(c \cdot E_n -A) = 0 \\ 
+          \Leftrightarrow c \cdot E_n -A \textnormal{ nicht invertierbar.} \\
+          \Leftrightarrow c \cdot id_v - \alpha \textnormal{ nicht invertierbar.} \\
+          \Leftrightarrow c \cdot id_v - \alpha \textnormal{ ist nicht injektiv} \\
+          \Leftrightarrow ker(c \cdot id_v -\alpha) \neq \{\sigma\}
+        \end{align*}
+
+        Wie berechnet man Eigenwerte einer lin. Abbildung und wie viele gibt es ?
+
+        \par \medskip
+
+        Nach 7.7 muss man alle $c \in K$ bestimmen mit $det(c \cdot E_n -A) = 0$. Betrachte Funktion:
+
+        \begin{center}
+          $f_A : \begin{cases}K \rightarrow K \\ t \mapsto det(t \cdot E_n -A) \end{cases}$
+        \end{center}
+
+        \section{Satz}
+
+        Die Funktion $f_A$ ist Polynomfunktion vom Grad n, d.h.
+
+        \begin{align*}
+          f_A(t) & = det(t \cdot E_n -A) \\
+                 & = t^n + a_{n-1}t^{n-1} + ... + a_1t + a_0
+        \end{align*}
+
+        wobei $a_i \in K$ (unabhängig von t)
+
+        \subsection{Beweis}
+
+        Mit Entwicklungsformel. Machen wir hier nicht.
+
+        \section{Definition}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Das Polynom $f_A(t) = det(t \cdot E_n -A) \in K[t]$ heißt \underline{charakteristisches Polynom} von $A \in \mathcal{M}_n(K)$.
+
+          \item $\alpha : V \rightarrow V$ linear, $\mathcal{B}$ Basis von V, so 
+
+          \begin{align*}
+            det(t \cdot id_v - \alpha) & = det(A_{t \cdot id_v -\alpha}^{\mathcal{B}}) \\
+                                       & = det(t \cdot E_n - A_{\alpha}^{\mathcal{B}})
+          \end{align*}
+
+          heißt charakteristisches Polynom von $\alpha$ (nach 6.12 unabhängig von $\mathcal{B}$).
+        \end{enumerate} 
+
+        \section{Korollar und Definition}
+
+        $\alpha : V \rightarrow V$ linear, $dim(V) = n$.
+
+        \begin{enumerate}[label=(\alph*)]
+          \item c ist Eigenwert von $\alpha$ $\Leftrightarrow c$ ist Nullstelle des char. Polynoms von $\alpha$
+
+          \par \medskip
+
+          \underline{Vielfachheit} des Eigenwerts c := \underline{Vielfachheit} von $c$ als Nullstelle des char. Polynoms. 
+
+          \item $\alpha$ hat höchstens n Eigenwerte (einschließlich Vielfachheit).
+        \end{enumerate}
+
+        \section{Beispiel}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $\rho : \mathbb{R}^2 \rightarrow \mathbb{R}^2$ Spiegelung an $\left \langle e_1 \right \rangle$ - Achse
+
+          $\mathcal{B} = (e_1, e_2)$ kan. Basis.
+
+          \par \medskip
+
+          $A := A_{\rho}^{\mathcal{B}} = \begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix}$
+
+          char. Polynom : $det(t \cdot E_2 - A) = det(\begin{pmatrix}t & 0 \\ 0 & t \end{pmatrix} - \begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix}) = det \begin{pmatrix}t-1  & 0 \\ 0 & t+1 \end{pmatrix} = (t-1) \cdot (t+1)$
+
+          \par \medskip
+
+          Nullstellen 1, -1 alle Eigenwerte von $\rho$
+
+          \item $\alpha : \mathbb{R}^2 \rightarrow \mathbb{R}^2$, 
+
+          $A = A_{\alpha}^{\mathcal{B}} = \begin{pmatrix}-1 & 2 \\ 4 & -3 \end{pmatrix}$
+
+          $\mathcal{B}$ kanonische Basis.
+
+          char. Polynom von $\alpha$:
+
+          \begin{center}
+            $det(t \cdot E_n - A_{\alpha}^{\mathcal{B}}) = det \begin{pmatrix}t+1 & -2 \\ -4 & t+3 \end{pmatrix} = (t+1) \cdot (t+3) - 8 = t^2 + 4t -5$
+          \end{center}
+
+          $t_{1,2} = -2 \pm \sqrt{4+5}$
+
+          Eigenwerte von $\alpha$: 1, -5
+
+          \par \medskip
+
+          \par \medskip
+
+          Eigenvektor zu 1: $\begin{pmatrix}x \\ y \end{pmatrix}$
+
+          $1 \cdot \begin{pmatrix}x \\ y \end{pmatrix} = \alpha \cdot \begin{pmatrix}x \\ y \end{pmatrix} = \begin{pmatrix}-x + 2y \\ 4x -3y \end{pmatrix}$
+
+          $\rightarrow$ x = y
+
+          \par \medskip
+
+          \par \medskip
+
+          Eigenraum zu Eigenwert 1: $\left \langle \begin{pmatrix}1 \\ 1 \end{pmatrix} \right \rangle$
+
+          \par \medskip
+
+          Eigenwert zu 5:
+
+          $-5 \cdot \begin{pmatrix}x \\ y \end{pmatrix} = \begin{pmatrix}-x + 2y \\ 4x -3y \end{pmatrix}$
+
+          $\rightarrow y = -2x$
+
+          Eigenraum zu EW-5: 
+
+          $\left \langle \begin{pmatrix}1 \\ -2 \end{pmatrix} \right \rangle$
+
+          \par \medskip
+
+          $\mathcal{B'} = ((1,1)^t, (1,-2)^t)$
+
+          $A_{\alpha}^{\mathcal{B'}} = \begin{pmatrix}1 & 0 \\  0 & -5 \end{pmatrix}$
+
+          (Diagonalmatrix)
+
+          \item $\rho : \mathbb{R}^2 \rightarrow \mathbb{R}^2$ Drehung um $\frac{\pi}{2}$ um 0. 
+
+          $\mathcal{B}$ kan. Basis.
+
+          $A = A_{\rho}^{\mathcal{B}} = \begin{pmatrix}cos(\frac{\pi}{2}) & - sin(\frac{\pi}{2}) \\ sin(\frac{\pi}{2}) & cos(\frac{\pi}{2}) \end{pmatrix} = \begin{pmatrix}0 & -1 \\ 1 & 0 \end{pmatrix}$
+
+          char. Polynom:
+
+          $f_A(t) = det(t \cdot E_2 - A) = det \begin{pmatrix}t & 1 \\ -1 & t \end{pmatrix} = t^2 + 1$
+
+          Keine Nullstellen in $\mathbb{R}$, also hat $\rho$ keine EW in $\mathbb{R}$
+
+          \par \medskip
+
+          \par \medskip
+
+          Fasst man $\rho$ als Abbildung $\mathbb{C}^2 \rightarrow \mathbb{C}^2$ auf, so gibt es EW i, -i.
+
+          \par \medskip
+
+          Die zugehörigen Eigenräume sind:
+
+          $\left \langle \begin{pmatrix}1 \\ i \end{pmatrix} \right \rangle_{\mathbb{C}}, \left \langle \begin{pmatrix}1 \\ -i \end{pmatrix} \right \rangle_{\mathbb{C}}$
+        \end{enumerate}
+
+        \section{Korollar}
+
+        $\alpha : V \rightarrow V$ linear. Falls Basis $\mathcal{B}$ von V existiert mit $A_{\alpha}^{\mathcal{B}}$ in Dreiecksgestallt, so sind die Diagonalelemente $a_{11}, a_{22}, ..., a_{nn}$ sämtliche Eigenwerte von $\alpha$ (mit Vielfachheit).
+
+        \subsection{Beweis}
+
+        $det(t \cdot E_n -A) = det \begin{pmatrix}t - a_{11} & ...  \\ 0 & t-a_{nn} \end{pmatrix}$ (Dreiecksmatrix) = $(t-a_{11}) \cdot ... \cdot (t-a_{nn})$ 
+
+        \section{Bemerkung}
+
+        Über $\mathcal{C}$ lässt sich für jede lineare Abbildung $\alpha : V \rightarrow V$ Basis $\mathcal{B}$ finden, so dass $A_{\alpha}^{\mathcal{B}}$ Dreiecksmatrix ist.
+
+
+        \section{Satz}
+
+        Seien $c_1, ..., c_r$ die paarweise verschiedenen Eigenwerte der lin Abb. $\alpha : V \rightarrow V$. Seien $v_1, ..., v_r$ zugehörige Eigenvektoren. Dann sind $v_1, ..., v_r$ linear unabhägnig. 
+
+        \subsection{Beweis}
+
+        Induktion nach r.
+
+        $r = 1: \ v_1 \neq 0$ lin unabhängig $\checkmark$
+
+        Behauptung sei richtig für $i-1$.
+
+        Zu zeigen: Richtig für $i \le r$. 
+
+        $v_1, ..., v_{i-1}$ lin unabhängig.
+
+        Angenommen: $v_1, ..., v_{i-1}, v_i$ lin. abhängig.
+
+        Dann: $v_i = \sum_{j=1}^{i-1} a_j v_j, a_j \in K (*)$
+
+        Mult. mit $c_i$: 
+
+        $c_i v_i = \sum_{j=1}^{i-1} c_i a_j v_j$ (1)
+
+        \par \medskip
+
+        Andererseits: Wende $\alpha$ auf $(*)$ an.
+
+        \par \medskip
+
+        $c_i v_i = \alpha(v_i) = \sum_{j=1}^{i-1} a_j \alpha(v_j) = \sum_{j=1}^{i-1} a_jc_jv_j$ (2)
+
+        \par \medskip
+        
+        Subtr. (1) von (2):
+
+        \begin{align*}
+          0 & = \sum_{j=1}^{i-1} (a_jc_j - c_i a_j) v_j  \\
+            & = \sum_{j=1}^{i-1} a_j (c_j- c_i)v_j 
+        \end{align*}
+
+        $\Rightarrow$ $a_j(c_j-c_i) = 0$ für $j=1, ..., i-1$
+
+        \par \medskip
+
+        \par \medskip
+
+        Nach Voraus. ist $c_j - c_i \neq 0$ für alle $j=1, ..., i-1$
+
+        $\Rightarrow a_j = 0$ für $j=1, ..., i-1$
+
+        $\Rightarrow v_i = \sigma$ Widerspruch!
+
+        \section{Definition}
+
+        $\alpha : V \rightarrow V$ linear.
+
+        $\alpha$ heißt \underline{diagonalisierbar}, falls $V$ eine Basis $\mathcal{B}$ aus Eigenvektoren von $\alpha$ besitzt, d.h.:
+
+        \begin{center}
+          $A_{\alpha}^{\mathcal{B}}$ ist Diagonalmatrix
+        \end{center}
+
+        \section{Satz}
+
+        $dim_K(V) = n, \alpha : V \rightarrow V$ linear.
+
+        Hat $\alpha$ n \underline{verschiedene} Eigenwerte, so ist $\alpha$ diagonalisierbar (Hinreichend, nicht notwendig, z.B. $\alpha = id_v$ EW 1 mit Vielfachheit n, diagonalisierbar).
+
+        \section{Beispiel}
+
+        $A_{\alpha}^{\mathcal{B}} = \begin{pmatrix}1 & 1 \\ 0 & 1 \end{pmatrix}$
+
+        $\alpha$ hat EW 1 mit Vielfachheit 2
+
+        \par \medskip
+
+        $\alpha$ ist nicht diagonalisierbar, denn sonst ex. Basis $\mathcal{B'}$ mit $A_{\alpha}^{\mathcal{B}} = \begin{pmatrix}1 & 0 \\ 0 & 1 \end{pmatrix} \rightarrow \alpha = id_v$ Widerspruch !
+
+        \par \medskip
+
+        \par \medskip
+
+        Also:
+
+        Zur Diagonalisierbarkeit reicht es nicht, dass $\alpha$ n Eigenwete (mit Vielfachheit) besitzt.
+
+        \section{Bemerkung}
+
+        Sei $\alpha : V \rightarrow V$ linear, $dim_K(V) = n$.
+
+        Besitze $\alpha$ n Eigenwerte (mit Vielfachheit), d.h. $det(t \cdot E_n -A) = (t-c_1)^{m_1} \cdot ... \cdot (t-c_r)^{m_r}$
+
+        \par \medskip
+
+        Ist $V_i$ Eigenraum von $\alpha$ zu $c_i$, so kann man zeigen: 
+
+        \begin{center}
+          $dim(V_i) \le m_i$
+        \end{center}
+
+        Es gilt: $\alpha$ ist diagonalisierbar $\Leftrightarrow dim(V_i) = m_i, i =1, ..., r$
+
+        \section{Definition}
+
+        $A \in \mathcal{M}_n(K)$ heißt \underline{diagonalisierbar}, falls
+
+        \begin{center}
+          $\alpha_A : \begin{cases}K^n \rightarrow K^n \\ x \mapsto A \cdot x \end{cases}$  
+        \end{center}
+
+        diagonalisierbar ist.
+
+        \section{Satz}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $A \in \mathcal{M}_n(K)$ ist diagonalisierbar $\Leftrightarrow$ es ex. invertierbare Matrix $S \in \mathcal{M}_n(K)$ mit $S^{-1} \cdot A \cdot S$ Diagonalmatrix.
+
+          \item Hat A $n$ verschiedene Eigenwerte, so ist A diagonalisierbar.
+        \end{enumerate}
+
+        \subsection{Beweis}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $\mathcal{B}$ kanonische Basis von $K^n$.
+
+          $A = A_{\alpha_A}^{\mathcal{B}} \cdot A$ diagonalisierbar, so existiert Basis $\mathcal{B'}$ von $K^n$ mit $A_{\alpha_A}^{\mathcal{B'}}$ Diagonalgestalt hat.
+
+          Setze S = $S_{\mathcal{B, B'}}$, dann nach 5.21:
+
+          \begin{center}
+            $A_{\alpha_A}^{\mathcal{B'}} = S^{-1} \cdot A_{\alpha_A}^{\mathcal{B}} \cdot S$
+          \end{center}
+
+          Umgekehrt analog, da jede inverse Matrix S Wechsel von B zu anderer Basis beschreibt.
+
+          \item Folgt aus 7.16
+        \end{enumerate}
+
+        \chapter{Vektorräume mit Skalarprodukt}
+
+        Jetzt: \underline{$K = \mathbb{R}$}.
+
+        $\mathbb{R}^2$: Länge von $v \in \mathbb{R}^2$, $v \leftrightarrow \begin{pmatrix}x \\ y \end{pmatrix}$
+
+        \par \medskip
+
+        $||v|| = + \sqrt{x^2 + y^2}$ (länge)
+
+        \par \medskip
+
+        \underline{\textbf{Abstand}} zwischen
+
+        \begin{center}
+          $v \leftrightarrow \begin{pmatrix}x_1 \\ y_1 \end{pmatrix}$
+
+          \par \medskip
+
+          $w \leftrightarrow \begin{pmatrix}x_2 \\ y_2 \end{pmatrix}$
+        \end{center}
+
+        entspricht: $d(v,w) := || v - w || = + \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}$
+
+        \par \medskip
+
+        \underline{\textbf{Winkel:}}
+
+        Pythagoras: 
+
+        \begin{align*}
+          ||v-w||^2 & = ||v||^2 \cdot sin^2(\varphi) + (||w|| - ||v|| \cdot cos(\varphi))1^2 \\
+                    & = ||v||^2 + ||w||^2 - 2 ||v|| \cdot ||w|| \cdot cos(\varphi) \text{ (Kosinussatz)} \\
+          ||v-w||^2 & = (x_1-x_2)^2 + (y_1-y_2)^2 \\
+                    & = x_1^2 + x_2^2 - 2x_1x_2 + y_1^2 + y_2^2 - 2y_1y_2 \\
+                    & = ||v||^2 + ||w||^2 - 2(x_1x_2 + y_1y_2)
+        \end{align*}
+
+        Damit folgt:
+
+        \begin{equation}
+          \underbrace{x_1x_2 + y_1y_2}_{Skalarprodukt} = ||v|| \cdot ||w|| \cdot cos(\varphi)
+        \end{equation}
+
+        \section{Definition Skalarprodukt}
+
+        Seien $v = \begin{pmatrix}u_1 \\ ... \\ u_n \end{pmatrix}, w = \begin{pmatrix}z_1 \\ ... \\ z_n \end{pmatrix} \in \mathbb{R}^n$.
+
+        \par \medskip
+
+        Das \underline{(Standard-)Skalarprodukt} von $v$ und $w$:
+
+        \begin{center}
+          $(v|w) :=u_1z_1 + u_2z_2 + ... + u_nz_n \in \mathbb{R}$
+        \end{center}
+
+        (Skalarprodukt zweier Vektoren ist reelle Zahl!)
+
+        \par \medskip
+
+        Es gilt:
+
+        \begin{itemize}
+          \item[(1)] $(v|v) \ge 0$
+
+          $(v|v) = 0 \Leftrightarrow v = \sigma$
+
+          (positiv definiert)
+
+          \item[(2)] $(v|w) = (w|v)$
+
+          (Symmetrie)
+
+          \item[(3)] $(v|w_1 + w_2) = (v | w_1) + (v | w_2)$
+
+          $(v|a \cdot w) = a \cdot (v|w)$
+
+          (Linearität im 2. Argument)
+
+          Analog: Linearität im 1. Argument.
+
+        \end{itemize}
+
+        $e_1, ..., e_n$ kanonische Basis.
+
+        \begin{equation}
+         (e_i | e_j) = \begin{cases}0, \text{ für $i \neq j$} \\ 1, \text{ für i = j} \end{cases}
+        \end{equation} 
+
+        \section{Definition}
+
+        V $\mathbb{R}$-Vektorraum
+
+        Abbildung 
+
+        \begin{equation*}
+          (.|.) : \begin{cases} V \times V \rightarrow \mathbb{R} \\ (v,w) \mapsto (v | w) \in \mathbb{R} \end{cases}
+        \end{equation*}
+
+        heißt \underline{Skalarprodukt} auf V, falls sie die Eigenschaften (1)-(3) aus 8.1 erfüllt (mit V statt $\mathbb{R}^n$).
+
+        \par \medskip
+
+        V heißt dann \underline{Euklidischer Vektorraum} (oder \underline{Skalarproduktraum}).
+
+        Dann gilt auch:
+
+        \begin{itemize}
+          \item[(4)] $(v_1+v_2|w) = (v_1|w) + (v_2|w)$
+
+          $(av | w) = a (v|w)$
+
+          (Linearität im 1. Argument)
+
+          (Folgt aus (2) und (3))
+
+        \end{itemize}
+
+        Es folgt auch:
+
+        \begin{center}
+          $(\sigma | w) = 0 = (v | \sigma)$
+        \end{center}
+
+        Weil $(\sigma | w ) = (0 \cdot \sigma | w) \underbrace{=}_{(4)} 0 \cdot (\sigma | w) = 0$
+
+        \section{Beispiel}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Standard-Skalarprodukt auf $\mathbb{R}^n$ ist Skalarprodukt im Sinne von 8.2
+
+          \item V n-dim. $\mathbb{R}$-Vektorraum.
+
+          $v_1, ..., v_n$ Basis von V.
+
+          $v = \sum_{i=1}^n a_iv_i$, w = $\sum_{i=1}^n b_iv_i$
+
+          Def. $(v|w) = \sum_{i=1}^n a_i \cdot b_i$ ist Skalarprodukt.
+
+          Das Standard-Skalarprodukt auf $\mathbb{R}^n$ entsteht auf diese Weise, wenn man für $v_1, ..., v_n$ die kan. Basis nimmt.
+
+          \item V $\mathbb{R}$-Vektorraum.
+
+          $C[a,b]$ der stetigen Funktionen auf $[a,b]$ (mit Werten in $\mathbb{R}$).
+
+          \par \medskip
+
+          $f,g \in V$
+
+          Def. $(f|g) := \int_{a}^b f(g) \cdot g(x) \ dx \in \mathbb{R}$
+
+          Skalarprodukt.
+        \end{enumerate}
+
+        \section{Satz (Cauchy-Schwarz'sche Ungleichung)}
+
+        V Euklidischer Vektorraum. Dann:
+
+        \begin{center}
+          $(v|w)^2 \le (v|v) \cdot (w|w)$ für alle $v,w \in V$
+        \end{center}
+
+        Gleichheit gilt genau dann, wenn $v$ und $w$ linear abhängig sind.
+
+        \subsection{Beweis}
+
+        Ist $w = \sigma$, so auf beiden Seiten 0 (und $v, w = \sigma$ sind lin. abhängig).
+
+        \par \medskip
+
+        Sei $w \neq \sigma$.
+
+        Setze $a := \frac{(v|w)}{\underbrace{(w|w)}_{> 0}} \in \mathbb{R}$
+
+        Bilde:
+
+        \begin{align*}
+          0 \le (v-a \cdot w | v - a \cdot w) & = (v-a \cdot w | v) - a \cdot (v- a \cdot w) |w) \\
+                                              & = (v|v) - a \cdot (w|v) - a(v|w) + a^2 \cdot (w|w)  \\
+                                              & = (v|v) - 2 \cdot \frac{(v|w)^2}{(w|w)} + \frac{(v|w)^2}{(w|w)} \\
+                                              & = (v|v) - \frac{(v|w)^2}{(w|w)}
+        \end{align*}
+        
+        Daraus folgt:
+
+        \begin{align*}
+          \frac{(v|w)^2}{(w|w)} \le (v|v) \\
+          (v|w)^2 \le (v|v) \cdot (w|w)
+        \end{align*}
+
+        Gleichheit $\Leftrightarrow$ $(v-a \cdot w) | v - a \cdot w) = 0 \Leftrightarrow v = a \cdot w$
+
+        \section{Definition}
+
+        V Euklidischer Vektorraum.
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Für $v \in V$ ist $||v|| := + \underbrace{\sqrt{(v|v)}}_{\ge 0}$ \underline{(Euklidische) Norm} von $v.$ ('Länge' von v)
+
+          \item $v,w \in V$
+
+          $d(v,w) := ||v-w||$, \underline{(Euklidischer) Abstand} von $v$ und $w$.
+
+          (8.4 bedeutet dann: $|(v|w)| \le ||v|| \cdot ||w||$)
+        \end{enumerate}
+
+        \section{Beispiel}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Standard-Skalarprodukt auf $\mathbb{R}^n$:
+
+          \begin{align*}
+            v = \begin{pmatrix} x_1 \\ ... \\ x_n \end{pmatrix}, w = \begin{pmatrix}y_1 \\ ... \\ y_n \end{pmatrix} \\
+            ||v|| = + \sqrt{\sum_{i=1}^n x_i^2} \\
+            d(v,w) = + \sqrt{\sum_{i=1}^n (x_i - y_i)^2}
+          \end{align*}
+
+          \item $V = C[a,b], a,b \in \mathbb{R}, a < b$
+
+          $(f|g) = \int_a^b f(x) \cdot g(x) \ dx$
+
+          $||f|| = \sqrt{\int_a^b f^2(x) \ dx}$
+        \end{enumerate}
+
+        \section{Satz (Eigenschaften der Norm)}
+
+        V Euklidischer VR, Norm $||.||$. Dann:
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $||v|| \ge 0$, $||v|| = 0 \Leftrightarrow v = \sigma$ (Definiertheit)
+
+          \item $||a \cdot v|| = |a| \cdot ||v||$ (absolute Homogenität)
+
+          \item $||v + w|| \le ||v|| + ||w||$ (Dreiecksungleichung)
+
+          \item $||v+w||^2 = ||v||^2 + ||w||^2 + 2 (v|w)$
+
+          \item $||v+w||^2 + ||v-w||^2 = 2 (||v||^2 + ||w||^2)$ (Parallelogrammgleichung)
+        \end{enumerate}
+
+        \subsection{Beweis}
+
+        (a) - (b) $\checkmark$
+
+        \par \medskip
+
+        (c)-(d):
+
+        \begin{align*}
+        ||v+w||^2 &= (v+w|v+w) = (v|v) + (w|w) + 2(v|w) \text{ (also (d))} \\
+                  & \le (v|v) + (w|w) + 2 \cdot \sqrt{(v|v) \cdot (w|w)} = (\sqrt{(v|v)} + \sqrt{(w|w)})^2 = (||v|| + ||w||)^2 \rightarrow (c)
+        \end{align*}
+
+        $\checkmark$
+
+        (e) folgt aus (d)
+
+        \section{Bemerkung}
+
+        Jede Abb. $\mathbb{R}$-VR in $\mathbb{R}$
+
+        \begin{center}
+          $||.|| : \begin{cases} V \rightarrow \mathbb{R}, \text{ die (a)-(c) erfüllt} \\ v \mapsto ||v|| \end{cases}$
+        \end{center}
+
+        heißt \underline{Norm} auf V. 
+
+        \par \medskip
+
+        Es gibt Normen, die nicht von Skalarprodukt herkommen, zb. in $\mathbb{R}^n$:
+
+        \begin{center}
+          $||\begin{pmatrix}x_1 \\ ... \\ x_n \end{pmatrix} ||_{max} := max \{|x_i| : i=1,...,n \}$
+        \end{center}
+
+        \section{Definition}
+
+        V Euklidischer VR.
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $v, w \in V$, $v \neq \sigma, w \neq \sigma$
+
+          Nach 8.4 gilt:
+
+          \begin{equation}
+           -1 \le \frac{|(v|w)|}{||v|| \cdot ||w||} \le 1
+          \end{equation}
+
+          Dann ex. genau ein $\varphi \in [0, \pi]$ mit:
+
+          \begin{equation}
+            \frac{(v|w)}{||v|| \cdot ||w||} = cos(\varphi)
+          \end{equation}
+
+          Das heißt:
+
+          \begin{equation} 
+            (v|w) = ||v|| \cdot ||w|| \cdot cos(\varphi)
+          \end{equation}
+
+          $\varphi$ heißt Winkel zwischen v,w. ($v \neq \sigma, w \neq \sigma$)
+
+          (kein orientierter Winkel, kleinerer der beiden möglich)
+
+          \item v,w heißen \underline{orthogonal} (senkrecht), falls $(v|w) = 0$.
+
+          Falls $v \neq \sigma$ und $w \neq \sigma$, so  heißt das: 
+
+          \begin{equation}
+            cos(\varphi) = 0 \Leftrightarrow \varphi = \frac{\pi}{2}
+          \end{equation}
+
+          ($\sigma$ ist orthogonal zu allen Vektoren)
+
+          \item $M \subseteq V$
+
+          $M^{\perp} := \{w \in V : (v|w) = 0$ für alle $v \in M \}$
+
+          \underline{Orthogonalraum} zu M. Unterraum von V (selbst wenn M kein Unterraum ist)
+
+          \par \medskip
+
+          $\{e_1, e_2\}^{\perp} = \left \langle e_3 \right \rangle$
+
+          $\{\sigma \}^{\perp} = V$
+
+          $V^{\perp} = \{\sigma\}$
+
+          ($v \in V^{\perp} \Rightarrow (v|v) = 0 \Rightarrow v = \sigma$)
+        \end{enumerate}
+
+        \section{Bemerkung}
+
+        Sind $v,w$ orthogonal, so ist 
+
+        \begin{equation}
+          ||v + w||^2 = ||v||^2 + ||w||^2
+        \end{equation}
+
+        (8.7.d) 
+
+        \section{Beispiel}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $\mathbb{R}^n$, Standard-Skalarprodukt.
+
+          $(e_i | e_j) = 0$ für $i \neq j$
+
+          $||e_i|| = 1$
+
+          \item $\mathbb{R}^3$, Standard-Skalarprodukt.
+
+          $v = \begin{pmatrix}-1 \\ 2 \\ 3 \end{pmatrix}, w = \begin{pmatrix}2 \\ 2 \\ 4 \end{pmatrix}$
+
+          \par \medskip
+
+          $||v|| = \sqrt{6}, \ ||w|| = \sqrt{24}$
+
+          Für den Winkel folgt:
+
+          \[ cos(\varphi) = \frac{(v|w)}{||v|| \cdot ||w||} = \frac{6}{\sqrt{6} \cdot \sqrt{24}} = \frac{1}{2} \Rightarrow \varphi = \frac{\pi}{3} \]
+
+          \item $\mathbb{R}^2$, Standard-Skalarprod.
+
+          $v = \begin{pmatrix}x_1 \\ x_2 \end{pmatrix} \neq \sigma$
+
+          $\{v\}^{\perp} = \left \langle \begin{pmatrix}x_2 \\ x_1 \end{pmatrix} \right \rangle$
+        \end{enumerate} 
+
+        \section{Definition}
+
+        V Euklidischer VR. $M \subseteq V$.
+
+        \begin{enumerate}[label=(\alph*)]
+          \item M heißt \underline{Orthonormalsystem}, falls \[ ||v|| = 1 \] für alle $v \in M$ und \[ (v|w) = 0 \] für alle $v,w \in M, v \neq w$
+
+          \item Ist V endl. dim., so heißt M \underline{Orthonomalbasis} (ONB) von V, falls M Orthonomalsystem und Basis von V.
+        \end{enumerate}
+
+        Beachte: $v \neq \sigma$ \[ v' = \frac{1}{||v||}  v \in V \]
+
+        Damit ergibt sich:
+
+        \[ ||v‘|| = || \frac{1}{||v||} \cdot ||v|| = \frac{1}{||v||} \cdot ||v|| = 1 \]
+
+        \underline{Normierung}
+
+        \section{Bemerkung}
+
+        Ist $(v_1, ..., v_n)$ ONB, $v \in V, v = \sum_{i=1}^n c_iv_i, c_i \in \mathbb{R}$
+
+        \begin{align*}
+          (v|v) & = (\sum_{i=1}^n c_ic_j | \sum_{j=1}^n c_jv_j) \\
+                & = \sum_{i,j=1}^n c_ic_j \cdot (v_i|v_j)  \\
+                & = \sum_{i=1}^n c_i^2 \cdot (v_i|v_i) \\
+                & = \sum_{i=1}^n c_i^2 \\
+          ||v|| & = \sqrt{\sum_{i=1}^n c_i^2}
+        \end{align*}
+
+        \section{Satz}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Ein Orthonormalsystem ist linear unabhängig.
+
+          \item Ist M = $\{v_1, ..., v_n \}$ ein Orthonormalsystem, $v \in V$, so ist:
+
+          \[ v - \sum_{i=1}^n (v|v_i) \cdot v_i \in M^{\perp} \]
+        \end{enumerate}
+
+        \subsection{Beweis}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Sei $\{v_1, ..., v_m\}$ endliche Teilmenge von M.
+
+          Zu zeigen: $\{v_1, ..., v_m \}$ linear unabhängig. 
+
+          Ist $\sum_{i=1}^m c_i v_i = \sigma$, so:
+
+          \[ 0 = (\sum_{i=1}^m c_i v_i | v_j) = \sum_{i=1}^m c_i (v_i | v_j) = c_j (v_j | v_j) = c_j \]
+
+          $c_j = 0$ für j = 1, ..., m 
+
+
+          \item $(v_j | v - \sum_{i=1}^n (v | v_i) \cdot v_i) = (v | v_j) - \sum_{i=1}^m (v | v_i) \cdot \underbrace{(v_j | v_i)}_{= 0 \text{ für i $\neq j$}}$
+
+          $ = (v | v_j) - (v | v_j) \cdot \underbrace{(v_j | v_j)}_{\le 1} = 0$
+        \end{enumerate}
+
+        \section{Satz (Gram-Schmidt'sches Orthonormalisierungsverfahren)}
+
+        Sei $M = \{w_1, ..., w_n \}$ lin. unabhängige Menge im Eukl. VR V. Dann gibt es Orthonormalsystem $\{v_1, ..., v_m \}$ mit $\left \langle w_1, ..., w_i \right \rangle = \left \langle v_1, ..., v_i \right \rangle$ für alle $i=1,...,m$.
+
+        Insbesonderes enthält V eine ONB.
+
+        \subsection{Beweis}
+
+        $w_1 \neq \sigma$. Setze \[v_1 = \frac{1}{||w_1||} \cdot w_1\].
+
+        $||v_1|| = 1, \left \langle w_1 \right \rangle = \left \langle v_1 \right \rangle$
+
+        \par \medskip
+
+        Sei schon Orthonormalsystem $\{v_1, ..., v_i \}$ konstruiert mit $\left \langle w_1, ..., w_j \right \rangle = \left \langle v_1, ..., v_j \right \rangle$ für alle $j = 1, ..., i$ (i $<$ m)
+
+        \par \medskip
+
+        Setze $v_{i+1}' = w_{i+1} - \sum_{j=1}^i (v_j | w_{i+1}) \cdot v_j$ $\rightarrow$ 8.14.b): $(v_{i+1}' | v_j) = 0$ für $j = 1, ..., i$.
+
+        \par \medskip
+
+        Da $w_{i+1} \neq \left \langle w_1, ..., w_i \right \rangle$ = $\left \langle v_1, ..., v_i \right \rangle$, ist $v_{i+1}' \neq \sigma$.
+
+
+        \par \medskip
+
+        Setze $v_{i+1} = \frac{1}{||v_{i+1}'||} \cdot v_{i+1}'$, $||v_{i+1}|| = 1, (v_j | v_{i+1}) = 0, \ j=1,...i$
+
+        \par \medskip
+
+        Es gilt:
+
+        \[ \left \langle v_1, ..., v_i, v_{i+1} \right \rangle = \left \langle v_1, ..., v_i, v_{i+1} \right \rangle = \left \langle v_1, ..., v_i, w_{i+1} \right \rangle = \left \langle w_1, ..., w_i, w_{i+1} \right \rangle \]
+
+        \section{Beispiel}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $e_1, ..., e_n$ ist ONB des $\mathbb{R}^n$ bezgl. Standard-Skalarprodukt.
+
+          \item V = $\mathbb{R}^3$ mit Standard-Skalarprodukt.
+
+          \[ w_1 = \begin{pmatrix}1 \\ 1 \\ 1 \end{pmatrix}, w_2 = \begin{pmatrix}1 \\ 1 \\ 2 \end{pmatrix}, w_3 = \begin{pmatrix}1 \\ 0 \\ 0 \end{pmatrix} \]
+
+          linear unabhängig.
+
+          Gram-Schmidt: ONB $\{v_1, v_2, v_3 \}$
+
+          $\left \langle v_1 \right \rangle = \left \langle w_1 \right \rangle, \left \langle v_1, v_2 \right \rangle = \left \langle w_1, w_2 \right \rangle, \left \langle v_1, v_2, v_3 \right \rangle = \mathbb{R}^3$
+
+          \par \medskip
+
+          $v_1 = \frac{1}{\sqrt{3}} \cdot w_1 = \frac{1}{\sqrt{3}} \cdot \begin{pmatrix}1 \\ 1 \\ 1 \end{pmatrix}$
+
+          \par \medskip
+
+          $v'_2 = w_2 - (v_1 | w_2) \cdot v_1 = \begin{pmatrix}1 \\ 1 \\ 2 \end{pmatrix} - \frac{1}{3} \cdot (\begin{pmatrix}1 \\ 1 \\ 1 \end{pmatrix} | \begin{pmatrix}1 \\ 1 \\ 2 \end{pmatrix}) \cdot \begin{pmatrix}1 \\ 1 \\ 1 \end{pmatrix} = \begin{pmatrix}- \frac{1}{3} \\ - \frac{1}{3} \\ \frac{2}{3}\end{pmatrix}$
+
+          \par \medskip
+
+          $||v'_2|| = \frac{\sqrt{6}}{3}, \ v_2 = \frac{1}{\sqrt{6}} \cdot \begin{pmatrix}-1 \\ -1 \\ 2 \end{pmatrix}$
+
+          \par \medskip
+
+          $v'_3 = w_3 - (v_1|w_3) \cdot v_1 - (v_2 | w_3) \cdot v_2 = ... = \begin{pmatrix}\frac{1}{2} \\ - \frac{1}{2} \\ 0 \end{pmatrix}$, $||v'_3 = \frac{\sqrt{2}}{2}$, $v_3 = \frac{1}{\sqrt{2}} \cdot \begin{pmatrix}1 \\ -1 \\ 0 \end{pmatrix}$
+        \end{enumerate}
+
+        \end{document} 
+
+
+

@@ -4504,6 +4504,254 @@ $a^n$ = a $\ast$ ... $\ast$ a  ``Potenzen'' eindeutig definiert. ($n \in \mathbb
           $v'_3 = w_3 - (v_1|w_3) \cdot v_1 - (v_2 | w_3) \cdot v_2 = ... = \begin{pmatrix}\frac{1}{2} \\ - \frac{1}{2} \\ 0 \end{pmatrix}$, $||v'_3 = \frac{\sqrt{2}}{2}$, $v_3 = \frac{1}{\sqrt{2}} \cdot \begin{pmatrix}1 \\ -1 \\ 0 \end{pmatrix}$
         \end{enumerate}
 
+        \section{Satz}
+
+        V endl. dim. Eukld. VR, U unterraum von V.
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $V = U \oplus U^{\perp}$ (d.h. $U \cap U^{\perp} = \{\emptyset\}$, $U + U^{\perp} = V$)
+
+          Insb: $dim(U) + dim(U^{\perp}) = dim(V)$
+
+          \item $(U^{\perp})^{\perp} = U$
+        \end{enumerate}
+
+        \subsection{Beweis}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Basis Ergänzung + Gram-Schmidt
+
+          \item folgta us a)
+        \end{enumerate}
+
+        \section{Definition}
+
+        $V = \begin{pmatrix}x_1 \\ x_2 \\ x_3 \end{pmatrix}, W = \begin{pmatrix}y_1 \\ y_2 \\ y_3 \end{pmatrix} \in \mathbb{R}^3$
+
+        \par \medskip
+
+        \underline{Vektorprodukt} (Kreuzprodukt) von v und w:
+
+        \[ V \times W := \begin{pmatrix}x_2y_3 - x_3y_2 \\ x_3y_1 - x_1 y_3 \\ x_1y_2 - x_2y_1 \end{pmatrix} \]
+
+        \section{Satz}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $(v \times w | v) = (v \times w | w) = 0$, d.h. $v \times w$ ist orthogonal zu $v$ und $w$.
+
+          \item $v \times w = -w \times v$
+
+          \item $u \times (v+w) = (u \times v) + (u \times w)$
+
+          $u \times (a \cdot v) = a \cdot (u \times v)$, $u,v,w \in \mathbb{R}^3, a \in \mathbb{R}$
+
+          \par \medskip
+
+          Ebenso in der ersten Komponente.
+
+          \item $v,w$ linear unabhängig $\Leftrightarrow$ $v \times w = \sigma$.
+
+          \item $v,w \neq \sigma$. $\varphi \in [0, \pi]$ Winkel zwischen $v$ und $w$.
+
+          \par \medskip
+
+          \begin{align*}
+            ||v \times w|| & = ||v|| \cdot ||w|| \cdot sin(\varphi) \\
+                           & = \text{ Flächeninhalt des von v und w aufgespannten Parallelogramms}
+          \end{align*}
+        \end{enumerate}
+
+        \subsection{Beweis}
+
+        Nachrechnen. 
+
+        \section{Bemerkung}
+
+        $v, w, v \times w$ bilden sogenanntes \underline{Rechtssystem}.
+
+        Faust der rechten Hand. Fingerspitzen von v nach w (kleinerer Winkel).
+
+        Daumen zeigt in Richtung $v \times w$.
+
+        \section{Beispiel}
+
+        $v = \begin{pmatrix}1 \\ 2 \\ 0 \end{pmatrix}, w = \begin{pmatrix}1 \\ 1 \\ 1 \end{pmatrix} \in \mathbb{R}^3$.
+
+        \par \medskip
+
+        Best. $\left \langle v, w \right \rangle^{\perp}$.
+
+        $v, w$ lin. unabhängig, d.h. $\left \langle v,w \right \rangle = 2$
+
+        $\Rightarrow dim \left \langle v,w \right \rangle^{\perp} = 3-2 = 1$.
+
+        \par \medskip
+
+        $\left \langle v \times w \right \rangle = \left \langle v,w \right \rangle^{\perp}$
+
+        Damit folgt:
+
+        \[ v \times w = \begin{pmatrix}2 \\ -1 \\ -1 \end{pmatrix} \]
+
+        \[ || v \times w || = \sqrt{4 + 1+1} = \sqrt{6} \]
+
+        \chapter{Orthogonale Abb., symmetrische Abb., Kongruenzabbildungen}
+
+        \section{Definition Orthogonale Abbildungen}
+
+        V Eukl. VR mit Skalarprodukt $(.|.)$.
+
+        $\alpha: V \rightarrow V$ lineare Abb.
+
+        \par \medskip
+
+        $\alpha$ heißt \underline{orthogonale Abbildung} $\Leftrightarrow (\alpha(v) | \alpha(w)) = (v | w)$ für alle $v,w \in V$
+
+        \section{Folgerungen}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Orthogonale Abb. sind \underline{längentreu}, d.h. \[ ||\alpha(v)|| = ||v|| \] für alle $v \in V$.
+
+          (da $||v|| = \sqrt{(v|v)}$ )
+
+          \item Ort. Abb. sind winkeltreu, da \[ cos(\varphi) = \frac{(v|w)}{||v|| \cdot ||w||}, v,w \neq \sigma \]
+
+          \item Orth. Abb. auf endlich dim. Eukl. Räumen sind bijektiv, da nach a) $ker(\alpha) = \{\sigma\}$, also $\alpha$ injektiv, also bijektiv, da $dim(V) < \infty$.
+
+          \item V endl. dim
+
+          $\alpha$ orth. $\Rightarrow \alpha^{-1}$ orthogonal.
+
+          ($u,v \in V$. Es ex. $x,y \in V$ mit $\alpha(x) = u$, $\alpha(y)$ = w, d.h. $\alpha^{-1}(u) = x, \alpha^{-1}(v) = y$.
+
+          $(u|v) = (\alpha(x) | \alpha(y)) = (x|y) = (\alpha^{-1}(u)|\alpha^{-1}(w)$)
+
+          \item $\alpha, \beta$ orthogonal, so auch $\alpha \circ \beta$.
+
+          \item (d) + (e) besagen, dass die Menge der orth. Abb. auf V bzgl. $\circ$ eine Gruppe ist. (V endl. dim.)
+        \end{enumerate}
+
+        \section{Beispiel}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Drehungen um $\sigma$ im $\mathbb{R}^2$ sind orth. Abb. (bzgl. des Standard-Skalarprodukts)
+
+          \item Spiegelungen $\varrho$ in $\mathbb{R}^2$ an Achse durch $\sigma$ sind orth.
+
+          $v_1$ Richtungsvektor der Achse, $||v_1|| = 1$, $\mathcal{B} = (v_1, v_2)$ ONB (Gram-Schmidt)
+
+          \[ A_{\varrho}^{\mathcal{B}} = \begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix} \]
+        \end{enumerate}
+
+        \section{Satz (Charakterisierung orth. Abb.)}
+
+        V endl. dim. Eukl. VR., $\mathcal{B} = (v_1, ..., v_n)$ ONB, $\alpha: V \rightarrow V$ linear, $A = A_{\alpha}^{\mathcal{B}}$. 
+
+        Dann sind äquivalent:
+
+        \begin{enumerate} 
+          \item $\alpha$ ist orthogonale Abb.
+
+          \item $A \cdot A^t = A^t \cdot A = E_n$
+
+          (d.h. $A^t = A^{-1}$)
+
+          \item $(\alpha(v_1), ..., \alpha(v_n))$ ist ONB
+
+          \item $||\alpha(v)|| = ||v||$ für alle $v \in V$.
+
+        \end{enumerate}
+
+        \subsection{Beweis}
+
+        \subsubsection*{1. $\Rightarrow$ 2.}
+
+        $A = (a_{ij})_{i,j =1,...,n}$
+
+        Es gilt:
+
+        \begin{align*}
+          \delta_{ij} & =  (v_i|v_j)  \\ & = (\alpha(v_i)|\alpha(v_j)) \\
+                                  & = (\sum_{k=1}^n a_{ki} \cdot v_k | \sum_{l=1}^n a_{lj} \cdot v_l) \\
+                                  & = \sum_{k,l=1}^n a_{ki} \cdot a_{lj} \cdot (v_k | v_l) \\
+                                  & = \sum_{k=1}^n a_{ki} \cdot a_{kj} \leftarrow \text{ Eintrag $(i,j)$ von $A \cdot A^t$}
+        \end{align*}
+
+        $\Rightarrow A \cdot A^t = E_n$. (*)
+
+        $\alpha$ orth. $\Rightarrow \alpha$ bijektiv $\rightarrow A$ invetierbar, d.h. $A^{-1}$ ex.
+
+        \par \medskip
+
+        Multipliziere (*) von links mit $A^{-1}$ von rechts mit A:
+
+        \[ A^{-1} \cdot A \cdot A^t \cdot A = A^{-1} \cdot A = E_n \]
+
+        \subsection*{2. $\Rightarrow$ 3.}
+
+        $A \cdot A^t = E_n$.
+
+        Dann wie in 1. $\Rightarrow$ 2.:
+
+        \[ (\alpha(v_i) | \alpha(v_j)) = \delta{ij} \]
+
+        $(\alpha(v_1), ..., \alpha(v_n))$ ONB.
+
+        \subsection*{3. $\Rightarrow$ 4.}
+
+        \[ v = \sum_{i=1}^n c_i v_i \]
+
+        \[ \alpha(v) = \sum_{i=1}^n c_i \cdot \alpha(v_i) \]
+
+        \[ ||v||^2 = (v|v) = \sum_{i=1}^n c_i^2 = || \alpha(v) ||^2\]
+
+        \subsection*{4. $\Rightarrow$ 1.}
+
+        8.7.d) $(v|w) = \frac{1}{2} (||v + w||^2 - ||v||^2 - ||w||^2)$
+
+        \par \medskip
+
+        Behauptung folgt. 
+
+        \section{Definition}
+
+        Eine $n \times n$ - Matrix A über $\mathbb{R}$ heißt \underline{orthogonal}, falls $A \cdot A^t = A^t \cdot A = E_n$.
+
+        \par \medskip
+
+        D.h. $z_1, ..., z_n$ von A:
+
+        \begin{align*} 
+            (z_i^t | z_j^t) & = z_i \cdot z_j^t \\
+                            & = z_i \cdot \underbrace{s_j}_{\text{j-te Spalte von $A^t$}} \\
+                            & = \delta_{ij}
+        \end{align*}
+
+        Die Spalten von A bilden Orthonormalbasis von $\mathbb{R}^n$.
+
+        Analog für die Zeilen.
+
+        \section{Korollar}
+
+        $\alpha$ orth. Abb. auf endl. dim.  Eukld. VR. V, $\mathcal{B}$ ONB von V, $A = A_{\alpha}^{\mathcal{B}}$
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $det(\alpha) = det(A) = \pm 1$
+
+          \item $\alpha$ hat höchstens die Eigenwerte 1 oder -1 (in $\mathbb{R}$)
+
+        \end{enumerate}
+
+        \subsection{Beweis}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item 1 = $det(E_n) = det(A \cdot A^t) = det(A) \cdot det(A^t) = detA)^2$
+
+          \item $c$ Eigenwert von $\alpha, v$ zugehöriger Eigenvektor. $||v|| = ||\alpha(v) = || c \cdot v|| = |c| \cdot ||v|| \Rightarrow |c| = 1$
+
+        \end{enumerate}
+
+
         \end{document} 
 
 

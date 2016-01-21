@@ -4751,6 +4751,163 @@ $a^n$ = a $\ast$ ... $\ast$ a  ``Potenzen'' eindeutig definiert. ($n \in \mathbb
 
         \end{enumerate}
 
+        \section{Satz}
+
+        Sei $\alpha$ orthogonale Abb. auf $\mathbb{R}^n$, $n \le 3$.
+
+        \begin{enumerate}[label=(\alph*)] 
+          \item $n = 1: \alpha = id$ oder $\alpha = - id$
+
+          \item $n = 2$: Sei $\mathcal{B}$ ONB von $\mathbb{R}^2$.
+
+          \begin{enumerate}[label=(\roman*)]
+            \item Ist $det(\alpha) = 1$, so ist \[ A_{\alpha}^{\mathcal{B}} = \begin{pmatrix}cos(\varphi) & - sin(\varphi) \\ sin(\varphi) & cos(\varphi) \end{pmatrix}\] für ein $\varphi \in [0, 2 \pi]$.
+
+            $\alpha$ ist Drehung um Winkel $\varphi$.
+
+            \item Ist $det(\alpha) = -1$, so ist \[ A_{\alpha}^{\mathcal{B}} = \begin{pmatrix}cos(\varphi) & sin(\varphi) \\ sin(\varphi) & - cos(\varphi) \end{pmatrix} \]
+
+            für ein $\varphi \in [0, 2 \pi]$.
+
+            Es gibt ONB $\mathcal{C} = (w_1, w_2)$ von V mit $A_{\alpha}^{\mathcal{C}} = \begin{pmatrix}1 & 0 \\ 0 & -1 \end{pmatrix}$
+
+            \par \medskip
+
+            Spiegelung an der Achse $\left \langle w_1 \right \rangle$.
+
+            ($\mathcal{B} = (v_1, v_2)$, so ist der Winkel zwischen $v_1$ und $w_1$ $\frac{\varphi}{2}$)
+
+          \end{enumerate}
+
+          \item $n = 3$: 
+
+          \begin{enumerate}[label=(\roman*)]
+            \item Ist $det(\alpha) = 1$, so existiert ONB $\mathcal{C} = (v_1, v_2, v_3)$ mit \[ A_{\alpha}^{\mathcal{C}} = \begin{pmatrix}cos(\varphi) & - sin(\varphi) & 0 \\ sin(\varphi) & cos(\varphi) & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+
+            $\alpha$ ist Drehung um $\varphi \in [0,2 \pi[$ parallel zur $\left \langle v_1, v_2 \right \rangle$-Ebene mit Drehachse $\left \langle v_3 \right \rangle$
+
+            \item Ist $det(\alpha) = -1$, so existiert ONB $\mathcal{C} = (v_1, v_2,v_3)$ mit \[ A_{\alpha}^{\mathcal{C}} = \begin{pmatrix}cos(\varphi) & - sin(\varphi) & 0 \\ sin(\varphi) & cos(\varphi) & 0 \\ 0 & 0 & -1 \end{pmatrix} \]
+
+            $\alpha$ ist Drehspiegelung.
+
+            Drehung um Achse $\left \langle v_3 \right \rangle$, dann Spiegelung an Ebene $\left \langle v_1, v_2 \right \rangle$.
+          \end{enumerate}
+
+        \end{enumerate}
+
+        \textbf{Bemerkung:} n = 2:
+
+        Ist $\mathcal{B} = (v_1, v_2)$ positiv orientiert (d.h. bewegt man sich von $v_1$ nach $v_2$ entgegen Uhrzeigersinn, so ist Winkel $\frac{\pi}{2}$), so ist $\alpha$ Drehung gegen Uhrzeigersinn um $\varphi$. 
+
+        \par \medskip
+
+        Ist $\mathcal{B}$ negativ orientiert, so ist $\alpha$ Drehung im Uhrzeigersinn.
+
+        \par \medskip
+
+        (Spezialfälle in (c):
+
+        (i) $\varphi = \pi$: $A_{\alpha}^\mathcal{C} = \begin{pmatrix}-1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$ Achsenspiegelung an $\left \langle v_3 \right \rangle$
+
+        \par \medskip
+
+        (ii) $\varphi = 0 : A_{\alpha}^{\mathcal{C}} = \begin{pmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & -1 \end{pmatrix}$ (Ebenen-)Spiegelung an $\left \langle v_1, v_2 \right \rangle$
+
+        $\varphi = \pi: A_{\alpha}^{\mathcal{C}} = \begin{pmatrix}-1 & 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & -1 \end{pmatrix}$ Punktspiegelung in 0.)
+
+
+        \subsection{Beweis}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item trivial $\checkmark$
+
+          \item Untersuchen der $2 \times 2$ - Mattrizen A. $A \cdot A^t = A^t \cdot A = E_2$ (WHK 10.67)
+
+          \item Für bel. n: Fischer, Lineare Algebra
+
+        \end{enumerate}
+
+
+        \section{Definition}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item V K-VR, $b \in V$.
+
+          Die Abb. $t_b \begin{cases}V \rightarrow V \\ v \mapsto v+b \end{cases}$ heißt \underline{Translation} um Vektor b
+
+          (Nicht linear, falls $b \neq 0$)
+
+          \item Komposition von lin. Abb. mit Translationen heißen \underline{affine Abbildungen}
+
+          \par \medskip
+
+          $\beta(v) = \alpha(v) + b,  \alpha$ lin. Abb. $V \rightarrow V, b \in V$ = ($t_b \circ \alpha) (v)$
+
+          \item Ist V Eukl. VR, so ist \underline{Kongruenzabbildung} auf V eine affine Abb. der Form $t_b \circ \alpha$, wobei $\alpha$ orthogonale Abb. ist. (lassen den Abstand zwischen Vektoren (und Winkel) fest).
+
+        \end{enumerate}
+
+        \section{Bemerkung}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Affine Abb. bilden affine Unterräume wieder auf affine Unterräume ab:
+
+          \[ \beta = t_b \circ \alpha, \ u+ \underset{\text{Unterraum von V}}{W} \]
+
+          \begin{align*}
+            \beta(u+W) & = t_b (\alpha(u+W)) \\
+                       & = t_b (\alpha(u) + \alpha(W)) \\
+                       & = b + \alpha(u) + \alpha(W) 
+          \end{align*}
+
+          \item Hinterinanderausführung von affinen (Kongruenz-)Abb. ist wieder affine  (Kongruenz-) Abb.:
+
+          \begin{align*}
+            ((t_b' \circ \alpha') \circ (t_b \circ \alpha))(v) & = (t_b' \circ \alpha') (\alpha(v) + b) \\
+                                                               & = \underbrace{(\alpha' \circ \alpha)}_{\text{lin. Abb.}}(v) + \underbrace{\alpha'(b) +b'}_{\text{Translationsvektor}}
+          \end{align*}
+
+          \textbf{Beispiel:} $\beta$ Drehung um $c \in \mathbb{R}^2$ mit Winkel $\varphi$ (in $\mathbb{R}^2$)
+
+        \begin{align*}
+          \beta(v) & = t_c \circ \underset{\text{Dehung um 0 mit $\varphi$}}{\alpha} \circ t_{-c} \\
+                   & = \alpha(v) + \alpha(-c) + c \\
+                   & = \underset{lin.}{\alpha}(v) \underbrace{- \alpha(c) + c}_{\text{Translationsv.}} \\
+                   & = (t_{-\alpha(c) +c} \circ \alpha)(v) \\
+                   & = \alpha(v-c) + c
+        \end{align*}
+
+        \item Affine Abb. auf $n-dim$. Räumen lassen sich nicht durch $n \times n$- Matrizen beschreiben.
+
+        Es gibt Beschreibung mit $(n+1) \times (n+1)$ - Matrizen:
+
+        \par \medskip
+
+        $\mathcal{B}$ Basis von V. $\mathcal{B} = (v_1, ..., v_n)$
+
+        $\beta = t_b \circ \alpha$.
+
+        \par \medskip
+
+        $b = b_!v_1 + ... + b_nv_n$, $A = A_{\alpha}^{\mathcal{B}}$
+
+        \[ \beta \rightarrow \begin{pmatrix}A & b_1 \\ ... & ... \\ ... & b_n \\ 0 & 1 \end{pmatrix} \]
+
+        $v \in V, v = x_1v_1 + .... + x_n v_n$
+
+        \[ v \rightarrow \begin{pmatrix}x_1 \\ ... \\ x_n \\ 1 \end{pmatrix} \]
+
+        [BILDER VON JOHANNES.]
+
+        \par \medskip
+
+
+        Nachrechnen: Hintereinandersauführung von aff. Abb. entspricht Multiplikation der entsprechenden $(n+1) \times (n+1)$- Matrizen.
+
+        \end{enumerate}
+
+
+        
 
         \end{document} 
 

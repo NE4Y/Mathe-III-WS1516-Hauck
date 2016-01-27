@@ -6,6 +6,7 @@
 \usepackage{polynom}
 \usepackage{amsmath, amssymb, amstext, amsfonts, mathrsfs}
 \usepackage{wasysym}
+\usepackage{graphicx}
 \renewcommand{\chaptername}{}
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 \titleformat{\chapter}
@@ -4905,6 +4906,402 @@ $a^n$ = a $\ast$ ... $\ast$ a  ``Potenzen'' eindeutig definiert. ($n \in \mathbb
         Nachrechnen: Hintereinandersauführung von aff. Abb. entspricht Multiplikation der entsprechenden $(n+1) \times (n+1)$- Matrizen.
 
         \end{enumerate}
+
+        \section{Lemma}
+
+        $A \in \mathcal{M}_n(\mathbb{R}), x,y \in \mathbb{R}^n$ so gilt für das Standard-Skalarprodukt:
+
+        \[ (Ax|y) = (x|A^t y) \]
+
+        \subsection{Beweis}
+
+        \begin{align*}
+          (Ax |y )  & = (Ax)^t \cdot y \\
+                    & = (x^t \cdot A^t) \cdot y \\
+                    & = x^t \cdot (A^t \cdot y) \\
+                    & = (x|A^t y)
+        \end{align*}
+
+        \section{Definition}
+
+        V endl. dim. Eukl. VR. Lineare Abb. $\alpha : V \rightarrow V$ heißt \underline{symmetrisch} (selbstadjungiert), falls \[ (\alpha(v) | w) = (v | \alpha(w)) \] für alle $v,w \in V$.
+
+        (z.B. alle $\alpha \cdot id_v$ sind symm.)
+
+        \section{Bemerkung und Definition}
+
+        V endl. dim. Eukl. VR., $\mathcal{B}$ ONB von V. $\alpha: V \rightarrow V$ linear, $A = A_{\alpha}^{\mathcal{B}}$. Dann: \[ \alpha \text{ symmetrisch} \Leftrightarrow A = A^t \]
+
+        $n \times n$ - Matrizen A mit $A = A^t$ heißen \underline{symmetrisch}.
+
+        \par \medskip
+
+        Matrix ändert sich nicht bei Spiegelung (wenn sie symmetrisch ist) bei Spiegelung an Diagonalen.
+
+        \subsection{Beweis}
+
+        Folgt aus 9.10.
+
+        \section{Satz über die Hauptachsentransformation}
+
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Ist $\alpha: V \rightarrow V$ symm. Abb., so existiert \underline{ONB $\mathcal{B}$} von V aus Eigenvektoren zu $\alpha$, insbesondere ist $\alpha$ diagonalisierbar.
+
+          \item Ist $A$ $n \times n$ - Matrix, $A$ symmetrisch, so existiert orthogonale Matrix $B$ mit $B^{-1} A B = B^t A B$ Diagonalmatrix.
+        \end{enumerate}
+
+        \subsection{Beweis}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item WHK 10.75
+
+          \item $\alpha(x) = A \cdot x$
+
+          $A = A_{\alpha}^{\mathcal{C}}$ bzgl. kan. Basis $\mathcal{C}$. $\alpha$ symmetrisch nach 9.12.
+
+          (a): $\exists$ ONB $\mathcal{B}$ mit $A_{\alpha}^{\mathcal{B}}$ Diagonalmatrix. 
+
+          \par \medskip
+
+          Wähle B als Basiswechselmatrix: $B^{-1} A B$ Diagonalmatrix. $\mathcal{B}, \mathcal{C}$ ONB $\Rightarrow$ B orthogonale Matrix (9.4), d.h. $B^{-1} = B^t$.
+        \end{enumerate}
+
+        \section{Bemerkung}
+
+        Grund für die Bezeichnung von 9.13.
+
+        \begin{enumerate}[label=(\alph*)]
+          \item Eine \underline{Quadrik} im $\mathbb{R}^n$ besteht aus allen $\begin{pmatrix}x_1 \\ ... \\ x_n \end{pmatrix} \in \mathbb{R}^n$, die die Gleichung \[ \sum_{i,j=1; i \le j}^{n} b_{ij} x_i x_j + \sum_{i=1}^n b_i x_i + c = 0 (*)\]
+
+          (quadr. Gleichung mit n Variablen $x_1, ..., x_n$ mit Koeff. $b_{ij}, b_j, c \in \mathbb{R}$)
+
+          \par \medskip
+
+          Setze $a_{ij} = a_{ji} = \frac{b_{ij}}{2}$ für $i < j$.
+
+          Dann lässt sich (*) schreiben: \[ \sum_{i,j = 1}^n a_{ij} x_ix_j + \sum_{i=1}^n b_ix_i + c = 0(**)\]
+
+          $A = (a_{ij})$ ist symmetrisch.
+
+          \par \medskip
+
+          $\alpha(x) = A \cdot x $ symm. Abbildung ($A = A_{\alpha}^{\mathcal{C}}$ bzgl. kan. Basis)
+
+          \par \medskip
+
+          $(**)$ $\Leftrightarrow (\alpha(v) | v) + (b|v) + c = 0$, $b = (b_1, ..., b_n)^t, v = (x_1, ..., x_n)^t (***)$
+
+          \par \medskip
+
+          9.13. besagt: $\exists$ ONB $\mathcal{B} = (v_1, ..., v_n)$, so dass $A_{\alpha}^{\mathcal{B}}$ Diagonalmatrix.
+
+          \par \medskip
+
+          Sei $v = \sum_{i=1}^n x_i' v_i$, so liest sich $(***)$ \[ \sum_{i=1}^n c_i x_i'^2 + \sum_{i=1}^n b_ix_i' + c = 0 \]
+
+          $v_i$ sind die \underline{Hauptachsen} der Quadrik.
+
+          \item n = 2: Quadriken sind \underline{Kegelschnitte}.
+
+          $(****)$, Striche weglassen.
+
+          Fall: $b_1 = b_2 = 0, c \neq 0$.
+
+          O.B.d.A: \[ c_1x_1^2  + c_2x_2^2 = 1 \]
+
+          $c_1 > 0$.
+
+          \par \medskip
+
+          \begin{itemize}
+            \item $c_1, c_2 > 0$:  $c_1 = \frac{1}{a^2}$, $c_2 = \frac{1}{b^2}$ \[ \frac{x_1^2}{a^2} + \frac{x_2^2}{b^2} = 1, a,b > 0 \]
+
+           \underline{Ellipse}.
+
+           \item $c_1 > 0, c_2 < 0$
+
+           $c_1 = \frac{1}{a^2}, c_2 = - \frac{1}{b^2}, a,b > 0$ \[ \frac{x_1^2}{a^2} - \frac{x_2^2}{b^2} = 1 \]
+
+           \underline{Hyperbel}
+
+           \item Parablen Typ Gleichung $c_1x_2^2 - x_2 = 0$
+
+          \end{itemize}
+
+
+        \end{enumerate}
+
+        \chapter{Mehrdimensionale Analysis}
+
+        Funktionen \[f: D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}^m \] Vektoren im $\mathbb{R}^n$ sind \underline{Zeilenvektoren}. 
+
+        \par \medskip
+
+        \underline{Länge} von Vektoren: $x = (x_1, ..., x_n)$, $||x|| = + \sqrt{x_1^2 + ... + x_n^2}$
+
+        \par \medskip
+
+        \underline{Abstand} von $x$ und $y$: $||x-y|| = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}$
+
+        \section{Beispiele}
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $f : D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}$ \underline{skalare Funktionen}
+
+          Z.B: $f(x_1, x_2, x_3) = x_1^2 + x_2^2 + x_3^2$, $D = \mathbb{R}^3$
+
+          \par \medskip
+
+          $f(x_1, x_2) = \frac{2_x1x_2}{x_1^2 + x_2^2}$, $D = \mathbb{R}^2 \setminus \{(0,0)\}$
+
+          $x,y,z$ statt $x_1, x_2, x_3$.
+
+          \par \medskip
+
+          $n = 2$: $f: D \subseteq \mathbb{R}^2 \rightarrow \mathbb{R}$ lassen sich graphisch darstellen.
+
+          \par \medskip
+
+          Beispiel: 
+
+          \begin{itemize}
+            \item $f(x,y) = x+y$
+
+            \includegraphics[width=0.3\textwidth]{Bilder/10_1_1.png}
+            
+            \item $f(x,y) = x \cdot y$
+
+
+            \includegraphics[width=0.3\textwidth]{Bilder/10_1_2.png}
+             
+      
+            \item $f(x,y) = x^2-y^2$
+
+            \includegraphics[width=0.3\textwidth]{Bilder/10_1_3.png}
+
+            \item $f(x,y) = sin(x) \cdot sin(y)$
+
+              \includegraphics[width=0.5\textwidth]{Bilder/10_1_4.png}
+          \end{itemize}
+
+          \item $f: D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}^m$, $m>1$ Vektorwertige Funktion.
+
+          $x \in D : f(x) = (f_1(x), ..., f_m(x))$ \[ f_i : D \subseteq \mathbb{R}^n \rightarrow \mathbb{R} \] skalar
+
+          \par \medskip
+
+          Spezialfall in 10.1.b): $n = 1, m = 2/3$.
+        \end{enumerate}
+
+        \section{Beispiel (ebene Kurven / Raumkurven)}
+
+        z.B $f : \begin{cases} [0, 2 \pi ] \Rightarrow \mathbb{R}^2 \\ t \mapsto (cos(t), sin(t)) \end{cases}$
+
+        \par \medskip
+
+        $n = 2$: Ebene Kurve
+
+        $n = 3$:  Raumkurve
+
+        \subsection*{n = 2}
+
+        Physikalische Interpret.: 
+
+        t Zeit $f(t)$ Ort
+
+        \[ f'(t) = (f'_1(t), f_2'(t)) \]
+
+        Geschwindigkeitsvektor.
+
+        Betrag der Geschwindigkeit: \[ ||f'(t)|| = \sqrt{f_1'(t)^2 + f_2'(t)^2} \]
+
+        Lönge der Kurve zwischen $t = a, t = b$?
+
+        \par \medskip
+
+        Konst. Geschwindigkeit v : $L = v \cdot (b-a)$.
+
+        \par \medskip
+
+        Bei variabler Geschwindigkeit: \[ v(t) = || f'(t)|| \] Approx. \[ L \approx \sum_{i=0}^k v(t_i) (t_{i+1} - t_i) \]
+
+        Grenzwert: \[ L = \int_a^b ||f'(t)|| dt \]
+
+        \section{Satz}
+
+        Ist $f : D \subseteq \mathbb{R} \rightarrow \mathbb{R}^n$, $f(t) = (f_1(t), ..., f_n(t))$, $f_i$ stetig diffbar, $[a,b] \subseteq D$, so gilt für die \underline{Bogenlänge} L der Kurve zwischen $t = a$ und $t = b$: \[ L = \int_a^b ||f'(t)|| dt \]
+
+        (1-dim. Analysis)
+
+        \par \medskip
+
+        (Exakter Beweis: Forster, Analysis 2)
+
+        \section{Beispiel}
+
+        Abrollen eines Kreises auf der x-Achse. Bahn eines Punktes auf der Peripherie des Kreises.
+
+        \par \medskip
+
+        $f(t) = (t-sin(t), 1-cos(t))$
+
+        \par \medskip
+
+        \underline{Zykloide}
+
+        \par \medskip
+
+        \[ L = \int_0^{2 \pi} ||f'(t)|| dt \] (Übungsaufgabe)
+
+        \par \medskip
+
+        Grenzwertbegriff für Funkt. $D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}^m$
+
+        \section{Definition}
+
+        $f: D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}^m$, $a$ Adhärenzpunkte (d.h. es ex. $d_i \in D$ mit $||d_i-a|| \underset{i \rightarrow \infty}{\longrightarrow} 0$)
+
+        \begin{enumerate}[label=(\alph*)]
+          \item $\lim \limits_{x \rightarrow a} f(x) = c \in \mathbb{R}^m$ $\Leftrightarrow \forall \epsilon > 0 \ \exists \ \delta > 0 \ \forall \ x \in D: ||x-a|| < \delta \Rightarrow ||f(x)-c|| < \epsilon$
+
+          \item Ist $a \in D$, so heißt $f$ stetig in $a$, falls \[ \lim_{x \rightarrow a} f(x) = f(a) \]
+        \end{enumerate}
+
+
+         \section{Bemerkung}
+
+          $f: D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}^m$, $f(x) = (f_1(x), ..., f_m(x)), x \in D$.
+
+          Dann gilt:
+
+          \[ \lim_{x \rightarrow a} f(x) = (c_1, ..., c_n) \Leftrightarrow \lim_{x \rightarrow a} f_i(x) = c_i, i=1, ...,m \]
+
+          Insb. $f$ stetig in $a \Leftrightarrow$ alle $f_i$ stetig in $a$.
+
+          \par \medskip
+
+          $f_i : D \rightarrow \mathbb{R}$ skalare Funktion.
+
+          \section{Beispiel}
+
+          Monom: $f(x_1, ..., x_n) = ax_1^{m_1} \cdot ... \cdot x_n^{m_n}$, $a \in \mathbb{R}, m_i \in \mathbb{N}_0$ fest.
+
+          \par \medskip
+
+          Polynom: Summe von endl. vielen Monomen.
+
+          \par \medskip
+
+          $f(x_1, x_2, x_3) = 3x_1^7 + 4x_1x_2x_3^5 - 12x_1^2x_2^4$
+
+          Polynome sind stetig.
+
+          \par \medskip
+
+          Allgemein gilt (Beweis wie in Analysis einer Var):
+
+          Summe, Produkt, Quotient von stetigen (Skalaren) Fkt. sind stetig.
+
+          \par \medskip
+
+          Hintereinanderausführung stetiger Funktionen ist stetig. 
+
+          \section{Definition}
+
+          \begin{enumerate}[label=(\alph*))]
+
+            \item   $a \in \mathbb{R}^n, r \in \mathbb{R}, r > 0$.
+
+            \[ K(a,r) = \{ x \in \mathbb{R}^n : ||x-a|| < r \} \] \underline{offene Kugeln} um $a$ von Radius $r$.
+
+            \par \medskip
+
+            $n = 1$: offenes Intervall $]a-r, a+r[$
+
+            \par \medskip
+
+            $n = 2$: $K(a,r)$ ist das Innere des Kreises ohne die Kreislinie
+
+            \item $D \subseteq \mathbb{R}^n$ heißt \underline{offen}, falls es zu jedem $a \in D$ ein $r(a) > 0$ gibt mit $K(a, r(a)) \subseteq D$.
+
+            \par \medskip
+
+            $\{x \in \mathbb{R}^2 : || x-0|| \le 1 \}$ ist \underline{nicht} offen.
+
+            \par \medskip
+
+            $\{x \in \mathbb{R}^2 : || x-0 || < 1 \}$ ist offen.
+
+          \end{enumerate}
+
+
+          \section{Definition}
+
+          $f : D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}$, $D$ offen.
+
+          \par \medskip
+
+          $a = (a_1, ..., a_n) \in D$.
+
+          \begin{enumerate}[label=(\alph*)]
+            \item $f$ heißt \underline{partiell differenzierbar} nach $x_j$ an der Stelle $a$, falls \[ \lim_{x_j \rightarrow a_j} \frac{f(a_1, ..., a_{j-1}, x_j, a_{j+1}, ..., a_n) - f(a_1, ..., a_n)}{x_j-a_j} \] existiert.
+
+            \par \medskip
+
+            \underline{Partielle Ableitung} von $f$ nach $x_j$ an der Stelle $a$: \[ \frac{\partial f(a)}{\partial x_j} \]
+
+            (n=1: $f'(a)$)
+
+            \item Ist $f$ nach allen $x_j$ an der Stelle $a$ partiell differenzierbar, so heißt \[ (\frac{\partial f(a)}{\partial x_1}, ..., \frac{\partial f(a)}{\partial x_n}) \]
+
+            \underline{Gradient} von $f$ an der Stelle a.
+
+            \item Ist $f$ an allen $a \in D$ nach allen $x_j$ partiell diffbar, so sind \[ \frac{\partial f}{\partial x_j} : D \rightarrow \mathbb{R} \]
+
+            Funktionen, die \underline{partielle Ableitungen} von $f$ auf $D$  zusammengefasst zu \[ Grad(f) := (\frac{\partial f}{\partial x_1}, ..., \frac{\partial f}{\partial x_n}) \]
+
+            \underline{Gradient} von $f$.
+
+            \par \medskip
+
+            [ $f: D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}^m$, $f(x) = (f_1(x), ..., f_m(x))$ skalar. Fkt. $D \rightarrow \mathbb{R}$ \[ \begin{pmatrix}\frac{\partial f_1}{\partial x_1} & ... & \frac{\partial f_1}{\partial x_n} \\ ... & ... & ... \\ \frac{\partial f_n}{\partial x_1} & ... & \frac{\partial f_n}{\partial x_n} \end{pmatrix} \] \underline{Jacobi-Matrix}]
+          \end{enumerate}
+
+          \section{Beispiel}
+
+          $f(x_1, x_2) = sin(_1 \cdot x_2)$, $\mathbb{R}^2 \rightarrow \mathbb{R}$
+
+          \par \medskip
+
+          Partielle Abl. an Stelle $a = (\pi, 1)$
+
+          \begin{align*}
+            \frac{ \partial f(\pi, 1)}{\partial x_1} & = \lim_{x_1 \rightarrow \pi} \frac{f(x_1, 1) - f(\pi, 1)}{x_1- \pi} \\
+            & = \lim_{x_1 \rightarrow \pi} \frac{sin(x_1) - sin(\pi)}{x_1 - \pi} \\
+            & = sin'(\pi) \\
+            & = cos(\pi) \\
+            & = -1
+          \end{align*}
+
+          \begin{align*}
+            \frac{\partial f(\pi, 1)}{\partial x_2} & = \lim_{x_2 \rightarrow 1} \frac{f(\pi, x_2) - f(\pi, 1)}{x_2-1} \\
+            & = \lim_{x_2 \rightarrow 1} \frac{sin(\pi x_2) - sin(\pi)}{x_2-\pi} \\
+            & = \pi \cdot cos(\pi \cdot 1) \\
+            & = - \pi
+          \end{align*}
+
+          Allgemein: part. Ableitungen an beliebiger Stelle $(x_1, x_2)$:
+
+          \begin{align*}
+            \frac{\partial f}{\partial x_1} \underbrace{=}_{\text{halte $x_2$ konstant}} cos(x_1 \cdot x_2) \cdot x_2
+          \end{align*}
+
+          \[ \frac{\partial f}{\partial x_2} \underbrace{=}_{\text{halte $x_1$ konstant}} cos(x_1 \cdot x_2) \cdot x_1 \]
+
+          \par \medskip
+          
+          $Grad(f) = (cos(x_1x_2) \cdot x_2, cos(x_1x_2) \cdot x_1)$
 
 
         

@@ -5304,6 +5304,353 @@ $a^n$ = a $\ast$ ... $\ast$ a  ``Potenzen'' eindeutig definiert. ($n \in \mathbb
           $Grad(f) = (cos(x_1x_2) \cdot x_2, cos(x_1x_2) \cdot x_1)$
 
 
+          \par \medskip
+
+          Es gibt Funktionen, die an Stelle $a$ partiell diffbar sind (nach allen Variablen) aber nicht stetig. Zum Beispiel \[ f(x,y) = \begin{cases} \frac{xy}{x^2+y^2}, (x,y) \neq (0,0) \\ 0, (x,y) = (0,0) \end{cases} \]
+
+          mit $a = (0,0)$.
+
+          \par \medskip
+
+          Existenz der part. Ableitungen (z.B: $f: \mathbb{R}^2 \rightarrow \mathbb{R}$) an Stelle $a$ bedeutet die Existenz von Tangenten in $x-$ und $y-$Richtung in $a$, aber nicht notwendig die Existenz einer Tangentialebene.
+
+          \par \medskip
+
+          \textbf{Beispiel:} $f(x,y) = 1- min(|x|, |y|)$
+
+          Partielle Ableitung in $(0,0)$ existieren. Tangenten in $x-$ und $y-$Richtung (Steigung 0). Aber keine Tangentialebene in $(0,0)$.
+
+          \par \medskip
+
+          \textbf{Stattdessen:} $f(x,y) = 1-x^2-y^2$
+
+          Hat an jedem Punkt Tangentialebene.
+
+          \section{Definition}
+
+          $f : D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}, D$ offen.
+
+          \begin{enumerate}[label=(\alph*)]
+            \item $f$ ist \underline{stetig diffbar} $\Leftrightarrow$ $f$ ist partiell diffbar und $\frac{\partial f}{\partial x_i}$ sind stetig.
+
+            \item $f$ ist 2-mal stetig diffbar $\Leftrightarrow f$ part. diffbar und alle $\frac{\partial f}{\partial x_i}$ sind stetig diffbar.
+
+            \par \medskip
+
+             Partielle Ableitung von $\frac{\partial f}{\partial x_i}$ nach $x_j$: \[ \frac{\partial^2 f}{\partial x_j \partial x_i} \]
+
+            Statt $\frac{\partial^2 f}{\partial x_i \partial x_i}: \frac{\partial^2 f}{(\partial x_i)^2}$
+
+            \item Analog: s-mal stetig diffbar. Schreibweise \[ \frac{\partial^s f}{\partial x_{i_s} ... \partial x_{i_2} \partial x_{i_1}} \]
+          \end{enumerate}
+
+          \section{Beispiel}
+
+          \begin{enumerate}[label=(\alph*)]
+            \item Polynomfunktionen sind $s$-mal stetig diffbar für alle $s$
+
+            \item Ebenso Funktionen wie \[ f(x_1, x_2) = sin(x_1x_2) + e^{x_2} \]
+
+            $\frac{\partial f}{\partial x_1} = x_2 \cdot  cos(x_1x_2) $
+
+            $\frac{\partial f}{\partial x_2} = x_1 \cdot cos(x_1x_2) + e^{x_2}$
+
+            Bilde 2-fache Ableitung \[ \frac{\partial^2 f}{(\partial x_1)^2} = -x^2 \cdot sin(x_1x_2) \]
+
+            \[ \frac{\partial^2 f}{\partial x_2 \partial x_1} = cos(x_1x_2) - x_1x_2 \cdot sin(x_1x_2) \] (erst nach $x_1$ dann nach $x_2$)
+
+            Andere Richtung: \[ \frac{\partial^2 f}{\partial x_1 \partial x_2} = cos(x_1x_2) - x_2x_1 sin(x_1x_2) \]
+
+            (erst nach $x_2$ dann nach $x_1$)
+          \end{enumerate}
+
+          \section{Satz (Schwarz)}
+
+          $f : D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}, D$ offen, 2-mal stetig diffbar. Dann \[ \frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j} \]
+
+          für alle $i,j$.
+
+          \section{Satz}
+
+          $D \subseteq \mathbb{R}^n$ offen, $F: D \rightarrow \mathbb{R}$ \underline{stetig diffbar}. Dann gilt für alle $a \in D$: \[ \lim_{x \rightarrow a} \frac{f(x)-f(a)- (Grad(f))(a) \cdot (x-a)^t}{||x-a||} = 0\]
+
+          D.h. $f(x)$ wird an der Stelle $a = (a_1, ..., a_n)$ durch die affine Abb. \begin{align*} f(x) & = f(a) + (Grad(f))(a) \cdot (x-a)^t \\ & = f(x) + \frac{\partial f}{\partial x_1}(x) \cdot (x_1-a_1) + ... + \frac{\partial f}{\partial x_n}(a) \cdot (x_n - a_n) \end{align*}
+
+          gut approximiert.
+
+          \par \medskip
+
+          \textbf{n = 1:} Normale Def. von Diffbarkeit: \begin{align*} \lim_{x \rightarrow a} \frac{f(x) - f(a)}{x-a} = f'(a)  & \Leftrightarrow \lim_{x \rightarrow a} \frac{f(x) - f(a) - f'(a) \cdot (x-a)}{x-a} = 0 \\ & \Leftrightarrow \lim_{x \rightarrow a} \frac{f(x) - f(a) - f'(a) \cdot (x-a)}{|x-a|} = 0\end{align*}
+
+          Tangente an ($a, f(a)$): $l(x) = f(a) + f'(a) \cdot (x-a)$
+
+          \par \medskip
+
+          \textbf{n = 2:} $l(x_1, x_2) = f(a) + \frac{\partial f}{\partial x_1}(a) \cdot (x_1-a_1) + \frac{\partial f}{\partial x_2} (a) \cdot (x_2 - a_2)$
+
+          Graph ist die Tangentialebene an ($a, f(a)$).
+
+          \subsection{Beispiel}
+
+          $f(x_1, x_2) = 1-x_1^2 - x_2^2$
+
+          \[ \frac{\partial f}{\partial x_1} = -2x_1, \frac{\partial f}{\partial x_2} = -2x_2 \]
+
+          $a = (\frac{1}{2}, \frac{1}{2})$
+
+          \par \medskip
+
+          Tangentialebene an $a$ ist der Graph von \begin{align*} l(x_1, x_2) & = \frac{1}{2} - (x_1- \frac{1}{2}) - (x_2 - \frac{1}{2}) \\ & = \frac{3}{2} - x_1 - x_2 \end{align*}
+
+          \section{Korollar}
+
+          Ist $f$ stetig diffbar, so ist $f$ stetig.
+
+          \section{Definition}
+
+          $f: D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}, D$ offen, $f$ 2-mal stetig diffbar. Dann heißt die Matrix der zweiten partiellen Ableitungen \[ H(f) = (\frac{\partial^2 f}{\partial x_i \partial x_j})_{i,j=1,...,n} \] die \underline{Hesse-Matrix} zu f.
+
+          Setzt man $a \in D$ in alle 2-ten partielle Ableitungen ein, dann \[ H(f)(a) = \begin{pmatrix}\frac{\partial^2 f}{\partial x_i \partial x_j}(a) \end{pmatrix} \]
+
+          reelle $n \times n$-Matrix.
+
+          \par \medskip
+
+          Nach 10.13: \[ H(f) = H(f)^t \]
+
+          \[ H(f)(a) = H(f)(a)^t \] ist symmetrische Matrix.
+
+          \par \medskip
+
+          Nach 9.13 hat $H(f)(a)$ n reelle Eigenwerte (mit Vielfachheit), d.h. das char. Polynom von $H(f)(a)$ zerfällt vollständig in Linearfaktoren.
+
+          \section{Definition}
+
+          $D \subseteq \mathbb{R}^n$ offen, $f: D \rightarrow \mathbb{R}, a \in D$ heißt lokale Maximal-/Minimalstelle, wenn es eine Kugel $K(a, r) = \{x \in \mathbb{R}^n : ||x-a|| < r \}$ gibt ($mit r > 0$), so dass \[ f(x) \le f(a) \text{ bzw. } f(x) \ge f(a) \] für alle $x \in K(a,r)$.
+
+          \par \medskip
+
+          $f(a):$ \underline{lokales Minimum} / \underline{lokales Maximum} (lokale Extremstelle)
+
+          \section{Satz}
+
+          $D \subseteq \mathbb{R}^n$, offen, $f: D \rightarrow \mathbb{R}$.
+
+          \begin{enumerate}[label=(\alph*)]
+            \item Sei $f$ stetig diffbar.
+
+            Ist $a$ ein lokale Extremalstelle, so ist $Grad(f)(a) = (0,...,0)$.
+
+            \item Sei $f$ 2-mal stetig diffbar, $Grad(f)(a) = (0,...,0)$.
+
+            \begin{enumerate}
+              \item Hat $H(f)(a)$ lauter positive Eigenwerte ($> 0$), so ist $a$ lokale Minimumstelle.
+
+              \item Hat $H(f)(a)$ lauter negative Eigenwete, so ist $a$ lokale Maximumstelle.
+
+              \item Hat $H(f)(a)$ sowohl positive als auch negative Eigenwerte, so ist $a$ \underline{keine} lokale Extremalstelle.
+
+              \item Hat $H(f)(a)$ lauter nicht-negative (nicht-positive) Eigenwerte und wenn 0 Eigenwert ist, so ist keine Aussage möglich.
+            \end{enumerate}
+          \end{enumerate}
+
+          \section{Beispiel}
+
+          \begin{enumerate}[label=(\alph*)]
+            \item $f(x_1, x_2) = x_1^2 + x_2^2$
+
+            \par \medskip
+
+            $\frac{\partial f}{\partial x_1} = 2x_1$, $\frac{\partial f}{\partial x_2} = 2x_2$
+
+            \par \medskip
+
+            $Grad(f)(a) = (0,0) \Rightarrow a = (0,0)$
+
+            Damit folgt \[ H(f) = \begin{pmatrix}2 & 0 \\ 0 & 2 \end{pmatrix} \]
+
+            entspricht in diesem Fall $H(f)(a)$. Eigenwert 2 mit Vielfachheit 2. Lokales Minimum.
+
+            \item $f(x_1, x_2) = x_1^2-x_2^2$
+
+            \par \medskip
+
+            $\frac{\partial f}{\partial x_1} = 2x_1$, $\frac{\partial f}{\partial x_2} = -2x_2$
+
+            \par \medskip
+
+            Es folgt erneut $a = (0,0)$.
+
+            Damit folgt \[ H(f)= \begin{pmatrix}2 & 0 \\ 0 & -2 \end{pmatrix} \]
+
+            Entspricht in diesem Fall $H(f)(a)$. Eigenwerte 2 und -2. Damit folgt, dass es kein lokales Maximum / lokales Minimum ist.
+
+            \item $f(x_1, x_2) = x_1^2 + x_2^4 + 2x_1$
+
+            \par \medskip
+
+            $\frac{\partial f}{\partial x_1} = 2x_1+2 \overset{!}{=} 0$
+
+            \par \medskip
+
+            $\frac{\partial f}{\partial x_2} = 4x_2^3 \overset{!}{=} 0$
+
+            Damit folgt $a = (-1, 0)$.
+
+            Es gilt \[ H(f) = \begin{pmatrix}2 & 0 \\ 0 & 12x^2 \end{pmatrix}\]
+
+            Damit folgt \[ H(f)(a) = \begin{pmatrix}2 & 0 \\ 0 & 0 \end{pmatrix} \]
+
+            Eigenwerte: 2, 0.
+
+            \par \medskip
+
+            Keine Aussage möglich (tatsächlich lokales Minimum).
+          \end{enumerate}
+         
+         \section{Geometrische Bedeutung der Gradienten}
+
+         $f: D \subseteq \mathbb{R}^n \rightarrow \mathbb{R}$, $D$ offen, $a \in D$.
+
+         \par \medskip
+
+         $(Grad(f))(a)$ ist der Vektor, der in die Richtung des steilsten Aufstiegs von $f$ an der Stelle $a$ zeigt.
+
+         \subsection{Beispiel}
+
+         $f(x,y) = 1-x^2-y^2$, $a = (0.55,-0.65)$
+
+         \par \medskip
+
+         $Grad(f) = (-2x,-2y)$
+
+         $Grad(f)(a) = (-1.1,1.3)$
+
+         \par \medskip
+
+         Steilster Aufstieg an der Stelle $(a,f(a))$ in Richtung $(-1.1,1.3)$, d.h. $f(a+t(-1.1,1.3))$, $t \ge 0$.
+
+         \chapter{Taylorpolynome und Taylorreihen}
+
+         Funktion einer Variablen. $f: D \subseteq \mathbb{R} \rightarrow \mathbb{R}$ diffbar an Stelle $c \in D$ bedeutet: \[ f \text{ wird an der Stelle c durch Tangente (d.h. Graph eines Polynoms von Grad $\le$ 1)} \] \[ t_1(x) = f(c) + f'(c)(x-c)\]
+
+         gut approximiert. \[ \lim_{x \rightarrow c} \frac{f(x)-t_1(x)}{x-c} = 0 \]
+
+         $t_1(c) = f(c)$
+
+         $t'_1(c) = f'(c)$
+
+         \par \medskip
+
+         \par \medskip
+
+         Ziel: Verbesserung der Approxim. von $f$ in der Nähe von $c$ durch Polynonm $t_n$ vom Grad $\le n$ mit \[f^{(i)} (c) = t^{(i)}_n(c)\] $i=0, ..., n$
+
+         Bez.: $f^{(0)} = f, f^{(i)} $ i-te Ableitung
+
+         \section{Satz und Definition}
+
+         $\mathcal{T}$ Intervall, $f: \mathcal{T} \rightarrow \mathbb{R}, c \in \mathcal{T}$.
+
+         Dann gibt es gena ein Polynom $t_n$ vom Grad $\le n$ (das von $f$ und $c$ abhängt) mit \[ t^{(i)}_n (c) = f^{(i)}(c) \] für $i=0,...,n$.
+
+         \par \medskip
+
+         Es ist \[t_n(x) = f(c) + f'(c)(x-c) + \frac{f''(c)}{2!} (x-c)^2+ ... + \frac{f^{(n)}(c)}{n!}(x-c)^n = \sum_{j=0}^n \frac{f^{(j)}(c)}{j!}(x-c)^j \]
+
+         $t_n$ heißt \underline{Taylorpolynom von $f$} mit Entwicklungspunkt $c$.
+
+         \subsection{Beweis}
+
+         Ansatz: $t_n(x)= \sum\limits_{j=0}^n a_j(x-c)^j$ (jedes Polynom vom Grad $\le n$ lässt sich so beschreiben).
+
+         \[ t_n^{(i)}(x) = a_i \cdot i! + a_{i+1} (i+1) ... 2(x-c) + ... \]
+
+         \[ t_n^{(i)}(c) = a_i \cdot i! \]
+
+         \[ t_n^{(i)} (c) = f^{(i)}(c) \Leftrightarrow a_i = \frac{f^{(i)}(c)}{i!} \]
+
+         \section{Satz}
+
+         $I$ Intervall, $f: \mathcal{T} \rightarrow \mathbb{R}$, n-mal stetig diffbar (n-mal diffbar, $f^{(n)}$ stetig).
+
+         \par \medskip
+
+         $c \in I$. $t_n$ n-tes Taylorpolynom zu $f$ und $c$.
+
+         \par \medskip
+
+         Ist $f(x) = t_n(x) + \underbrace{R(x)}_{Restglied}$
+
+         \[ \lim_{x \rightarrow c} \frac{R(x)}{(x-c)^n} = \lim_{x \rightarrow c} \frac{f(x) - t_n(x)}{(x-c)^n} = 0\]
+
+         ("sehr gute" Approximation in der Nähe von $c$)
+
+         \subsection{Beweis}
+
+         \[ \lim_{x \rightarrow c} \frac{f(x) - t_n(x)}{(x-c)^n} \underbrace{=}_{L'Hopital} \lim_{x \rightarrow c} \frac{f'(x) - t_n'(x)}{n(x-c)^{n-1}}\]
+
+         So oft L'Hopital anwenden bis folgt \[ \lim_{x \rightarrow c} \frac{f^{(n)}(x) - t_n^{(x)}}{n!} = 0 \]
+
+         \section{Beispiel}
+
+         \begin{enumerate}[label=(\alph*)]
+          \item Ist $f = a_kx^k + ... + a_1x + a_0$ ein Polynom, $c = 0$, so ist \[t_0(x) = a_0 \] \[t_1(x) = a_1x+a_0 \] \[...\] \[ t_k(x) = f(x) = t_n(x) \] für $n > k$.
+
+          \item $f(x) = e^x$, $c = 0$
+
+          \par \medskip
+
+          $t_n(x) = \sum_{j=0}^n \frac{1}{j!} x^j = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + ... + \frac{x^n}{n!}$
+
+          erste $n+1$ Glieder der Potenzreihe von $e^x$.
+        \end{enumerate}
+
+        \section{Satz (Taylor)}
+
+        $\mathcal{T}$ Intervall, $f: \mathcal{T} \rightarrow \mathbb{R}$ (n+1)-mal diffbar, $c \in \mathcal{T}$.
+
+        \par \medskip
+
+        $t_n$ sei des $n$-te Taylorpol. zu $f$ um $c$. 
+
+        \par \medskip
+
+        Sei $x \in \mathcal{T}$. Dann gibt es ein $y$ zwischen $x$ und $c$ ($y$ hängt von $x,c$ ab) mit \[ R(x) = f(x) - t_n(x) = \frac{f^{(n+1)}(y)}{(n+1)!} (x-c)^{n+1} \]
+
+        \[ f(x) = \sum_{j=0}^n \frac{f^{(g)}(c)}{j!}(x-c)^j + \frac{f^{(n+1)}(y)}{(n+1)!}(x-c)^{n+1} \]
+
+        (Taylorentwicklung von $f$)
+
+
+        \par \medskip
+
+        Beweis beruht auf 2. Mittelwertsatz.
+
+        \section{Beispiel}
+
+        Wie groß muss man $n$ wählen, damit $|sin(x) - t_n(x)| < \frac{1}{100}$ für alle $x \in [0, \frac{\pi}{2}]$
+
+        ($t_n$ Taylorpolynom zu $sin$ um $c = 0$)
+
+        \par \medskip
+
+        $|sin(x) - t_n(x)| = | \frac{sin^{(n+1)} (y)}{(n+1)!} x^{n+1}|$ für ein $y$ zwischen 0 und $x$, $y \in [0, \frac{\pi}{2}]$
+
+        $\le _{\underset{x,y \in [0, \frac{\pi}{2}]}{max}} \frac{|sin^{(n+1)}(y)|}{(n+1)!} |x^{n+1}|$
+
+        $\le \frac{1}{(n+1)!} \cdot (\frac{\pi}{2})^{n+1} = \frac{\pi^{n+1}}{(n+1)! 2^{n+1}}$
+
+        \par \medskip
+
+        Suche $min$ n mit \[ \frac{\pi^{n+1}}{(n+1)! \cdot 2^{n+1}} < 0,01 \]
+
+        $n = 6: \frac{\pi^7}{7! \cdot 2^7} \approx 0,0047$
+
+        \par \medskip
+
+        $|sin(x)-t_6(x)| < 0,01$ für alle $x \in [0, \frac{\pi}{2}]$ für ein $y$ zwischen 0 und $x$, $y \in [0, \frac{\pi}{2}]$
+
         
 
         \end{document} 
